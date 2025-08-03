@@ -382,7 +382,7 @@ function check_status(_device){
 
 		if(stopScan == 1 || scan_done == 1){
 			if(!parent.rog_support)
-				parent.document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundImage = "url(/images/New_ui/white_04.gif)"; //have to change the file location
+				parent.document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundImage = "url(/images/New_ui/networkmap/white_04.gif)";
 			parent.document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundPosition = '0px -184px';
 		}
 		parent.document.getElementById('iconUSBdisk_'+diskOrder).style.backgroundPosition = '1px -206px';
@@ -390,13 +390,13 @@ function check_status(_device){
 	else if(got_code_2){
 		if(stopScan == 1){
 			if(!parent.rog_support)
-				parent.document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundImage = "url(/images/New_ui/white_04.gif)"; //have to change the file location
+				parent.document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundImage = "url(/images/New_ui/networkmap/white_04.gif)";
 			parent.document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundPosition = '0% 0%';
 		}
 	}
 	else if(got_code_3){
 		if(!parent.rog_support)
-			parent.document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundImage = "url(/images/New_ui/white_04.gif)"; //have to change the file location
+			parent.document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundImage = "url(/images/New_ui/networkmap/white_04.gif)";
 		parent.document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundPosition = '0% 0%';
 	}
 	else{ // got_code_0
@@ -406,7 +406,7 @@ function check_status(_device){
 		document.getElementById('scan_status_image').src = "/images/New_ui/networkmap/blue.png";
 		if(stopScan == 1 || scan_done == 1){
 			if(!parent.rog_support)
-				parent.document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundImage = "url(/images/New_ui/white_04.gif)"; //have to change the file location
+				parent.document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundImage = "url(/images/New_ui/networkmap/white_04.gif)";
 
 			parent.document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundPosition = '0px -92px';
 		}
