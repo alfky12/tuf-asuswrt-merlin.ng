@@ -19,8 +19,8 @@
 	border-bottom: 1px solid #929eA1;
 }
 </style>
-<script type="text/javascript" src="../require/require.min.js"></script>
 <script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../require/require.min.js"></script>
 <script type="text/javascript" src="../validator.js"></script>
 <script>
 if(parent.location.pathname.search("index") === -1) top.location.href = "../index.asp";
