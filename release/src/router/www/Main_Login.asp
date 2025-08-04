@@ -191,7 +191,7 @@ body{
 	}
 	.button{
 		height: 50px;
-		width: 100%;
+		/*width: 100%;*/
 		font-size: 14pt;
 		text-align: center;
 		float:right; 
