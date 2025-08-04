@@ -1,4 +1,4 @@
-﻿/* CSS Document */
+/* CSS Document */
 body{
 	background-color: rgb(0, 0, 0) !important; 
 }
@@ -620,7 +620,7 @@ width:122px;
 	text-align: left;
 	font-size: 32px;
 	float:left;
-	margin: 30px 35px 0 -210px;
+	margin: 44px 27px 0 -198px;
 	text-shadow: 3px 2px #000;
 	font-weight: bold;
 	font-family: ROG;
@@ -1129,6 +1129,10 @@ width:122px;
 ._index{
   background: url(images/New_ui/icon_indexes.png);
   background-position: -0px -40px; width: 43px; height: 43px;
+}
+.menu_Tools{
+	background: url(images/New_ui/icon_menues.png);
+	background-position: 0px -144px;
 }
 .radio_hint{
     background-color: #FA9100;

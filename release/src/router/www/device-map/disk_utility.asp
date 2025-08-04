@@ -38,8 +38,8 @@ a:active {
 	font-family: Verdana, Arial, Helvetica, MS UI Gothic, MS P Gothic, Microsoft Yahei UI, sans-serif;
 }
 </style>
-<script type="text/javascript" src="/require/require.min.js"></script>
 <script language="JavaScript" type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/require/require.min.js"></script>
 <script>
 if(parent.location.pathname.search("index") === -1) top.location.href = "../"+'<% networkmap_page(); %>';
 
