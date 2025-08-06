@@ -267,7 +267,7 @@ body{
 	padding: 10px 0 0 0; 
 }
 .login-btn-bg, .login-btn-bg-odm{
-	width: 93%;
+	/*width: 93%;*/
 	background-size: 100%;
 }
 .login-btn-bg{
