@@ -809,7 +809,7 @@ function is_wgsc_connected(_pubkey) {
 						</tr>
 					</thead>
 					<tr>
-						<td style="border: none;">
+						<td>
 							<div id="pptp_Block"></div>
 						</td>
 					</tr>
@@ -822,7 +822,7 @@ function is_wgsc_connected(_pubkey) {
 						</tr>
 					</thead>
 					<tr>
-						<td style="border: none;">
+						<td>
 							<div id="ovpnserver1_Block"></div>
 						</td>
 					</tr>
@@ -835,7 +835,7 @@ function is_wgsc_connected(_pubkey) {
 						</tr>
 					</thead>
 					<tr>
-						<td style="border: none;">
+						<td>
 							<div id="ovpnserver2_Block"></div>
 						</td>
 					</tr>
@@ -848,7 +848,7 @@ function is_wgsc_connected(_pubkey) {
 						</tr>
 					</thead>
 					<tr>
-						<td style="border: none;">
+						<td>
 							<div id="ipsec_srv_Block"></div>
 						</td>
 					</tr>
@@ -860,7 +860,7 @@ function is_wgsc_connected(_pubkey) {
 						</tr>
 					</thead>
 					<tr>
-						<td style="border: none;">
+						<td>
 							<div id="wgserver_Block"></div>
 						</td>
 					</tr>
@@ -872,7 +872,7 @@ function is_wgsc_connected(_pubkey) {
 						</tr>
 					</thead>
 					<tr>
-						<td style="border: none;">
+						<td>
 							<div id="ovpnclient1_Block"></div>
 						</td>
 					</tr>
@@ -885,7 +885,7 @@ function is_wgsc_connected(_pubkey) {
 						</tr>
 					</thead>
 					<tr>
-						<td style="border: none;">
+						<td>
 							<div id="ovpnclient2_Block"></div>
 						</td>
 					</tr>
@@ -898,7 +898,7 @@ function is_wgsc_connected(_pubkey) {
 						</tr>
 					</thead>
 					<tr>
-						<td style="border: none;">
+						<td>
 							<div id="ovpnclient3_Block"></div>
 						</td>
 					</tr>
@@ -911,7 +911,7 @@ function is_wgsc_connected(_pubkey) {
 						</tr>
 					</thead>
 					<tr>
-						<td style="border: none;">
+						<td>
 							<div id="ovpnclient4_Block"></div>
 						</td>
 					</tr>
@@ -924,7 +924,7 @@ function is_wgsc_connected(_pubkey) {
 						</tr>
 					</thead>
 					<tr>
-						<td style="border: none;">
+						<td>
 							<div id="ovpnclient5_Block"></div>
 						</td>
 					</tr>
@@ -937,7 +937,7 @@ function is_wgsc_connected(_pubkey) {
 						</tr>
 					</thead>
 					<tr>
-						<td style="border: none;">
+						<td>
 							<div id="vpnc_clientlist_Block"></div>
 						</td>
 					</tr>
@@ -951,7 +951,7 @@ function is_wgsc_connected(_pubkey) {
 						</tr>
 					</thead>
 					<tr>
-						<td style="border: none;">
+						<td>
 							<div id="wgclient1_Block"></div>
 						</td>
 					</tr>
@@ -964,7 +964,7 @@ function is_wgsc_connected(_pubkey) {
 						</tr>
 					</thead>
 					<tr>
-						<td style="border: none;">
+						<td>
 							<div id="wgclient2_Block"></div>
 						</td>
 					</tr>
@@ -976,7 +976,7 @@ function is_wgsc_connected(_pubkey) {
 						</tr>
 					</thead>
 					<tr>
-						<td style="border: none;">
+						<td>
 							<div id="wgclient3_Block"></div>
 						</td>
 					</tr>
@@ -989,7 +989,7 @@ function is_wgsc_connected(_pubkey) {
 						</tr>
 					</thead>
 					<tr>
-						<td style="border: none;">
+						<td>
 							<div id="wgclient4_Block"></div>
 						</td>
 					</tr>
@@ -1002,7 +1002,7 @@ function is_wgsc_connected(_pubkey) {
 						</tr>
 					</thead>
 					<tr>
-						<td style="border: none;">
+						<td>
 							<div id="wgclient5_Block"></div>
 						</td>
 					</tr>
