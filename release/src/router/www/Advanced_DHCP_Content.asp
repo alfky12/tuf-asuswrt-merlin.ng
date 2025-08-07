@@ -38,6 +38,15 @@
 	bottom: 0;
 	top: initial;
 }
+.pop_div_bg.pop_div_container {
+	position: fixed;
+	top: 40% !important;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 10;
+	padding: 20px;
+  	border-radius: 8px;
+}
 </style>
 <script>
 $(function () {
@@ -951,7 +960,7 @@ function edit_dhcp_manual_ok(){
 					</tr>
 				</table>
 
-				<div id="edit_dhcp_manual_profile"  class="pop_div_bg pop_div_container">
+				<div id="edit_dhcp_manual_profile" class="pop_div_bg pop_div_container" style="display:none;">
 					<table width="95%" border="1" align="center" cellpadding="4" cellspacing="0" class="FormTable" style="margin-top:8px;">
 						<thead>
 							<tr>
