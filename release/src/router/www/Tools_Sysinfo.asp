@@ -740,7 +740,7 @@ function show_wifi_version() {
 						</tr>
 					</thead>
 					<tr>
-						<td colspan="2"><canvas style="background-color:#2f3e44;border-radius:10px;"id="tempchartId" height="250" width="700"></canvas></td>
+						<td colspan="2"><canvas style="background-color:rgb(66, 66, 66);border-radius:5px;"id="tempchartId" height="250" width="700"></canvas></td>
 					</tr>
 					<tr>
 						<th>Temperatures</th>
