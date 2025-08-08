@@ -2536,7 +2536,7 @@ function close_phone_as_modem_hint(){
 		<div id="NM_shift" style="margin-top:-140px;"></div>
 		<div id="NM_table" class="NM_table" >
 		<div id="NM_table_div" style="background-color:rgba(0,0,0,.5);height:805px;">
-			<div style="width:51%;float:left;background:url('images/New_ui/networkmap/networkmap_bg.png') no-repeat rgba(0,0,0,.5);background-position-x: 4px; height:805px;">
+			<div style="width:51%;float:left;background:url('images/New_ui/networkmap/networkmap_bg.png') no-repeat rgba(0,0,0,.0);background-position-x: 4px; height:805px;">
 			<table id="_NM_table" border="0" cellpadding="0" cellspacing="0" style="opacity:.95;margin-left:-30px;" >
 				<tr>
 					<td width="40px" rowspan="11" valign="center"></td>

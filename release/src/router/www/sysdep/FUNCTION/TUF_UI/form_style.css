@@ -680,7 +680,7 @@ form{
 }
 
 .list_table{
-	border: 1px solid rgb(76,76,76);
+	border: 0px solid rgb(76,76,76);
 	border-collapse: collapse;
 	background-color:rgb(55,55,55);
 	text-align:center;
@@ -2029,14 +2029,14 @@ padding-top:1px;
 
 .content_bg{
 	/* background: rgba(17, 17, 17, .5); */
-	background: rgba(45, 45, 45, .5);
+	background: rgba(0, 0, 0, .0);
 }
 .divide_line{
 	border: 1px solid #FFF;
 }
 [bgcolor="#4D595D"]{
 	/* background: rgba(17, 17, 17, .5); */
-	background: rgba(45, 45, 45, .5);
+	background: rgba(0, 0, 0, .0);
 }
 .block_bg{
 	background: transparent;
@@ -2049,7 +2049,7 @@ padding-top:1px;
 }
 .control_bg{
 	/* background: rgba(17, 17, 17, .5); */
-	background: rgba(45, 45, 45, .5);
+	background: rgba(0, 0, 0, .0);
 }
 .tab_font_color{
 	color: #FFF;
@@ -2059,7 +2059,7 @@ padding-top:1px;
 }
 .analysis_bg, .web_frame{
 	/* background: rgba(17, 17, 17, .5); */
-	background: rgba(45, 45, 45, .5);
+	background: rgba(0, 0, 0, .0);
 	border: 1px solid #92650F;
 }
 .tm_title_bg{
