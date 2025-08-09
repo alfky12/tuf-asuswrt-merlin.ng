@@ -167,7 +167,8 @@
 	text-align:center;
 }
 .FormTable_table td{
-	background-color:transparent;
+	/* background-color:transparent; */
+	background-color: rgb(66, 66, 66);
 	text-align:center;
 	/*border: 1px solid #222;*/
 	border-collapse: collapse;
@@ -1598,7 +1599,7 @@ padding-top:1px;
 
 /* 整體設置*/
 .navigation {
-	margin-left:835px;
+	margin-left:765px;
 	*margin-left:45px;
 	margin-top:20px;
 	width:100px;

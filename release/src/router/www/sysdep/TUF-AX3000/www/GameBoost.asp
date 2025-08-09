@@ -33,12 +33,13 @@ body{
 }
 
 .GB_background{
-	background: url('images/New_ui/mainimage_img_Game.jpg');
+	/* background: url('images/New_ui/mainimage_img_Game.jpg');
 	background-repeat: no-repeat
 	margin-top: -15px;
 	border-radius: 3px;
 	background-size: cover;
-	height: auto;
+	height: auto; */
+	background: rgba(0, 0, 0, .0);
 }
 
 .GB_background_rt{
@@ -162,7 +163,8 @@ body{
 	position: absolute;
 	width: 700px;
 	height: 600px;
-	background-color: #444f53;
+	/* background-color: #444f53; */
+	background: rgb(66, 66, 66);
 	z-index: 199;
 	padding: 12px 18px;
 	overflow-y: auto;
