@@ -897,7 +897,7 @@ function clickEvent(obj){
 	else if(obj.id.indexOf("Router") > 0){
 		icon = "iconRouter";
 		stitle = "<#menu5_7_1#>";
-		document.getElementById("statusframe").src = "/device-map/router.asp";
+		document.getElementById("statusframe").src = "/device-map/router_status.asp";
 	}
 	else if(obj.id.indexOf("Client") > 0){
 		icon = "iconClient";
