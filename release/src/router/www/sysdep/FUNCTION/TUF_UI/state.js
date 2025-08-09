@@ -1040,7 +1040,7 @@ function show_banner(L3){// L3 = The third Level of Menu
 		}
 	}
 	else if(tuf_support){
-		banner_code +='<div class="banner1" align="center"><img src="images/New_ui/logo_TUF.png" align="left" style="width: 250px;height:96px;margin-left:57px;object-fit: cover;object-position: left;">';
+		banner_code +='<div class="banner1" align="center"><img src="images/New_ui/logo_TUF.png" align="left" style="width: 250px;height:96px;margin-left:0px;object-fit: cover;object-position: left;">';
 		banner_code +='<div style="margin-left:25px;margin-right:20px;width:130px;height:52px;margin-top:15px;float:left;" align="left"><span><a href="https://github.com/gnuton/asuswrt-merlin.ng" target="_blank" rel="noreferrer"><img src="images/merlin-logo.png" style="border: 0;"></a></span></div>'
 		banner_code +='<div style="margin-top:0px;margin-left:-90px;*margin-top:0px;*margin-left:0px;" align="center"><span id="modelName_top" onclick="this.focus();" class="modelName_top"><#Web_Title2#></span></div>';
 			// logout
@@ -1075,7 +1075,7 @@ function show_banner(L3){// L3 = The third Level of Menu
 	banner_code +='</div>\n';
 	banner_code +='<table width="998" border="0" align="center" cellpadding="0" cellspacing="0" class="statusBar" style="margin:auto;">\n';
 	banner_code +='<tr>\n';
-	banner_code +='<td class="minup_bg" height="179" valign="top"><table width="764" border="0" cellpadding="0" cellspacing="0" height="35px" style="margin-left:230px;">\n';
+	banner_code +='<td class="minup_bg" height="179" valign="top"><table width="745" border="0" cellpadding="0" cellspacing="0" height="35px" style="margin-left:230px;">\n';
 	banner_code +='<tbody><tr>\n';
 
 	if(radio_all_disabled && !radioHintIgnored){
