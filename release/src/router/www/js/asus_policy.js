@@ -955,8 +955,8 @@ class PolicyModalComponent {
         let theme = 'RT';
         if (isSupport("rog")) {
             return "ROG";
-        } else if (isSupport("tuf")) {
-            return "TUF";
+        // } else if (isSupport("tuf")) {
+        //     return "TUF";
         } else if (isSupport("BUSINESS")) {
             return "";
         } else {
@@ -2250,8 +2250,8 @@ class QisPolicyPageComponent {
         let theme = 'RT';
         if (isSupport("rog")) {
             return "ROG";
-        } else if (isSupport("tuf")) {
-            return "TUF";
+        // } else if (isSupport("tuf")) {
+        //     return "TUF";
         } else if (isSupport("BUSINESS")) {
             return "";
         } else {
