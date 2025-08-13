@@ -1444,7 +1444,7 @@ function pullLANIPList(obj){
 	var element = document.getElementById('ClientList_Block_PC');
 	var isMenuopen = element.offsetWidth > 0 || element.offsetHeight > 0;
 	if(isMenuopen == 0){
-		obj.src = "/images/arrow-top.gif"
+		obj.src = "/images/unfold_less.svg"
 		element.style.display = 'block';
 		document.form.PC_devicename.focus();
 	}
@@ -1453,7 +1453,7 @@ function pullLANIPList(obj){
 }
 
 function hideClients_Block(){
-	document.getElementById("pull_arrow").src = "/images/arrow-down.gif";
+	document.getElementById("pull_arrow").src = "/images/unfold_more.svg";
 	document.getElementById('ClientList_Block_PC').style.display='none';
 }
 var PC_mac = "";
@@ -1661,7 +1661,7 @@ function genMain_table(){
 		code += '<input type="text" style="margin-left:10px;float:left;width:255px;" class="input_20_table" name="PC_devicename" onkeyup="device_filter(this);check_field();" placeholder="Please select the Device Group Name" autocorrect="off" autocapitalize="off" autocomplete="off" disabled>';/*untranslated*/
 	else
 		code += '<input type="text" style="margin-left:10px;float:left;width:255px;" class="input_20_table" name="PC_devicename" onkeyup="device_filter(this);check_field();" placeholder="<#AiProtection_client_select#>" autocorrect="off" autocapitalize="off" autocomplete="off">';
-	code += '<img id="pull_arrow" height="14px;" src="/images/arrow-down.gif" onclick="pullLANIPList(this);" title="<#select_client#>">';
+	code += '<img id="pull_arrow" height="14px;" src="/images/unfold_more.svg" onclick="pullLANIPList(this);" title="<#select_client#>">';
 	code += '<div id="ClientList_Block_PC" class="clientlist_dropdown" style="margin-top:25px;margin-left:10px;"></div>';
 	code += '</td>';
 	code += '<td style="border-bottom:2px solid #000;text-align:right;"><input type="text" id="download_rate" class="input_6_table" maxlength="6" onkeypress="return validator.bandwidth_code(this, event);" onkeyup="check_field();"><span style="margin: 0 5px;color:#FFF;">Mb/s</span></td>';
@@ -1733,7 +1733,7 @@ function device_filter(obj){
 		showDropdownClientList('setClientIP', 'name>mac', 'all', 'ClientList_Block_PC', 'pull_arrow', 'all');
 	}
 	else{
-		obj.src = "/images/arrow-top.gif"
+		obj.src = "/images/unfold_less.svg"
 		document.getElementById("ClientList_Block_PC").style.display = 'block';
 		document.form.PC_devicename.focus();
 		var code = "";
@@ -1845,11 +1845,11 @@ function pullOverheadList(_this) {
 	var $element = $("#overhead_presets_list");
 	var isMenuopen = $element[0].offsetWidth > 0 || $element[0].offsetHeight > 0;
 	if(isMenuopen == 0) {
-		$(_this).attr("src","/images/arrow-top.gif");
+		$(_this).attr("src","/images/unfold_less.svg");
 		$element.show();
 	}
 	else {
-		$(_this).attr("src","/images/arrow-down.gif");
+		$(_this).attr("src","/images/unfold_more.svg");
 		$element.hide();
 	}
 }
@@ -1864,7 +1864,7 @@ function set_overhead(entry) {
 		framing = 0;	// fq_codel does not support ptm compensation
 
 	document.getElementById('qos_atm').value = framing;
-	document.getElementById("ovh_pull_arrow").src = "/images/arrow-down.gif";
+	document.getElementById("ovh_pull_arrow").src = "/images/unfold_more.svg";
 	document.getElementById('overhead_presets_list').style.display='none';
 }
 
@@ -2123,7 +2123,7 @@ function set_overhead(entry) {
 											<th><a class="hintstyle" href="javascript:void(0);" onClick="openHint(50, 28);">WAN packet overhead</a></th>
 											<td colspan="2">
 												<input type="text" maxlength="4" class="input_6_table" name="qos_overhead" id="qos_overhead" onKeyPress="return validator.isNumber(this,event);" onblur="validator.numberRange(this, -64, 256);" value="<% nvram_get("qos_overhead"); %>" style="float:left;">
-												<img id="ovh_pull_arrow" class="pull_arrow" height="14px;" src="/images/arrow-down.gif" onclick="pullOverheadList(this);">
+												<img id="ovh_pull_arrow" class="pull_arrow" height="14px;" src="/images/unfold_more.svg" onclick="pullOverheadList(this);">
 												<div id="overhead_presets_list" style="margin-top:25px;height:auto;" class="dns_server_list_dropdown"></div>
 												<label id="qos_mpu_label" style="display:none;float:left;margin-left:25px;margin-right:5px;">MPU:</label>
 												<input type="text" maxlength="4" class="input_6_table" name="qos_mpu" id="qos_mpu" onKeyPress="return validator.isNumber(this,event);" onblur="validator.numberRange(this, 0, 256);" value="<% nvram_get("qos_mpu"); %>" style="display:none;float:left;">
