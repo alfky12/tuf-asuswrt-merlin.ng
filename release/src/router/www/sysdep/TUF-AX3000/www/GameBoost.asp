@@ -292,7 +292,7 @@ function setClientIP(macaddr){
 }
 
 function hideClients_Block(){
-	document.getElementById("pull_arrow").src = "/images/arrow-down.gif";
+	document.getElementById("pull_arrow").src = "/images/unfold_more.svg";
 	document.getElementById('ClientList_Block_PC').style.display='none';
 }
 
@@ -301,7 +301,7 @@ function pullLANIPList(obj){
 	var isMenuopen = element.offsetWidth > 0 || element.offsetHeight > 0;
 
 	if(isMenuopen == 0){		
-		obj.src = "/images/arrow-top.gif"
+		obj.src = "/images/unfold_less.svg"
 		element.style.display = 'block';		
 		document.getElementById('client').focus();		
 	}
@@ -329,7 +329,7 @@ function genGameList(){
                 <div style="display: flex; justify-content: center">
                     <div class="clientlist_dropdown_main">
                         <input type="text" class="input_20_table" maxlength="17" id="client" onKeyPress="return validator.isHWAddr(this,event)" onClick="hideClients_Block();" autocorrect="off" autocapitalize="off" placeholder="ex: ${nvram_get_param.lan_hwaddr}">
-                        <img id="pull_arrow" height="14px;" src="/images/arrow-down.gif" style="position:absolute;*margin-left:-3px;*margin-top:1px;" onclick="pullLANIPList(this);" title="<#select_MAC#>">
+                        <img id="pull_arrow" height="14px;" src="/images/unfold_more.svg" style="position:absolute;*margin-left:-3px;*margin-top:1px;" onclick="pullLANIPList(this);" title="<#select_MAC#>">
                         <div id="ClientList_Block_PC" class="clientlist_dropdown" style="margin-left:138px;"></div>
                     </div>
                 </div>

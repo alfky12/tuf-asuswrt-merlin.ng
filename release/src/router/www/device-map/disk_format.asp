@@ -19,8 +19,8 @@
 	border-bottom: 1px solid #929eA1;
 }
 </style>
-<script type="text/javascript" src="../require/require.min.js"></script>
 <script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../require/require.min.js"></script>
 <script type="text/javascript" src="../validator.js"></script>
 <script>
 if(parent.location.pathname.search("index") === -1) top.location.href = "../index.asp";
@@ -282,7 +282,7 @@ function showLoadingUpdate(){
 				document.getElementById('progress_bar_no').innerHTML = progressBar + "%";
 				document.getElementById('scan_message').innerHTML = "Disk format error!";
 				if(!parent.rog_support) {
-					parent.document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundImage = "url(/images/New_ui/white_04.gif)"; //have to change the file location
+					parent.document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundImage = "";
 					parent.document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundPosition = '0px -184px';
 					parent.document.getElementById('iconUSBdisk_'+diskOrder).style.backgroundPosition = '1px -206px';
 				}
@@ -299,7 +299,7 @@ function showLoadingUpdate(){
 				document.getElementById('scan_status_field').style.display = "";
 				document.getElementById('btn_format').disabled = false;
 				if(!parent.rog_support) {
-					parent.document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundImage = "url(/images/New_ui/white_04.gif)"; //have to change the file location
+					parent.document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundImage = "";
 					parent.document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundPosition = '0% 0%';
 				}
 				else
