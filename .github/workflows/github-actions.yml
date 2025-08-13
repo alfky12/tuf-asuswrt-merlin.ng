@@ -11,6 +11,7 @@ jobs:
       matrix:
         cfg:
           - { model: "tuf-ax3000", sdk: "src-rt-5.02axhnd.675x", ui: "tuf", skip: false }
+          - { model: "tuf-ax3000_v2", sdk: "src-rt-5.04axhnd.675x", ui: "tuf",  skip: false }
           - { model: "tuf-ax5400", sdk: "src-rt-5.02axhnd.675x", ui: "tuf", skip: false }
           
     if: "!contains(github.event.commits[0].message, '[SKIP_CI]')"

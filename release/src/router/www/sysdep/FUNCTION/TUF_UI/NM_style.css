@@ -310,7 +310,7 @@
 	margin-left:45px;
 	width: 320px;
 	height: 760px;
-	background-color:#111;
+	/* background-color:#111; */
 	behavior: url(/PIE.htc);
 	position:relative;
 	-webkit-border-radius: 0 0 10px 10px;
