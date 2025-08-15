@@ -163,7 +163,8 @@ function init(){
 	redraw();
 
 	if(bwdpi_support){
-		document.getElementById('content_title').innerHTML = "<#traffic_monitor#>";
+		//document.getElementById('content_title').innerHTML = "<#traffic_monitor#>";
+		document.getElementById('content_title').innerHTML = "<#Menu_TrafficManager#> - <#traffic_monitor#>";
 	}
 }
 

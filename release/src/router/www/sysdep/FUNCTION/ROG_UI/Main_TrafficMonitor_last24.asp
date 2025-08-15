@@ -129,7 +129,8 @@ function init()
 	document.getElementById("faq0").href = faq_href;
 	
 	if(bwdpi_support){
-		document.getElementById('content_title').innerHTML = "<#menu5_3_2#> - <#traffic_monitor#>";
+		// document.getElementById('content_title').innerHTML = "<#menu5_3_2#> - <#traffic_monitor#>";
+		document.getElementById('content_title').innerHTML = "<#Menu_TrafficManager#> - <#traffic_monitor#>";
 	}
 
 	document.getElementById('traffic_unit').value = getTrafficUnit();
