@@ -145,7 +145,7 @@ body{
 	background: #248DFF;
 }
 
-@media all and (-ms-high-contrast:none)
+@media all and (forced-colors:none)
 {
     *::-ms-backdrop, .container::after { margin-top: 0px} /* IE11 */
 }
