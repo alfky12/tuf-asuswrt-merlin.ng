@@ -728,7 +728,7 @@ function enableGearUp(){
 				<div id="subMenu"></div>
 			</td>
 			<td valign="top">
-				<div id="tabMenu" style="*margin-top: -160px;"></div>
+				<div id="tabMenu" style="margin-top: -155px;"></div>
 				<br>
 		<!--=====Beginning of Main Content=====-->
 				<div id="FormTitle">
