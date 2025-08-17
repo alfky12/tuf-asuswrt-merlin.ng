@@ -58,7 +58,7 @@
 }
 .profile_setting_container .popup_edit_profile_container,
 .client_content_bg .client_contorl_bg{
-	background: rgb(40, 58, 70);
+	background: rgb(48, 61, 67);
 	border-radius: 8px;
 }
 .profile_setting_title{
@@ -264,7 +264,7 @@
 	border-right: 2px solid rgb(255 255 255 / 60%);
 }
 .profile_setting_item{
-	background-color: rgb(35, 52, 62);
+	/* background-color: rgb(35, 52, 62); */
 	display: flex;
 	flex-wrap: wrap;
 	height: 90px;
@@ -1391,7 +1391,7 @@
 	color: rgba(171, 180, 194, 0.87);
 	font-size: 13px;
 	font-weight: 600;
-	background-color: rgb(35, 52, 62);
+	/* background-color: rgb(35, 52, 62); */
 	position: relative;
 	height: 56px;
 }
