@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html xmlns:v>
 <head>
@@ -16,6 +16,7 @@
 <link rel="stylesheet" type="text/css" href="/device-map/device-map.css">
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/state.js"></script>
+<script type="text/javascript" src="/js/httpApi.js"></script>
 <script type="text/javascript" src="/popup.js"></script>
 <script type="text/javascript" src="/help.js"></script>
 <script type="text/javascript" src="/general.js"></script>
@@ -61,15 +62,48 @@ var modes_array = [[ "",   "System" ],
 		  [ "6",  "Yandex Family" ]];
 
 
+if (isSupport("mtlancfg")) {
+	sdnRuleTable = [
+		"idx",
+		"sdn_name",
+		"sdn_enable",
+		"vlan_idx",
+		"subnet_idx",
+		"apg_idx",
+		"vpnc_idx",
+		"vpns_idx",
+		"dns_filter_idx",
+		"urlf_idx",
+		"nwf_idx",
+		"cp_idx",
+		"gre_idx",
+		"firewall_idx",
+		"kill_switch",
+		"access_host_service",
+		"wan_idx",
+		"pppoe-relay",
+		"wan6_idx",
+		"createby",
+		"mtwan_idx",
+		"mswan_idx"
+	];
+
+	var sdn_rl = decodeURIComponent(httpApi.nvramCharToAscii(["sdn_rl"]).sdn_rl)
+	var sdn_rl_json = convertRulelistToJson(sdnRuleTable, sdn_rl);
+}
+
+
 function initial(){
 	show_menu();
 	show_footer();
 
-	show_dnsfilter_list();
-	showDropdownClientList('setclientmac', 'mac', 'all', 'ClientList_Block_PC', 'pull_arrow', 'all');
-
 	showhide_settings(document.form.dnsfilter_enable_x.value);
 
+	show_dnsfilter_list();
+	if (isSupport("mtlancfg"))
+		show_sdn_list();
+
+	showDropdownClientList('setclientmac', 'mac', 'all', 'ClientList_Block_PC', 'pull_arrow', 'all');
 	gen_modeselect("dnsfilter_mode", "<% nvram_get("dnsfilter_mode"); %>", "");
 	gen_modeselect("client_modesel", "-1", "");
 }
@@ -85,7 +119,7 @@ function pullLANIPList(obj){
 	var element = document.getElementById('ClientList_Block_PC');
 	var isMenuopen = element.offsetWidth > 0 || element.offsetHeight > 0;
 	if(isMenuopen == 0){
-		obj.src = "/images/arrow-top.gif"
+		obj.src = "/images/unfold_less.svg"
 		element.style.display = 'block';
 		document.form.rule_mac.focus();
 	}
@@ -94,7 +128,7 @@ function pullLANIPList(obj){
 }
 
 function hideClients_Block(){
-	document.getElementById("pull_arrow").src = "/images/arrow-down.gif";
+	document.getElementById("pull_arrow").src = "/images/unfold_more.svg";
 	document.getElementById('ClientList_Block_PC').style.display='none';
 }
 
@@ -123,7 +157,7 @@ function gen_modeselect(name, value, onchange){
 	        }
 		if (optGroup != "") obj.appendChild(optGroup);
 	} else {
-		code = '<select class="input_option" name="'+name+'" value="'+value+'" onchange="'+onchange+'">';
+		code = '<select class="input_option" id="'+name+'" name="'+name+'" value="'+value+'" onchange="'+onchange+'">';
 		for (i = 0; i < modes_array.length; i++){
 			if (modes_array[i][0] == "") {
 				if (optGroup != "") code += '</optgroup>';
@@ -151,7 +185,7 @@ function show_dnsfilter_list(){
 	else{
 		//user icon
 		var userIconBase64 = "NoIcon";
-		var clientName, deviceType, deviceVender;
+		var clientName, deviceType, deviceVendor;
 		for(var i=1; i<dnsfilter_rule_list_row.length; i++){
 			var ruleArray = dnsfilter_rule_list_row[i].split('&#62');
 			var clientMac = ruleArray[1].toUpperCase();
@@ -162,18 +196,18 @@ function show_dnsfilter_list(){
 			if(clientList[clientMac]) {
 				clientName = (clientList[clientMac].nickName == "") ? clientList[clientMac].name : clientList[clientMac].nickName;
 				deviceType = clientList[clientMac].type;
-				deviceVender = clientList[clientMac].vendor;
+				deviceVendor = clientList[clientMac].vendor;
 				dnsfilter_rule_list_row[clientMac] = clientName;
 			}
 			else {
 				clientName = clientMac;
 				deviceType = 0;
-				deviceVender = "";
+				deviceVendor = "";
 			}
 			code +='<tr id="row'+i+'">';
 			code +='<td width="50%" title="'+clientName+'">';
 
-			code += '<table style="width:100%;"><tr><td style="width:40%;height:56px;border:0px;float:right;">';
+			code += '<table style="width:100%;"><tr><td style="width:40%;height:56px;border:0px; float:right;padding-right:15px;">';
 			if(clientList[clientMac] == undefined) {
 				code += '<div id="' + clientIconID + '" class="clientIcon type0"></div>';
 			}
@@ -184,16 +218,16 @@ function show_dnsfilter_list(){
 				if(userIconBase64 != "NoIcon") {
 					code += '<div id="' + clientIconID + '" style="text-align:center;"><img class="imgUserIcon_card" src="' + userIconBase64 + '"></div>';
 				}
-				else if(deviceType != "0" || deviceVender == "") {
-					code += '<div id="' + clientIconID + '" class="clientIcon type' + deviceType + '"></div>';
+				else if(deviceType != "0" || deviceVendor == "") {
+					code += '<div id="' + clientIconID + '" class="clientIcon"><i class="type'+deviceType+'"></i></div>';
 				}
-				else if(deviceVender != "" ) {
-					var venderIconClassName = getVenderIconClassName(deviceVender.toLowerCase());
-					if(venderIconClassName != "" && !downsize_4m_support) {
-						code += '<div id="' + clientIconID + '" class="venderIcon ' + venderIconClassName + '"></div>';
+				else if(deviceVendor != "" ) {
+					var vendorIconClassName = getVendorIconClassName(deviceVendor.toLowerCase());
+					if(vendorIconClassName != "" && !downsize_4m_support) {
+						code += '<div id="' + clientIconID + '" class="clientIcon"><i class="vendor-icon '+ vendorIconClassName +'"></i></div>';
 					}
 					else {
-						code += '<div id="' + clientIconID + '" class="clientIcon type' + deviceType + '"></div>';
+						code += '<div id="' + clientIconID + '" class="clientIcon"><i class="type' + deviceType + '"></i></div>';
 					}
 				}
 			}
@@ -233,6 +267,10 @@ function applyRule(){
 		split_clientlist(dnsfilter_rule_list.replace(/&#62/g, ">"));
 	else
 		document.form.dnsfilter_rulelist.value = dnsfilter_rule_list.replace(/&#62/g, ">") ;
+
+	if (isSupport("mtlancfg")) {
+		save_sdn_rules();
+	}
 
 	showLoading();
 	document.form.submit();
@@ -361,6 +399,93 @@ function showhide_settings(state) {
 	}
 	showhide("mainTable_Table", state);
 	showhide("mainTable_Block", state);
+	if (isSupport("mtlancfg")) {
+		showhide("sdnTable_Table", state);
+		showhide("sdnTable_Block", state);
+	}
+}
+
+
+function convertRulelistToJson(attrArray, rulelist) {
+	var rulelist_json = [];
+
+	var each_rule = rulelist.split("<");
+	var convertAtoJ = function(rule_array) {
+		var rule_json = {}
+		$.each(rule_array, function(index, value) {
+			if (index > attrArray.length - 1)
+				attr = "ext" + index;
+			else
+				attr = attrArray[index];
+			rule_json[attr] = rule_array[index];
+		});
+		return rule_json;
+	}
+
+	$.each(each_rule, function(index, value) {
+		if (value != "") {
+			var one_rule_array = value.split(">");
+			var one_rule_json = convertAtoJ(one_rule_array);
+			if (!one_rule_json.error) rulelist_json.push(one_rule_json);
+		}
+	});
+
+	return rulelist_json;
+}
+
+
+function show_sdn_list() {
+	var code, sdn_name;
+	var i = 0;
+
+	code = '<table width="100%" border="1" cellspacing="0" cellpadding="4" align="center" class="list_table" id="clientTable">';
+
+	$.each(sdn_rl_json, function(index, entry){
+		if(!$.isEmptyObject(entry)) {
+			if (entry.idx != 0 && entry.subnet_idx != 0) {	// Skip default LAN
+				i++;
+				sdn_name = decodeURIComponent(httpApi.nvramCharToAscii(["apg" + entry.apg_idx + "_ssid"])["apg" + entry.apg_idx + "_ssid"])
+				code +='<tr id="row'+i+'">';
+				code +='<td width="50%" title="'+sdn_name+'">'+sdn_name+'</td>';
+				code +='<td width="50%">'+gen_modeselect("sdn_dns_filter_idx"+entry.idx, entry.dns_filter_idx, "")+'</td>';
+				code += '</tr>';
+			}
+		}
+	});
+
+	if (i == 0)
+		code +='<tr><td colspan="2" class="hint-color">No supported network.</td></tr>';
+
+	code += '</table>';
+
+	document.getElementById("sdnTable_Block").innerHTML = code;
+}
+
+
+function save_sdn_rules() {
+	var nv = "";
+	var new_entry;
+
+	$.each(sdn_rl_json, function(index, entry){
+		if(!$.isEmptyObject(entry)) {
+			if (entry.idx != 0 && entry.subnet_idx != 0) {	// Skip default LAN}
+				entry.dns_filter_idx = document.getElementById("sdn_dns_filter_idx"+entry.idx).value;
+			}
+		}
+	});
+
+	$.each(sdn_rl_json, function(idx, profile){
+		nv += "<";
+		new_entry = 1;
+		for (var attr in profile) {
+			if (new_entry)
+				new_entry = 0;
+			else
+				nv += ">";
+			nv += profile[attr];
+		}
+	});
+	document.form.sdn_rl.value = nv;
 }
 
 </script>
@@ -388,6 +513,7 @@ function showhide_settings(state) {
 <input type="hidden" name="dnsfilter_rulelist3" value="">
 <input type="hidden" name="dnsfilter_rulelist4" value="">
 <input type="hidden" name="dnsfilter_rulelist5" value="">
+<input type="hidden" name="sdn_rl" value="<% nvram_get("sdn_rl"); %>">
 
 <table class="content" align="center" cellpadding="0" cellspacing="0" >
 	<tr>
@@ -422,7 +548,9 @@ function showhide_settings(state) {
 			   different custom servers to use.</p>
 			<br>
 			<p>A few special System options are available in the presets.  "No Redirection" will bypass a global redirection,
-			   and "Router" will force clients to use the DNS provided by the router's DHCP server (or, the router itself if it's not defined).
+			   and "Router" will force clients to use the router itself as their resolver.</p>
+			<br>
+			<p>Use a Custom DNS entry in DNS Director if you need DNS Director to redirect to an IP configured in your DHCP settings.</p>
 		</div>
 
 			<!--=====Beginning of Main Content=====-->
@@ -490,7 +618,7 @@ function showhide_settings(state) {
 				<tr>
 					<td width="50%">
 						<input type="text" maxlength="17" style="margin-left:10px;width:255px;" autocorrect="off" autocapitalize="off" class="input_macaddr_table" name="rule_mac" onClick="hideClients_Block();" onKeyPress="return validator.isHWAddr(this,event)" placeholder="ex: <% nvram_get("lan_hwaddr"); %>">
-						<img id="pull_arrow" height="14px;" src="/images/arrow-down.gif" style="position:absolute;" onclick="pullLANIPList(this);" title="<#select_client#>">
+						<img id="pull_arrow" height="14px;" src="/images/unfold_more.svg" style="position:absolute;" onclick="pullLANIPList(this);" title="<#select_client#>">
 						<div id="ClientList_Block_PC" style="margin:0 0 0 52px" class="clientlist_dropdown"></div>
 					</td>
 					<td width="35%">
@@ -500,8 +628,21 @@ function showhide_settings(state) {
 					<td width="15%"><input class="add_btn" type="button" onClick="addRow_main(64)" value=""></td>
 				</tr>
 			</table>
+
 			<!-- Client list -->
 			<div id="mainTable_Block"></div>
+
+			<table width="100%" border="1" cellspacing="0" cellpadding="4" align="center" class="FormTable_table" style="margin-top:8px; display:none;" id="sdnTable_Table">
+			<thead><tr><td colspan="2">Guest Network Pro profiles</td></tr></thead>
+				<tr>
+					<th width="50%">Network</th>
+					<th width="50%">Redirection</th>
+				</tr>
+			</table>
+
+			<!-- SDN list -->
+			<div id="sdnTable_Block"></div>
+
 			<div class="apply_gen">
 				<input name="button" type="button" class="button_gen" onclick="applyRule()" value="<#CTL_apply#>"/>
 			</div>
