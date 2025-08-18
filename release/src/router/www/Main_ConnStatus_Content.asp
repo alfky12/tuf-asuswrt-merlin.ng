@@ -196,8 +196,8 @@ function draw_table(type){
 		shownlen++;
 
 		// Output row
-		code += "<tr><td style=\"text-align:left;\">" + dataarray[i][0] + "</td>" +
-		        "<td title=\"" + srctitle + "\"" + (srchost.length > 37 ? "style=\"font-size: 80%;text-align:left;white-space: nowrap;\"" : "style=\"text-align:left;white-space: nowrap;\"") +">";
+		code += "<tr><td style=\"text-align:center;\">" + dataarray[i][0] + "</td>" +
+		        "<td title=\"" + srctitle + "\"" + (srchost.length > 37 ? "style=\"font-size: 80%;text-align:center;white-space: nowrap;\"" : "style=\"text-align:center;white-space: nowrap;\"") +">";
 
 		if (!validator.isPrivateIP(dataarray[i][1])) {
 			code += "<a style=\"cursor:pointer; text-decoration:underline;\" href=\"https://whatismyipaddress.com/ip/" + dataarray[i][1] + "\" target=\"_blank\">" + srchost + "</a>"
@@ -206,8 +206,8 @@ function draw_table(type){
 		}
 
 		code += "</td>" +
-			    "<td style=\"text-align:left;\">" + dataarray[i][2] + "</td>" +
-		        "<td title=\"" + dsttitle + "\"" + (dsthost.length > 37 ? "style=\"font-size: 80%;text-align:left;white-space: nowrap;\"" : "style=\"text-align:left;white-space: nowrap;\"") +">";
+			    "<td style=\"text-align:center;\">" + dataarray[i][2] + "</td>" +
+		        "<td title=\"" + dsttitle + "\"" + (dsthost.length > 37 ? "style=\"font-size: 80%;text-align:center;white-space: nowrap;\"" : "style=\"text-align:center;white-space: nowrap;\"") +">";
 
 		if (!validator.isPrivateIP(dataarray[i][3])) {
 			code +="<a style=\"cursor:pointer; text-decoration:underline;\" href=\"https://whatismyipaddress.com/ip/" + dataarray[i][3] + "\" target=\"_blank\">" + dsthost + "</a>";
@@ -216,8 +216,8 @@ function draw_table(type){
 		}
 
 		code += "</td>" +
-		        "<td style=\"text-align:left;\">" + dataarray[i][4] + "</td>" +
-		        "<td style=\"text-align:left;\">" + dataarray[i][5] + "</td>";
+		        "<td style=\"text-align:center;\">" + dataarray[i][4] + "</td>" +
+		        "<td style=\"text-align:center;\">" + dataarray[i][5] + "</td>";
 	}
 
 	if (shownlen == 0) {
