@@ -687,7 +687,7 @@ form{
 	font-size:12px;
 }
 .list_table td{
-	border-bottom: 1px solid #FFF;
+	/* border-bottom: 1px solid #FFF; */
 	border-collapse: collapse;
 	height:25px;
 }
