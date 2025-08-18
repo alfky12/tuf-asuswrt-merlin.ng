@@ -763,8 +763,8 @@ function showDiskInfo(device){
 		percentbar = simpleNum2((device.totalSize - device.totalUsed)/device.totalSize*100);
 		percentbar = Math.round(100 - percentbar);
 
-		dec_html_code += '<div id="diskquota" align="left" style="margin-top:5px;margin-bottom:10px;">\n';
-		dec_html_code += '<div class="quotabar" style="width:'+ percentbar +'%;height:13px;"></div>';
+		dec_html_code += '<div id="diskquota" align="left" style="margin-top:5px;margin-bottom:10px;border-radius:4px">\n';
+		dec_html_code += '<div class="quotabar" style="width:'+ percentbar +'%;height:13px;border-radius:4px"></div>';
 		dec_html_code += '</div>\n';
 	}
 	else{
@@ -2534,8 +2534,8 @@ function close_phone_as_modem_hint(){
 		<!--=====Beginning of Network Map=====-->
 		<div id="tabMenu"></div>
 		<div id="NM_shift" style="margin-top:-140px;"></div>
-		<div id="NM_table" class="NM_table" >
-		<div id="NM_table_div" style="background-color:rgba(0,0,0,.5);height:805px;">
+		<div id="NM_table" class="NM_table" style="background-color:rgba(34,34,34,.5)" >
+		<div id="NM_table_div" style="height:805px;">
 			<div style="width:51%;float:left;background:url('images/New_ui/networkmap/networkmap_bg.png') no-repeat rgba(0,0,0,.0);background-position-x: 4px; height:805px;">
 			<table id="_NM_table" border="0" cellpadding="0" cellspacing="0" style="opacity:.95;margin-left:-30px;" >
 				<tr>
