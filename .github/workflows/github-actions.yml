@@ -11,6 +11,7 @@ jobs:
       matrix:
         cfg:
           - { model: "tuf-ax3000", sdk: "src-rt-5.02axhnd.675x", ui: "tuf", skip: false }
+          - { model: "tuf-ax3000_v2", sdk: "src-rt-5.04axhnd.675x", ui: "tuf",  skip: false }
           - { model: "tuf-ax5400", sdk: "src-rt-5.02axhnd.675x", ui: "tuf", skip: false }
           
     if: "!contains(github.event.commits[0].message, '[SKIP_CI]')"
@@ -22,8 +23,8 @@ jobs:
         SDK: ${{ matrix.cfg.sdk }}
         UI: ${{ matrix.cfg.ui }}
         SKIP_BUILD: ${{ matrix.cfg.skip }}
-        GIT_REPO: "https://github.com/alfky12/asuswrt-merlin.ng.git"
-        PROJECT_DIR: "/project/asuswrt-merlin.ng"
+        GIT_REPO: "https://github.com/alfky12/tuf-asuswrt-merlin.ng.git"
+        PROJECT_DIR: "/project/tuf-asuswrt-merlin.ng"
         ARTIFACTS_DIR: "/project/artifacts"
         CHANGELOG_FILE: "/tmp/CHANGELOG"
         PROJECTBASEDIR: "/project"
