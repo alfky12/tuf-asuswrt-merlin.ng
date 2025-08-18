@@ -96,7 +96,7 @@ function draw_table(type){
 		document.getElementById('connblock_header').style.display = "";
 		document.getElementById('connblock_nat').innerHTML = "";
 		code = '<table width="100%" cellpadding="4" class="FormTable_table"><thead><tr><td colspan="6">NAT Connections</td></tr></thead>' +
-		       '<tr><th width="8%" id="track_header_0" style="cursor: pointer; text-align:left;" onclick="setsort(0,\'nat\'); draw_table(\'nat\')">Proto</th>' +
+		       '<tr><th width="8%" id="track_header_0" style="cursor: pointer; text-align:center;" onclick="setsort(0,\'nat\'); draw_table(\'nat\')">Proto</th>' +
 		       '<th width="28%" id="track_header_1" style="cursor: pointer;" onclick="setsort(1, \'nat\'); draw_table(\'nat\')">NAT IP</th>' +
 		       '<th width="9%" id="track_header_2" style="cursor: pointer;" onclick="setsort(2, \'nat\'); draw_table(\'nat\')">NAT Port</th>' +
 		       '<th width="28%" id="track_header_3" style="cursor: pointer;" onclick="setsort(3, \'nat\'); draw_table(\'nat\')">Destination IP</th>' +
