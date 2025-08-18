@@ -550,7 +550,7 @@ function save_sdn_rules() {
 			<p>A few special System options are available in the presets.  "No Redirection" will bypass a global redirection,
 			   and "Router" will force clients to use the router itself as their resolver.</p>
 			<br>
-			<p>Use a Custom DNS entry in DNS Director if you need DNS Director to redirect to an IP configured in your DHCP settings.</p>
+			<p>Use a User Defined DNS entry in DNS Director if you need DNS Director to redirect to an IP configured in your DHCP settings.</p>
 		</div>
 
 			<!--=====Beginning of Main Content=====-->
