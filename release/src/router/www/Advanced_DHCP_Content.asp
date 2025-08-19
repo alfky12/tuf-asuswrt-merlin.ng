@@ -951,7 +951,7 @@ function edit_dhcp_manual_ok(){
 					</tr>
 				</table>
 
-				<div id="edit_dhcp_manual_profile"  class="pop_div_bg pop_div_container">
+				<div id="edit_dhcp_manual_profile" class="pop_div_bg pop_div_container" style="display:none;position:fixed;inset:0;margin:auto;z-index:10;max-height:40vh;overflow:auto;width:fit-content;">
 					<table width="95%" border="1" align="center" cellpadding="4" cellspacing="0" class="FormTable" style="margin-top:8px;">
 						<thead>
 							<tr>
