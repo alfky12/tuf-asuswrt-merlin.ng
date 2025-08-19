@@ -33,12 +33,13 @@ body{
 }
 
 .GB_background{
-	background: url('images/New_ui/mainimage_img_Game.jpg');
+	/* background: url('images/New_ui/mainimage_img_Game.jpg');
 	background-repeat: no-repeat
 	margin-top: -15px;
 	border-radius: 3px;
-	background-size: cover;
-	height: auto;
+	background-size: cover; */
+	background: rgba(34, 34, 34, .5);
+	height: 1229px !important;
 }
 
 .GB_background_rt{
@@ -145,7 +146,7 @@ body{
 	background: #248DFF;
 }
 
-@media all and (-ms-high-contrast:none)
+@media all and (forced-colors:none)
 {
     *::-ms-backdrop, .container::after { margin-top: 0px} /* IE11 */
 }
@@ -728,7 +729,7 @@ function enableGearUp(){
 				<div id="subMenu"></div>
 			</td>
 			<td valign="top">
-				<div id="tabMenu" style="*margin-top: -160px;"></div>
+				<div id="tabMenu" style="margin-top: -155px;"></div>
 				<br>
 		<!--=====Beginning of Main Content=====-->
 				<div id="FormTitle">
