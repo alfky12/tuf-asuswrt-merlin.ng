@@ -82,7 +82,6 @@ typedef struct {
 #endif
 #include "openvpn_config.h"
 
-extern int dev_nvram_getall(char *buf, int count);
 
 unsigned int get_phy_temperature(int radio);
 unsigned int get_wifi_clients(int unit, int querytype);
@@ -256,10 +255,8 @@ int ej_show_sysinfo(int eid, webs_t wp, int argc, char_t ** argv)
 				free(buffer);
 				sprintf(result, "%d", freq);
 			}
-			else if (get_model() == MODEL_RTAX58U || get_model() == MODEL_RTAX56U || get_model() == MODEL_DSLAX82U || get_model() == MODEL_RTAX95Q )
+			else if (get_model() == MODEL_RTAX58U || get_model() == MODEL_RTAX56U)
 				strcpy(result, "1500");
-			else if (get_model() == MODEL_TUFAX3000_V2)
-				strcpy(result, "1700");
 			else
 #endif // BCM4912
 #endif
@@ -307,7 +304,7 @@ int ej_show_sysinfo(int eid, webs_t wp, int argc, char_t ** argv)
 			sysinfo(&sys);
 			sprintf(result,"%.2f",(sys.loads[2] / (float)(1<<SI_LOAD_SHIFT)));
 		} else if(strcmp(type,"nvram.total") == 0) {
-			sprintf(result,"%d",MAX_NVRAM_SPACE);
+			sprintf(result,"%d",NVRAM_SPACE);
 		} else if(strcmp(type,"nvram.used") == 0) {
 			int size = 0;
 #ifdef HND_ROUTER
@@ -391,18 +388,23 @@ int ej_show_sysinfo(int eid, webs_t wp, int argc, char_t ** argv)
 				fclose(fp);
 			}
 		} else if(strcmp(type,"conn.active") == 0) {
-			char buf[256];
+			char buf[256], proto[20];
 			FILE* fp;
 			unsigned int established = 0;
 
-			fp = fopen("/proc/net/nf_conntrack", "r");
+			eval("cp", "/proc/net/nf_conntrack", "/tmp/conntrack.tmp");
+
+			fp = fopen("/tmp/conntrack.tmp", "r");
 			if (fp) {
 				while (fgets(buf, sizeof(buf), fp) != NULL) {
-				if (strstr(buf,"ESTABLISHED") || ((strstr(buf,"udp")) && (strstr(buf,"ASSURED"))))
-					established++;
+					strlcpy(proto, buf, sizeof(proto));
+					if ((strstr(proto, "tcp") && strstr(buf, "ESTABLISHED")) ||
+					    (strstr(proto, "udp") && strstr(buf, "ASSURED")))
+						established++;
 				}
 				fclose(fp);
 			}
+			unlink("/tmp/conntrack.tmp");
 			sprintf(result,"%u",established);
 
 		} else if(strcmp(type,"conn.max") == 0) {
@@ -848,4 +850,3 @@ void GetPhyStatus_rtk(int *states)
 	states[3] = (pS.link[o[3]] == 1) ? (pS.speed[o[3]] == 2) ? 1000 : 100 : 0;
 }
 #endif
-
