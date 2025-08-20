@@ -148,8 +148,8 @@ if(cfg_sync_support){
 	var cfg_check = '<% nvram_get("cfg_check"); %>';
 	var cfg_upgrade = '<% nvram_get("cfg_upgrade"); %>';
 }
-download_url_redir = "https://fwupdate.asuswrt-merlin.net/" + based_modelid;
-download_url = "https://www.asuswrt-merlin.net/download";
+download_url_redir = "https://gnuton.github.io/asuswrt-merlin.ng/updates/" + based_modelid;
+download_url = "https://github.com/gnuton/asuswrt-merlin.ng/releases/latest";
 
 /* Disable these for Asuswrt-Merlin */
 afwupg_support=false;
@@ -1439,7 +1439,7 @@ function show_fw_release_note(event) {
 	if (event.data.isMerlin) {
 		document.amas_release_note.version.value = event.data.newfwver.replace(/^(\d+)\.(\d+)\.(\d+).(\d+)\./, "$1$2$3$4.");
 		if (event.data.product_id)
-			siteurl = "https://fwupdate.asuswrt-merlin.net/" + event.data.product_id;
+			siteurl = "https://gnuton.github.io/asuswrt-merlin.ng/updates/" + event.data.product_id;
 		else
 			siteurl = download_url;
 	} else {
@@ -1934,7 +1934,7 @@ function toggle_fw_check(state) {
 					<li><#FW_n0#></li>
 					<li><#FW_n1#></li>
 					<li id="fw_note2"><#FW_n2#>&nbsp;<#FW_n3#></li>
-					<li id="fw_note3">Get the latest firmware version from the download site at <a style="font-weight: bolder;text-decoration: underline;color:#FFFFFF;" href="https://www.asuswrt-merlin.net/download/" target="_blank">https://www.asuswrt-merlin.net/download/</a></li>
+					<li id="fw_note3">Get the latest firmware version from the download site at <a style="font-weight: bolder;text-decoration: underline;color:#FFFFFF;" href="https://github.com/gnuton/asuswrt-merlin.ng/releases/latest" target="_blank">https://github.com/gnuton/asuswrt-merlin.ng/releases/latest</a></li>
 					<li style="display:none;"id="fw_note5"><#FW_n5#></li>
 					</ol>
 		  </div>
