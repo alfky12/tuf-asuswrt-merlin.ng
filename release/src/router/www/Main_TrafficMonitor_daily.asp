@@ -326,7 +326,7 @@ function draw_chart(){
 
 						<tr>
 							<td>
-								<div style="background-color:#2f3e44;border-radius:10px;width:730px;"><canvas id="chart" height="140"></div>
+								<div style="background-color:rgba(34, 34, 34, .5);border-radius:10px;width:730px;"><canvas id="chart" height="140"></div>
 							</td>
 						</tr>
 						<tr>
