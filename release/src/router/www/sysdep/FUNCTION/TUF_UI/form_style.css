@@ -2135,10 +2135,10 @@ padding-top:1px;
 	display: none;
 }
 .quotabar{
-	background: #8DB6D8;
-	background: -webkit-linear-gradient(#8DB6D8 0%, #7FACD3 49%, #6C9AC7 50%, #6998C5 51%, #6998C5 100%);
-	background: -o-linear-gradient(#8DB6D8 0%, #7FACD3 49%, #6C9AC7 50%, #6998C5 51%, #6998C5 100%);
-	background: linear-gradient(#8DB6D8 0%, #7FACD3 49%, #6C9AC7 50%, #6998C5 51%, #6998C5 100%);
+	background: #0bc8ff;
+	background: -webkit-linear-gradient(to right, #0bc8ff 0%, #0039ff 100%);
+	background: -o-linear-gradient(to right, #0bc8ff 0%, #0039ff 100%);
+	background: linear-gradient(to right, #0bc8ff 0%, #0039ff 100%);
 }
 .splitLine{
 	background: #CEC1C7;
