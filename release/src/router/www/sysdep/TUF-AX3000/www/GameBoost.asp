@@ -163,7 +163,7 @@ body{
 	position: absolute;
 	width: 700px;
 	height: 600px;
-	background-color: #444f53;
+	background-color: #222222;
 	z-index: 199;
 	padding: 12px 18px;
 	overflow-y: auto;
