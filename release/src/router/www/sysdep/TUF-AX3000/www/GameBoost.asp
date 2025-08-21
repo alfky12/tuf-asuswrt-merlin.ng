@@ -371,11 +371,7 @@ function genGameList(){
                     userIconBase64 = getUploadIcon(clientMac.replace(/\:/g, ""));
                 }
                 if (userIconBase64 !== "NoIcon") {
-                    if (clientList[clientMac].isUserUplaodImg) {
-                        iconCode += `<div id="${clientIconID}" class="clientIcon"><img class="imgUserIcon_card" src="${userIconBase64}"></div>`;
-                    } else {
-                        iconCode += `<div id="${clientIconID}" class="clientIcon"><i class="type" style="--svg:url('${userIconBase64}')"></i></div>`;
-                    }
+                    iconCode += '<div id="' + clientIconID + '" style="text-align:center;"><img class="imgUserIcon_card" src="' + userIconBase64 + '"></div>';
                 } else if (deviceType != "0" || deviceVendor == "") {
                     iconCode += `<div id="${clientIconID}" class="clientIcon"><i class="type${deviceType}"></i></div>`;
                 } else if (deviceVendor != "") {
