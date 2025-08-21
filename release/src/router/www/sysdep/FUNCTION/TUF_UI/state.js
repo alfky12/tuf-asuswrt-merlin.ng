@@ -4,12 +4,13 @@ document.write('<script type="text/javascript" src="/js/support_site.js"></scrip
 document.write('<script type="text/javascript" src="/notification.js"></script>');
 document.write('<link rel="stylesheet" type="text/css" href="/notification.css"></link>');
 
-console.log(
-"      __  ___        ___         \n" +
-" ____/  |/  /__ ____/ (_)__  ___ \n" +
-"/___/ /|_/ / -_) __/ / / _ \/__/ \n" +
-"   /_/  /_/\__/_/ /_/_/_//_/     \n" +
-"   ------  TUF  UI  --------     \n")
+console.log(`
+      __  ___        ___         
+ ____/  |/  /__ ____/ (_)__  ___ 
+/___/ /|_/ / -_) __/ / / _ \\/__/ 
+   /_/  /_/\__/_/ /_/_/_//_/     
+   -------- TUF UI --------     
+`);
 
 /* String splice function */
 String.prototype.splice = function( idx, rem, s ) {
