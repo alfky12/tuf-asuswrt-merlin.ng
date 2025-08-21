@@ -946,7 +946,7 @@ function clickEvent(obj){
 
 	if(lastClicked){
 		if(lastClicked.id.indexOf("USBdisk") > 0)
-			lastClicked.style.backgroundPosition = '0 0';
+			lastClicked.style.backgroundPosition = '0 5px';
 		else if(lastClicked.id.indexOf("iconRouter") >= 0){
 			lastClicked.style.backgroundPosition = '35% -3%';
 		}
@@ -1054,7 +1054,7 @@ function check_status(_device){
 		document.getElementById('iconUSBdisk_'+diskOrder).style.backgroundImage = "url(/images/New_ui/networkmap/M2.png)";
 	else 
 		document.getElementById('iconUSBdisk_'+diskOrder).style.backgroundImage = "url(/images/New_ui/networkmap/USB_2.png)";
-	document.getElementById('iconUSBdisk_'+diskOrder).style.backgroundPosition = '0 0';
+	document.getElementById('iconUSBdisk_'+diskOrder).style.backgroundPosition = '0 5px';
 	document.getElementById('iconUSBdisk_'+diskOrder).style.backgroundSize = "100%";
 
 	if(!rog_support)
