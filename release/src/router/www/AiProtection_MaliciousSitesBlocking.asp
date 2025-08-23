@@ -52,20 +52,21 @@
 	width:650px;
 	height:200px;
 	position:absolute;
-	background: #293438;
+	background: #111111;
 	z-index:10;
 	margin: 0 0 0 300px;
 	border-radius:10px;
 	display: none;
 }
 .confirm-button{
-	background: linear-gradient(#233438 0%, #0F1011 100%);
+	background: #ffa523;
 	border-radius: 8px;
 	height:33px;
 	cursor: pointer;
 	min-width:120px;
 	line-height: 33px;
 	text-align: center;
+	color: #000000;
 	margin: 0 12px;
 }
 .icon-container{
@@ -870,7 +871,7 @@ function quickAdd(value){
 													<div style="margin: 0 8px;"><div id="edit_icon" class="icon-container icon-edit" onclick="showWhitelistField();" title="Manage Whitelist"></div></div>
 												</div>
 											</div>
-											<div id="whitelistField" style="position: absolute;width:600px;height:650px;background-color: rgba(47,62,68,1);margin:-350px 0 0 35px;z-index:30;padding: 32px 24px 24px 24px;display:none;">
+											<div id="whitelistField" style="position: absolute;width:600px;height:650px;background-color: #111111;margin:-350px 0 0 35px;z-index:30;padding: 32px 24px 24px 24px;display:none;">
 												<div style="display:flex;justify-content: space-between;align-items: center;">
 													<div style="font-size: 24px;"><#WhiteList#></div>
 													<div onclick="hideWhitelistField();"><img src="images/New_ui/icon_close.svg" alt="" style="width:32px;height:32px;cursor:pointer;"></div>
