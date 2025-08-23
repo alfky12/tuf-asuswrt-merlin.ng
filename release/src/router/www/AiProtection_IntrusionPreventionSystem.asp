@@ -50,7 +50,7 @@
 	width:650px;
 	height:200px;
 	position:absolute;
-	background: #222222;
+	background: #111111;
 	z-index:10;
 	margin: 0 0 0 300px;
 	border-radius:10px;
