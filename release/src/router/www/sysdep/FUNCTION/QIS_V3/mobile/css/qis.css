@@ -119,7 +119,7 @@ a{
 		font-size: 14px;
 	}
 	.navigation li dt {
-		padding:4px 8px 0 0;
+		padding:7px 8px 0 0;
 		font-size: 18px;
 	}
 	.navigation li dd a, .navigation  li dd a:visited {
@@ -311,7 +311,7 @@ a{
 	border:1px solid #007AFF;
 	font-size:2.25em;
 	margin:auto;
-	line-height:88px;
+	line-height:66px;
 }
 #aimesh_welcome_button{
 	cursor:pointer;
