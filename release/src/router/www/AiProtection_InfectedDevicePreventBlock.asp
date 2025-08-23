@@ -28,20 +28,21 @@
 	width:650px;
 	height:200px;
 	position:absolute;
-	background: #293438;
+	background: #111111;
 	z-index:10;
 	margin: 0 0 0 300px;
 	border-radius:10px;
 	display: none;
 }
 .confirm-button{
-	background: linear-gradient(#233438 0%, #0F1011 100%);
+	background: #ffa523;
 	border-radius: 8px;
 	height:33px;
 	cursor: pointer;
 	min-width:120px;
 	line-height: 33px;
 	text-align: center;
+	color: #000000;
 	margin: 0 12px;
 }
 .detail-table{
@@ -661,7 +662,7 @@ var download = function(content, fileName, mimeType) {
 												<div style="display:table-row">
 													<div style="font-size:16px;margin:0 0 5px 5px;text-align:center"><#AiProtection_event#></div>
 												</div>
-												<div id="vulner_table" style="background-color:#444f53;width:350px;height:340px;border-radius: 10px;display:table-cell;position:relative;">
+												<div id="vulner_table" style="background-color:#222222;width:350px;height:340px;border-radius: 10px;display:table-cell;position:relative;">
 													<div id="bar_shade" style="position:absolute;width:330px;height:330px;background-color:#505050;opacity:0.6;margin:5px;display:none"></div>
 													<div>
 														<div style="display:table-cell;width:50px;padding: 10px;">
@@ -687,7 +688,7 @@ var download = function(content, fileName, mimeType) {
 												<div style="font-size:16px;margin:0 0 5px 5px;text-align:center;"><#AiProtection_activity#></div>
 
 												<!-- Line Chart -Block-->
-												<div style="background-color:#444f53;width:350px;height:340px;border-radius: 10px;display:table-cell;padding-left:10px;position:relative">
+												<div style="background-color:#222222;width:350px;height:340px;border-radius: 10px;display:table-cell;padding-left:10px;position:relative">
 													<div id="chart_shade" style="position:absolute;width:350px;height:330px;background-color:#505050;opacity:0.6;margin:5px 0 5px -5px;display:none"></div>
 													<div>
 														<div style="display:inline-block;margin:5px 10px"><#AiProtection_scan_rHits#></div>		
@@ -720,7 +721,7 @@ var download = function(content, fileName, mimeType) {
 												</div>
 											</div>		
 										</div>
-										<div style="margin: 10px auto;width:720px;height:500px;background:#444f53;border-radius:10px;position:relative;overflow:auto">
+										<div style="margin: 10px auto;width:720px;height:500px;background:#222222;border-radius:10px;position:relative;overflow:auto">
 											<div id="info_shade" style="position:absolute;width:710px;height:490px;background-color:#505050;opacity:0.6;margin:5px;display:none"></div>
 											<div id="detail_info_table" style="padding: 10px 15px;">
 												<div style="font-size:14px;font-weight:bold;border-bottom: 1px solid #797979">
