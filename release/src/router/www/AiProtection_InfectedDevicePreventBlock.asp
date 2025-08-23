@@ -42,7 +42,7 @@
 	min-width:120px;
 	line-height: 33px;
 	text-align: center;
-	color: #000000
+	color: #000000;
 	margin: 0 12px;
 }
 .detail-table{
