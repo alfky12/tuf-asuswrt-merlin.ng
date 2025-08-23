@@ -50,20 +50,21 @@
 	width:650px;
 	height:200px;
 	position:absolute;
-	background: #293438;
+	background: #222222;
 	z-index:10;
 	margin: 0 0 0 300px;
 	border-radius:10px;
 	display: none;
 }
 .confirm-button{
-	background: linear-gradient(#233438 0%, #0F1011 100%);
+	background: #ffa523;
 	border-radius: 8px;
 	height:33px;
 	cursor: pointer;
 	min-width:120px;
 	line-height: 33px;
 	text-align: center;
+	color: #000000;
 	margin: 0 12px;
 }
 .icon-container{
