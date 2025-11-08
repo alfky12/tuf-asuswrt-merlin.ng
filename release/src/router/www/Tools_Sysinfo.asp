@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html xmlns:v>
 <head>
@@ -31,7 +31,8 @@
 </style>
 
 <script language="JavaScript" type="text/javascript" src="/js/jquery.js"></script>
-<script type="text/javascript" src="/js/chart.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="/js/httpApi.js"></script>
+<script language="JavaScript" type="text/javascript" src="/js/chart.min.js"></script>
 <script language="JavaScript" type="text/javascript" src="/state.js"></script>
 <script language="JavaScript" type="text/javascript" src="/general.js"></script>
 <script language="JavaScript" type="text/javascript" src="/popup.js"></script>
@@ -60,6 +61,7 @@ var wifi24data = [];
 var wifi51data = [];
 var wifi52data = [];
 var wifi6data = [];
+var wifi62data = [];
 
 
 function draw_mem_charts(){
@@ -203,6 +205,8 @@ function draw_temps_charts(){
 		wifi52data.shift();
 	if (wifi6data.length > 20)
 		wifi6data.shift();
+	if (wifi62data.length > 20)
+		wifi62data.shift();
 
         if (cputempGraph != undefined) {
                 cputempGraph.update();
@@ -250,6 +254,7 @@ function draw_temps_charts(){
 			fill: { target: "origin"}
 		});
 	}
+
 /* 5 GHz-2 */
 	if (typeof wifi52data[0] === "number" && wifi52data[0] > 0) {
 		datasets.push({
@@ -267,7 +272,7 @@ function draw_temps_charts(){
 /* 6 GHz */
 	if (typeof wifi6data[0] === "number" && wifi6data[0] > 0) {
 		datasets.push({
-			label: "6 GHz",
+			label: (wl_info.band6g_2_support ? "6 GHz-1" :"6 GHz"),
 			data: wifi6data,
 			backgroundColor: "rgba(128, 191, 0, 0.3)",
 			borderColor: "rgba(128, 191, 0, 1)",
@@ -275,6 +280,20 @@ function draw_temps_charts(){
 			pointStyle: "line",
 			lineTension: "0",
 			fill: {	target: "origin"}
+		});
+	}
+
+/* 6 GHz-2 */
+	if (typeof wifi62data[0] === "number" && wifi62data[0] > 0) {
+		datasets.push({
+			label: "6 GHz-2",
+			data: wifi62data,
+			backgroundColor: "rgba(200, 0, 200, 0.3)",
+			borderColor: "rgba(200, 0, 200, 1)",
+			borderWidth: "2",
+			pointStyle: "line",
+			lineTension: "0",
+			fill: { target: "origin"}
 		});
 	}
 
@@ -330,12 +349,15 @@ function initial(){
 
 	if (wl_info.band5g_2_support) {
 		document.getElementById("wifi51_clients_th").innerHTML = "Wireless Clients (5 GHz-1)";
-		document.getElementById("wifi5_2_clients_tr").style.display = "";
+		document.getElementById("wifi52_clients_tr").style.display = "";
 	}
 	if (wl_info.band6g_support) {
 		document.getElementById("wifi6_clients_tr").style.display = "";
 	}
-
+	if (wl_info.band6g_2_support) {
+		document.getElementById("wifi6_clients_th").innerHTML = "Wireless Clients (6 GHz-1)";
+		document.getElementById("wifi62_clients_tr").style.display = "";
+        }
 	if (band5g_support) {
 		document.getElementById("wifi5_clients_tr").style.display = "";
 	}
@@ -349,6 +371,14 @@ function initial(){
 	else
 		document.getElementById("model_id").innerHTML = productid;
 
+	var firmver = '<% nvram_get("firmver"); %>';
+	var buildno = '<% nvram_get("buildno"); %>';
+	var extendno = '<% nvram_get("extendno"); %>';
+	if ((extendno == "") || (extendno == "0"))
+		document.getElementById("fwver").innerHTML = firmver.replace(/\./g,"") + '.' + buildno;
+	else
+		document.getElementById("fwver").innerHTML = firmver.replace(/\./g,"") + '.' + buildno + '_' + extendno;
+
 	var rc_caps = "<% nvram_get("rc_support"); %>";
 	var rc_caps_arr = rc_caps.split(' ').sort();
 	rc_caps = rc_caps_arr.toString().replace(/,/g, " ");
@@ -356,7 +386,6 @@ function initial(){
 
 	hwaccel_state();
 	update_temperatures();
-	updateClientList();
 	update_sysinfo();
 	show_wifi_version();
 }
@@ -374,6 +403,11 @@ function update_temperatures(){
 				curr_coreTmp_5_raw = curr_coreTmp_wl0_raw;
 				curr_coreTmp_52_raw = curr_coreTmp_wl1_raw;
 				curr_coreTmp_6_raw = curr_coreTmp_wl2_raw;
+			} else if (based_modelid === 'GT-BE98_PRO') {
+                                curr_coreTmp_24_raw = curr_coreTmp_wl3_raw;
+                                curr_coreTmp_5_raw = curr_coreTmp_wl0_raw;
+                                curr_coreTmp_6_raw = curr_coreTmp_wl1_raw;
+                                curr_coreTmp_62_raw = curr_coreTmp_wl2_raw;
 			} else {
 				curr_coreTmp_24_raw = curr_coreTmp_wl0_raw;
 				if (band5g_support)
@@ -397,7 +431,12 @@ function update_temperatures(){
 				wifi51data.push(parseInt(curr_coreTmp_5_raw.replace("&deg;C", "")));
 			}
 
-			if (wl_info.band6g_support) {
+			if (wl_info.band6g_2_support) {
+				code += "&nbsp;&nbsp;-&nbsp;&nbsp;<span>6 GHz-1: </span>" + curr_coreTmp_6_raw;
+				code += "&nbsp;&nbsp;-&nbsp;&nbsp;<span>6 GHz-2: </span>" + curr_coreTmp_62_raw;
+				wifi6data.push(parseInt(curr_coreTmp_6_raw.replace("&deg;C", "")));
+				wifi62data.push(parseInt(curr_coreTmp_62_raw.replace("&deg;C", "")));
+			} else if (wl_info.band6g_support) {
 				code += "&nbsp;&nbsp;-&nbsp;&nbsp;<span>6 GHz: </span>" + curr_coreTmp_6_raw;
 				wifi6data.push(parseInt(curr_coreTmp_6_raw.replace("&deg;C", "")));
 			}
@@ -462,6 +501,11 @@ function show_connstate(){
 		wlc_51_arr = wlc_0_arr;
 		wlc_52_arr = wlc_1_arr;
 		wlc_6_arr = wlc_2_arr;
+	} else if (based_modelid === 'GT-BE98_PRO') {
+                wlc_24_arr = wlc_3_arr;
+                wlc_51_arr = wlc_0_arr;
+                wlc_6_arr = wlc_1_arr;
+                wlc_62_arr = wlc_2_arr;
 	} else {
 		wlc_24_arr = wlc_0_arr;
 		if (band5g_support)
@@ -472,27 +516,33 @@ function show_connstate(){
 			wlc_6_arr = wlc_2_arr;
 	}
 
-	document.getElementById("wlc_24_td").innerHTML = "<span>Associated: </span>" + wlc_24_arr[0] + "&nbsp;&nbsp;-&nbsp;&nbsp;" +
+	document.getElementById("wlc_24_td").innerHTML = (!wifi7_support ? "<span>Associated: </span>" + wlc_24_arr[0] + "&nbsp;&nbsp;-&nbsp;&nbsp;" : "") +
 	                                                 "<span>Authorized: </span>" + wlc_24_arr[1] + "&nbsp;&nbsp;-&nbsp;&nbsp;" +
 	                                                 "<span>Authenticated: </span>" + wlc_24_arr[2];
 
 	if (band5g_support) {
-		document.getElementById("wlc_51_td").innerHTML = "<span>Associated: </span>" + wlc_51_arr[0] + "&nbsp;&nbsp;-&nbsp;&nbsp;" +
+		document.getElementById("wlc_51_td").innerHTML = (!wifi7_support ? "<span>Associated: </span>" + wlc_51_arr[0] + "&nbsp;&nbsp;-&nbsp;&nbsp;" : "") +
 		                                                 "<span>Authorized: </span>" + wlc_51_arr[1] + "&nbsp;&nbsp;-&nbsp;&nbsp;" +
 		                                                 "<span>Authenticated: </span>" + wlc_51_arr[2];
 	}
 
 	if (wl_info.band5g_2_support) {
-		document.getElementById("wlc_52_td").innerHTML = "<span>Associated: </span>" + wlc_52_arr[0] + "&nbsp;&nbsp;-&nbsp;&nbsp;" +
+		document.getElementById("wlc_52_td").innerHTML = (!wifi7_support ? "<span>Associated: </span>" + wlc_52_arr[0] + "&nbsp;&nbsp;-&nbsp;&nbsp;" : "") +
 		                                                 "<span>Authorized: </span>" + wlc_52_arr[1] + "&nbsp;&nbsp;-&nbsp;&nbsp;" +
 		                                                 "<span>Authenticated: </span>" + wlc_52_arr[2];
 	}
 
 	if (wl_info.band6g_support) {
-		document.getElementById("wlc_6_td").innerHTML = "<span>Associated: </span>" + wlc_6_arr[0] + "&nbsp;&nbsp;-&nbsp;&nbsp;" +
+		document.getElementById("wlc_6_td").innerHTML = (!wifi7_support ? "<span>Associated: </span>" + wlc_6_arr[0] + "&nbsp;&nbsp;-&nbsp;&nbsp;" : "") +
 		                                                "<span>Authorized: </span>" + wlc_6_arr[1] + "&nbsp;&nbsp;-&nbsp;&nbsp;" +
 		                                                "<span>Authenticated: </span>" + wlc_6_arr[2];
 	}
+
+	if (wl_info.band6g_2_support) {
+		document.getElementById("wlc_62_td").innerHTML = (!wifi7_support ? "<span>Associated: </span>" + wlc_62_arr[0] + "&nbsp;&nbsp;-&nbsp;&nbsp;" : "") +
+		                                                 "<span>Authorized: </span>" + wlc_62_arr[1] + "&nbsp;&nbsp;-&nbsp;&nbsp;" +
+		                                                 "<span>Authenticated: </span>" + wlc_62_arr[2];
+        }
 }
 
 
@@ -514,20 +564,6 @@ function show_memcpu(){
 	}
 
 	draw_mem_charts();
-}
-
-
-function updateClientList(e){
-	$.ajax({
-		url: '/update_clients.asp',
-		dataType: 'script',
-		error: function(xhr) {
-			setTimeout("updateClientList();", 1000);
-		},
-		success: function(response){
-			setTimeout("updateClientList();", 3000);
-		}
-	});
 }
 
 function update_sysinfo(e){
@@ -553,7 +589,7 @@ function show_wifi_version() {
 		buf += "<br><% sysinfo("driver_version.1"); %>";
 	if (wl_info.band5g_2_support || wl_info.band6g_support)
 		buf += "<br><% sysinfo("driver_version.2"); %>";
-	if (based_modelid === 'GT-AXE16000')
+	if (based_modelid === 'GT-AXE16000' || based_modelid === 'GT-BE98_PRO')
 		buf += "<br><% sysinfo("driver_version.3"); %>";
 	buf += "</td>";
 
@@ -581,8 +617,6 @@ function show_wifi_version() {
 <input type="hidden" name="SystemCmd" value="">
 <input type="hidden" name="preferred_lang" id="preferred_lang" value="<% nvram_get("preferred_lang"); %>">
 <input type="hidden" name="firmver" value="<% nvram_get("firmver"); %>">
-<input type="hidden" name="ct_tcp_timeout" value="<% nvram_get("ct_tcp_timeout"); %>">
-<input type="hidden" name="ct_udp_timeout" value="<% nvram_get("ct_udp_timeout"); %>">
 
 
 <table class="content" align="center" cellpadding="0" cellspacing="0">
@@ -616,6 +650,11 @@ function show_wifi_version() {
 						<th>Model</th>
 							<td id="model_id"><% nvram_get("productid"); %></td>
 					</tr>
+					<tr>
+						<th>Firmware Version</th>
+						<td id="fwver"></td>
+					</tr>
+
 					<tr>
 						<th>Firmware Build</th>
 						<td><% nvram_get("buildinfo"); %></td>
@@ -769,13 +808,17 @@ function show_wifi_version() {
 						<th id="wifi51_clients_th">Wireless Clients (5 GHz)</th>
 						<td id="wlc_51_td"></td>
 					</tr>
-					<tr id="wifi5_2_clients_tr" style="display:none;">
+					<tr id="wifi52_clients_tr" style="display:none;">
 						<th>Wireless Clients (5 GHz-2)</th>
 						<td id="wlc_52_td"></td>
 					</tr>
 					<tr id="wifi6_clients_tr" style="display:none;">
-						<th>Wireless Clients (6 GHz)</th>
+						<th id="wifi6_clients_th">Wireless Clients (6 GHz)</th>
 						<td id="wlc_6_td"></td>
+					</tr>
+					<tr id="wifi62_clients_tr" style="display:none;">
+						<th>Wireless Clients (6 GHz-2)</th>
+						<td id="wlc_62_td"></td>
 					</tr>
 				</table>
 				</td>
@@ -795,4 +838,3 @@ function show_wifi_version() {
 <div id="footer"></div>
 </body>
 </html>
-

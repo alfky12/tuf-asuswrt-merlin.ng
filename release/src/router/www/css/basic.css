@@ -37,7 +37,7 @@
 }
 
 .border-container{
-    width: 769px; 
+    width: 768px; 
     position: relative;
     margin-bottom: 20px;
     border: 1px solid #5C0C0B;
@@ -325,6 +325,7 @@ input[type="checkbox"]:checked + label > div{
     color:#f5a623;
     margin-left: 8px;
 }
+
 
 
 

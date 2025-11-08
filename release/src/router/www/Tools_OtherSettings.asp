@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html xmlns:v>
 <head>
@@ -11,7 +11,8 @@
 <title><#Web_Title#> - Tweaks</title>
 <link rel="stylesheet" type="text/css" href="index_style.css">
 <link rel="stylesheet" type="text/css" href="form_style.css">
-<script language="JavaScript" type="text/javascript" src="/js/jquery.js"></script>
+
+<script language="JavaSCript" type="text/javascript" src="/js/jquery.js"></script>
 <script language="JavaScript" type="text/javascript" src="/state.js"></script>
 <script language="JavaScript" type="text/javascript" src="/general.js"></script>
 <script language="JavaScript" type="text/javascript" src="/validator.js"></script>
@@ -223,24 +224,17 @@ function applyRule(){
 						</tr>
 					</thead>
 					<tr>
-						<th>Redirect webui access to www.asusrouter.com</th>
-						<td>
-							<input type="radio" name="http_dut_redir" value="1" <% nvram_match_x("","http_dut_redir","1", "checked"); %> ><#checkbox_Yes#>
-							<input type="radio" name="http_dut_redir" value="0" <% nvram_match_x("","http_dut_redir","0", "checked"); %> ><#checkbox_No#>
-						</td>
+					<th>Redirect webui access to www.asusrouter.com</th>
+					<td>
+						<input type="radio" name="http_dut_redir" value="1" <% nvram_match_x("","http_dut_redir","1", "checked"); %> ><#checkbox_Yes#>
+						<input type="radio" name="http_dut_redir" value="0" <% nvram_match_x("","http_dut_redir","0", "checked"); %> ><#checkbox_No#>
+					</td>
 					</tr>
 					<tr>
 						<th><a class="hintstyle" href="javascript:void(0);" onClick="openHint(50,4);">Firewall: Drop IPv6 neighbour solicitation broadcasts (default: No)</a></th>
 						<td>
 							<input type="radio" name="ipv6_ns_drop" class="input" value="1" <% nvram_match_x("", "ipv6_ns_drop", "1", "checked"); %>><#checkbox_Yes#>
 							<input type="radio" name="ipv6_ns_drop" class="input" value="0" <% nvram_match_x("", "ipv6_ns_drop", "0", "checked"); %>><#checkbox_No#>
-						</td>
-					</tr>
-					<tr>
-						<th><a class="hintstyle" href="javascript:void(0);" onClick="openHint(50,27);">Wan: Use local caching DNS server as system resolver (default: No)</a></th>
-						<td>
-							<input type="radio" name="dns_local_cache" class="input" value="1" <% nvram_match_x("", "dns_local_cache", "1", "checked"); %>><#checkbox_Yes#>
-							<input type="radio" name="dns_local_cache" class="input" value="0" <% nvram_match_x("", "dns_local_cache", "0", "checked"); %>><#checkbox_No#>
 						</td>
 					</tr>
 					<tr>
@@ -278,4 +272,3 @@ function applyRule(){
 
 </body>
 </html>
-

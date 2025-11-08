@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html xmlns:v>
 <head>
@@ -96,7 +96,7 @@ function draw_table(type){
 		document.getElementById('connblock_header').style.display = "";
 		document.getElementById('connblock_nat').innerHTML = "";
 		code = '<table width="100%" cellpadding="4" class="FormTable_table"><thead><tr><td colspan="6">NAT Connections</td></tr></thead>' +
-		       '<tr><th width="8%" id="track_header_0" style="cursor: pointer; text-align:left;" onclick="setsort(0,\'nat\'); draw_table(\'nat\')">Proto</th>' +
+		       '<tr><th width="8%" id="track_header_0" style="cursor: pointer; text-align:center;" onclick="setsort(0,\'nat\'); draw_table(\'nat\')">Proto</th>' +
 		       '<th width="28%" id="track_header_1" style="cursor: pointer;" onclick="setsort(1, \'nat\'); draw_table(\'nat\')">NAT IP</th>' +
 		       '<th width="9%" id="track_header_2" style="cursor: pointer;" onclick="setsort(2, \'nat\'); draw_table(\'nat\')">NAT Port</th>' +
 		       '<th width="28%" id="track_header_3" style="cursor: pointer;" onclick="setsort(3, \'nat\'); draw_table(\'nat\')">Destination IP</th>' +
@@ -196,8 +196,8 @@ function draw_table(type){
 		shownlen++;
 
 		// Output row
-		code += "<tr><td style=\"text-align:left;\">" + dataarray[i][0] + "</td>" +
-		        "<td title=\"" + srctitle + "\"" + (srchost.length > 37 ? "style=\"font-size: 80%;text-align:left;white-space: nowrap;\"" : "style=\"text-align:left;white-space: nowrap;\"") +">";
+		code += "<tr><td style=\"text-align:center;\">" + dataarray[i][0] + "</td>" +
+		        "<td title=\"" + srctitle + "\"" + (srchost.length > 37 ? "style=\"font-size: 80%;text-align:center;white-space: nowrap;\"" : "style=\"text-align:center;white-space: nowrap;\"") +">";
 
 		if (!validator.isPrivateIP(dataarray[i][1])) {
 			code += "<a style=\"cursor:pointer; text-decoration:underline;\" href=\"https://whatismyipaddress.com/ip/" + dataarray[i][1] + "\" target=\"_blank\">" + srchost + "</a>"
@@ -206,8 +206,8 @@ function draw_table(type){
 		}
 
 		code += "</td>" +
-			    "<td style=\"text-align:left;\">" + dataarray[i][2] + "</td>" +
-		        "<td title=\"" + dsttitle + "\"" + (dsthost.length > 37 ? "style=\"font-size: 80%;text-align:left;white-space: nowrap;\"" : "style=\"text-align:left;white-space: nowrap;\"") +">";
+			    "<td style=\"text-align:center;\">" + dataarray[i][2] + "</td>" +
+		        "<td title=\"" + dsttitle + "\"" + (dsthost.length > 37 ? "style=\"font-size: 80%;text-align:center;white-space: nowrap;\"" : "style=\"text-align:center;white-space: nowrap;\"") +">";
 
 		if (!validator.isPrivateIP(dataarray[i][3])) {
 			code +="<a style=\"cursor:pointer; text-decoration:underline;\" href=\"https://whatismyipaddress.com/ip/" + dataarray[i][3] + "\" target=\"_blank\">" + dsthost + "</a>";
@@ -216,8 +216,8 @@ function draw_table(type){
 		}
 
 		code += "</td>" +
-		        "<td style=\"text-align:left;\">" + dataarray[i][4] + "</td>" +
-		        "<td style=\"text-align:left;\">" + dataarray[i][5] + "</td>";
+		        "<td style=\"text-align:center;\">" + dataarray[i][4] + "</td>" +
+		        "<td style=\"text-align:center;\">" + dataarray[i][5] + "</td>";
 	}
 
 	if (shownlen == 0) {

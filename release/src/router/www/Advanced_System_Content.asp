@@ -2433,7 +2433,7 @@ function build_boostkey_options() {
 					</td>
 				</tr>
 			</table>
-
+			
 			<table id="hdd_spindown_table" width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bordercolor="#6b8fa3"  class="FormTable" style="margin-top:8px;display:none;">
 				<thead>
 					<tr>
