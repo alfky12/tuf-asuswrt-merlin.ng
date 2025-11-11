@@ -4,12 +4,13 @@ document.write('<script type="text/javascript" src="/js/support_site.js"></scrip
 document.write('<script type="text/javascript" src="/notification.js"></script>');
 document.write('<link rel="stylesheet" type="text/css" href="/notification.css"></link>');
 
-console.log(
-"      __  ___        ___         \n" +
-" ____/  |/  /__ ____/ (_)__  ___ \n" +
-"/___/ /|_/ / -_) __/ / / _ \/__/ \n" +
-"   /_/  /_/\__/_/ /_/_/_//_/     \n" +
-"   ------  TUF  UI  --------     \n")
+console.log(`
+      __  ___        ___         
+ ____/  |/  /__ ____/ (_)__  ___ 
+/___/ /|_/ / -_) __/ / / _ \\/__/ 
+   /_/  /_/\__/_/ /_/_/_//_/     
+   -------- TUF UI --------     
+`);
 
 /* String splice function */
 String.prototype.splice = function( idx, rem, s ) {
@@ -1040,11 +1041,11 @@ function show_banner(L3){// L3 = The third Level of Menu
 		}
 	}
 	else if(tuf_support){
-		banner_code +='<div class="banner1" align="center"><img src="images/New_ui/logo_TUF.png" align="left" style="width: 250px;height:96px;margin-left:45px;object-fit: cover;object-position: left;">';
-		banner_code +='<div style="margin-left:25px;margin-right:20px;width:130px;height:52px;margin-top:0px;float:left;" align="left"><span><a href="https://github.com/gnuton/asuswrt-merlin.ng" target="_blank" rel="noreferrer"><img src="images/merlin-logo.png" style="border: 0;"></a></span></div>'
+		banner_code +='<div class="banner1" align="center"><img src="images/New_ui/logo_TUF.png" align="left" style="width: 250px;height:96px;margin-left:38px;object-fit: cover;object-position: left;">';
+		banner_code +='<div style="margin-left:25px;margin-right:20px;width:130px;height:52px;margin-top:15px;float:left;" align="left"><span><a href="https://github.com/gnuton/asuswrt-merlin.ng" target="_blank" rel="noreferrer"><img src="images/merlin-logo.png" style="border: 0;"></a></span></div>'
 		banner_code +='<div style="margin-top:0px;margin-left:-90px;*margin-top:0px;*margin-left:0px;" align="center"><span id="modelName_top" onclick="this.focus();" class="modelName_top"><#Web_Title2#></span></div>';
 			// logout
-		banner_code +='<a href="javascript:logout();"><div style="margin:20px 0 0 15px;*width:136px;background:url(\'images/New_ui/btn_logout.png\') no-repeat;background-size:cover;width:132px;height:34px;float:left;" align="center"><div style="margin:8px 0 0 15px;"><#t1Logout#></div></div></a>\n';
+		banner_code +='<a href="javascript:logout();"><div style="margin:20px 0 0 -25px;*width:136px;background:url(\'images/New_ui/btn_logout.png\') no-repeat;background-size:cover;width:132px;height:34px;float:left;" align="center"><div style="margin:8px 0 0 5px;"><#t1Logout#></div></div></a>\n';
 	}
 	else if(spirit_logo_support){
 		banner_code +='<div class="banner1" align="center"><img src="images/New_ui/asus_spirit_title.png" width="214" height="31" align="left" style="margin-top:13px;margin-left:30px;">\n';
@@ -4643,4 +4644,3 @@ function Get_Component_PWD_Strength_Meter(id){
 function plainPasswordSwitch(obj, event){
 	(event === 'focus') ? (obj.type = 'text') : (obj.type = 'password');						
 }
-

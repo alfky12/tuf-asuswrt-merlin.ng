@@ -52,7 +52,7 @@ $(function () {
 	}
 	else{
 		var productid = httpApi.nvramGet(["productid"]).productid;
-		if(productid.substr(0,2) == "GT"){
+		if(isSupport("rog")) {
 			$('link').last().after('<link group="extend_css" rel="stylesheet" type="text/css" href="/VPN/vpncGT.css">');
 		}
 		else if(productid.substr(0,3) == "TUF"){

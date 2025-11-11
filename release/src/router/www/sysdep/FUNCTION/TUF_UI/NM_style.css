@@ -1,7 +1,7 @@
 ﻿/* CSS Document */
 .statusbody {
 	margin:5px auto 0px auto;
-	background: #000;
+	/* background: #000; */
 }
 .statusTitle{	
 	font-family: "Times New Roman", Times, serif;
@@ -12,8 +12,8 @@
 	font-size:14px;
 	text-align:center;
 	height:36px;	
-	width:320px;
-	margin-left:44px;
+	width:330px;
+	margin-left:41px;
 	behavior: url(/PIE.htc);
 	position:relative;
 	-webkit-border-radius: 10px 10px 0 0;
@@ -310,7 +310,7 @@
 	margin-left:45px;
 	width: 320px;
 	height: 760px;
-	background-color:#111;
+	/* background-color:#111; */
 	behavior: url(/PIE.htc);
 	position:relative;
 	-webkit-border-radius: 0 0 10px 10px;

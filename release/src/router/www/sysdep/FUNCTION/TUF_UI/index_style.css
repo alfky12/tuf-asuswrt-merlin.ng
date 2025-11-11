@@ -1,4 +1,4 @@
-﻿/* CSS Document */
+/* CSS Document */
 body{
 	background-color: rgb(0, 0, 0) !important; 
 }
@@ -618,12 +618,12 @@ width:122px;
 
 .modelName_top{
 	text-align: left;
-	font-size: 32px;
+	font-size: 28px;
 	float:left;
-	margin: 30px 35px 0 -210px;
+	margin: 5px 0 0 -210px;
 	text-shadow: 3px 2px #000;
 	font-weight: bold;
-	font-family: ROG;
+	font-family: Xolonium;
     word-break: break-all;
     width: 420px;
 }
@@ -1005,6 +1005,10 @@ width:122px;
 	background-image: url(images/New_ui/icon_Gamecenter.png);
 	background-position: -0px -54px;
 }
+.menu_WifiRadar{
+	background-image: url(images/New_ui/icon_Gamecenter.png);
+	background-position: -0px -72px;
+}
 .menu_GameProfile{
 	background-image: url(images/New_ui/icon_Gamecenter.png);
 	background-position: -0px -90px;
@@ -1129,6 +1133,10 @@ width:122px;
 ._index{
   background: url(images/New_ui/icon_indexes.png);
   background-position: -0px -40px; width: 43px; height: 43px;
+}
+.menu_Sysinfo{
+	background: url(images/New_ui/icon_menues.png);
+	background-position: 0px -144px;
 }
 .radio_hint{
     background-color: #FA9100;

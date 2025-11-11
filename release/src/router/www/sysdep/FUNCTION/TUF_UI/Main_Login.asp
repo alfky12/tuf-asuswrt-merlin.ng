@@ -267,7 +267,7 @@ body{
 	padding: 10px 0 0 0; 
 }
 .login-btn-bg, .login-btn-bg-odm{
-	width: 95%;
+	/*width: 93%;*/
 	background-size: 100%;
 }
 .login-btn-bg{
@@ -431,6 +431,7 @@ var remaining_time_show;
 var countdownid, rtime_obj;
 var redirect_page = login_info.page;
 var cloud_file = '<% get_parameter("file"); %>';
+if ('<% nvram_get("http_dut_redir"); %>' == '1') {
 var isRouterMode = ('<% nvram_get("sw_mode"); %>' == '1') ? true : false;
 
 var header_info = [<% get_header_info(); %>][0];
@@ -444,6 +445,7 @@ var chdom = function(){window.location.href=domainNameUrl};
 		}, 1);
 	}
 })();
+}
 
 <% login_state_hook(); %>
 
@@ -460,7 +462,13 @@ else
 	var captcha_on = false;
 
 var faq_href = "https://nw-dlcdnet.asus.com/support/forward.html?model=&type=SG_TeleStand&lang=&kw=&num=";
+var ATEMODE = '<% nvram_get("ATEMODE"); %>';
+
 function initial(){
+	if(ATEMODE == "1"){
+		$(".login-title-desc").text(`<#Sign_in_title#>` + ` (ATE Mode)`);
+	}
+
 	/*handle sysdep for ROG or ODM product*/
 	if(odm_support){
 		document.getElementsByClassName("main-field-bg")[0].className = "main-field-bg-odm";

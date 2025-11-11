@@ -4688,9 +4688,6 @@ int validate_apply(webs_t wp, json_object *root)
 				{
 					reg_default_final_token();
 					nvram_set("x_Setting", "1");
-#if defined(RTAXE7800) && !defined(RTCONFIG_AUTO_WANPORT)
-					notify_rc("addif_extwan");
-#endif
 					notify_rc("restart_firewall");
 #ifdef RTCONFIG_EXTPHY_BCM84880
 					notify_rc("br_addif");
@@ -4698,9 +4695,6 @@ int validate_apply(webs_t wp, json_object *root)
 				}
 			}else if(fromapp_flag != 0) {
 				nvram_set("x_Setting", "1");
-#if defined(RTAXE7800) && !defined(RTCONFIG_AUTO_WANPORT)
-				notify_rc("addif_extwan");
-#endif
 				notify_rc("restart_firewall");
 			}
 		}
@@ -14330,9 +14324,6 @@ do_lang_post(char *url, FILE *stream, int len, char *boundary)
 			cprintf ("set x_Setting --> 1\n");
 			reg_default_final_token();
 			nvram_set("x_Setting", "1");
-#if defined(RTAXE7800) && !defined(RTCONFIG_AUTO_WANPORT)
-			notify_rc("addif_extwan");
-#endif
 			notify_rc("restart_firewall");
 		}
 		cprintf ("!!!!!!!!!Commit new language settings.\n");
@@ -33663,8 +33654,7 @@ ej_get_cfg_clientlist(int eid, webs_t wp, int argc, char **argv){
 	lock = file_lock(CFG_FILE_LOCK);
 	shm_client_tbl_id = shmget((key_t)KEY_SHM_CFG, sizeof(CM_CLIENT_TABLE), 0666|IPC_CREAT);
 	if (shm_client_tbl_id == -1){
-		int error = errno;
-		fprintf(stderr, "shmget failed (%d)\n", error);
+		fprintf(stderr, "shmget failed\n");
 		file_unlock(lock);
 		return 0;
 	}
@@ -35454,7 +35444,7 @@ ej_get_realip(int eid, webs_t wp, int argc, char **argv)
 static int
 ej_get_header_info(int eid, webs_t wp, int argc, char **argv)
 {
-	int bIsIPv6 = 0, nPort = 0, port_len = 0;
+	int bIsIPv6 = 0, nPort = 0, port_len = 0, d1, d2, d3, d4;
 	unsigned char abyAddr[16] = {0};
 	char port_t[8] = {0}, current_page_name_temp[128] = {0};
 	char host_name_temp[64] = {0}, host_name_copy_t[256] = {0};
@@ -35477,7 +35467,9 @@ ej_get_header_info(int eid, webs_t wp, int argc, char **argv)
 		strlcpy(host_name_temp, "repeater.asus.com", sizeof(host_name_temp));
 	}
 #endif
-	else if(ParseIPv4OrIPv6(&host_name_copy, abyAddr, &nPort, &bIsIPv6)){
+	else if ((sscanf(host_name_copy, "%d.%d.%d.%d", &d1, &d2, &d3, &d4) == 4 || strstr(host_name_copy, "["))
+		&& ParseIPv4OrIPv6(&host_name_copy, abyAddr, &nPort, &bIsIPv6)) {
+
 		if(nPort != 0)
 			port_len = snprintf(port_t, sizeof(port_t), "%d", htons(nPort)) + 1;
 

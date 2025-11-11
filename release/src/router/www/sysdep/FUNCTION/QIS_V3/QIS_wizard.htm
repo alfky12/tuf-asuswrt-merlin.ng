@@ -371,13 +371,13 @@
 					<div id="welcome_button" class="welcome_button" onclick="apply.welcome();"></div>
 				</div>
 
-				<div style="text-align:center;margin:50px 0;" class="welcomeBtnContainer wispMode">
+				<!--<div style="text-align:center;margin:50px 0;" class="welcomeBtnContainer wispMode">
 					<div id="welcome_rt_button" class="welcome_button" onclick="goTo.rtMode();"><#wireless_router#></div>
-				</div>
+				</div>-->
 
-				<div style="text-align:center;margin:50px 0;" class="welcomeBtnContainer wispMode">
+				<!--<div style="text-align:center;margin:50px 0;" class="welcomeBtnContainer wispMode">
 					<div id="welcome_wisp_button" class="welcome_button" onclick="goTo.wispMode();">Public WiFi Mode (WISP)</div>
-				</div>
+				</div>-->
 
 				<!--div style="text-align:center;margin:50px 0" class="amasSupport">
 					<div id="aimesh_welcome_button" onclick="goTo.amasIntro();">Start</div>
@@ -2554,10 +2554,16 @@
 					</div>
 				</div>
 				<div class="table_td">
-					<div class="pageDesc"><#exist_new#></div>
+					<div class="pageDesc">A newer firmware version is available for download. Upgrading is recommended to improve security and stability.</div>
 					<!--div class="pageDesc forceUpgrade"><#FIRM_fupgrade_desc#></div-->
 					<div>
 						<div>
+							<div class="inputTitleContainer">
+								<div class="inputTitle"><#ADSL_FW_item1#></div>
+							</div>
+							<div class="inputContainer">
+								<input id="currentVersion" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="textInput" data-role="none" disabled />
+							</div>
 							<div class="inputTitleContainer">
 								<div class="inputTitle"><#ADSL_FW_item3#></div>
 							</div>

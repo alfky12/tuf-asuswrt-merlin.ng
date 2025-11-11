@@ -1295,7 +1295,7 @@ function shadeHandle(flag){
 												</td>
 												<td style="width:20%;border-radius:0px 10px 10px 0px;cursor:pointer;">
 													<div style="position:relative" onclick="location.href='AiProtection_MaliciousSitesBlocking.asp'">
-														<div id="mals_count_shade" style="position:absolute;width:140px;height:115px;background-color:#505050;opacity:0.6;z-index:5;margin-top:-25px;display:none"></div>
+														<div id="mals_count_shade" style="position:absolute;width:140px;height:115px;background-color:#505050;opacity:0.6;z-index:5;margin-top:-14px;display:none"></div>
 														<div style="text-align:center;">
 															<div id="mali_count" style="width:45px;height:45px;margin:0 auto;line-height: 45px;font-size:38px;color:#FC0;text-shadow:1px 1px 0px black"></div>
 															<div style="font-size: 16px;"><#AiProtection_scan_rHits#></div>
@@ -1348,7 +1348,7 @@ function shadeHandle(flag){
 												</td>
 												<td style="width:20%;border-radius:0px 10px 10px 0px;cursor:pointer;">
 													<div style="position:relative" onclick="location.href='AiProtection_IntrusionPreventionSystem.asp'">
-														<div id="vp_count_shade" style="position:absolute;width:140px;height:115px;background-color:#505050;opacity:0.6;z-index:5;margin-top:-25px;display:none"></div>
+														<div id="vp_count_shade" style="position:absolute;width:140px;height:115px;background-color:#505050;opacity:0.6;z-index:5;margin-top:-14px;display:none"></div>
 														<div style="text-align:center;">
 															<div id="vp_count" style="width:45px;height:45px;margin:0 auto;line-height: 45px;font-size:38px;color:#FC0;text-shadow:1px 1px 0px black"></div>
 															<div style="font-size: 16px;"><#AiProtection_scan_rHits#></div>
@@ -1398,7 +1398,7 @@ function shadeHandle(flag){
 												</td>
 												<td style="width:20%;border-radius:0px 10px 10px 0px;cursor:pointer;">
 													<div style="position:relative" onclick="location.href='AiProtection_InfectedDevicePreventBlock.asp'">
-														<div id="infected_count_shade" style="position:absolute;width:140px;height:115px;background-color:#505050;opacity:0.6;z-index:5;margin-top:-25px;display:none"></div>
+														<div id="infected_count_shade" style="position:absolute;width:140px;height:115px;background-color:#505050;opacity:0.6;z-index:5;margin-top:-14px;display:none"></div>
 														<div style="text-align:center;">
 															<div id="infected_count" style="width:45px;height:45px;margin:0 auto;line-height: 45px;font-size:38px;color:#FC0;text-shadow:1px 1px 0px black"></div>
 															<div style="font-size: 16px;"><#AiProtection_scan_rHits#></div>
