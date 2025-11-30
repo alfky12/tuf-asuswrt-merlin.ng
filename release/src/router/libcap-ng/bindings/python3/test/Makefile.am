@@ -1,5 +1,5 @@
 # Makefile.am --
-# Copyright 2009,2015 Red Hat Inc.
+# Copyright 2023 Red Hat Inc.
 # All Rights Reserved.
 #
 # This library is free software; you can redistribute it and/or
@@ -21,10 +21,7 @@
 #   Steve Grubb <sgrubb@redhat.com>
 #
 
-CONFIG_CLEAN_FILES = *.loT *.rej *.orig
-SUBDIRS = src 
-
-if USE_PYTHON3
-SUBDIRS += python3
-endif
+dist_check_SCRIPTS = capng-test.py
+TESTS = $(dist_check_SCRIPTS)
+TESTS_ENVIRONMENT = PYTHONPATH=${top_builddir}/bindings/python3/:${top_builddir}/bindings/python3/.libs
 
