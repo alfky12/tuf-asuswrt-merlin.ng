@@ -132,7 +132,7 @@ if (isSupport("UI4")) {
 
 	labelsColor = "#CCC";
 	ticksColor = "#CCC";
-	canvasColor = "#2f3e44";
+	canvasColor = "rgba(0, 0, 0, 0)";
 }
 
 var pieColor = ["rgba(0, 84, 159, 1)",
