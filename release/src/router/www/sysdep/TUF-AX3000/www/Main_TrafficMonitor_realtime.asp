@@ -58,7 +58,7 @@ if (isSupport("UI4")){
 	var rxBackgroundColor = "rgba(76, 143, 192, 0.3)";
 	var txBorderColor = "rgba(76, 192, 143, 1)";
 	var txBackgroundColor = "rgba(76, 192, 143, 0.3)";
-	var chartBackgroundColor = "#2f3e44";
+	var chartBackgroundColor = "rgba(0, 0, 0, 0)";
 	var tableLabelColor = "#FFCC00";
 	var tableValueColor = "white";
 }
