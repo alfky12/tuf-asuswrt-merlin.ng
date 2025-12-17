@@ -28,6 +28,7 @@ Asuswrt-Merlin GNUton's builds Changelog
   - UPDATED: libcap-ng to 0.8.4 (to be in sync with upstream)
   - CHANGED: TrafficMonitor stats can now be saved to JFFS,
              and removed support for saving to NVRAM.
+  - FIXED: IPv6 blocking of DoT servers (dave14305)
   - REMOVED: outdated setuprsa.sh script.
   - REMOVED: AiCloud support, due to security reasons.
 
@@ -2421,6 +2422,7 @@ Asuswrt-Merlin GNUton's builds Changelog
               match with Asus' own supported list)
    - REMOVED: "Custom" OpenVPN authentication mode (which probably
               nobody used or even understood).
+
 
 
 
