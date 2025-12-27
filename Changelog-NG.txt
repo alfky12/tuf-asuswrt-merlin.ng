@@ -1,7 +1,7 @@
 Asuswrt-Merlin GNUton's builds Changelog
 ========================
 
-3004.388.11 (xx-xxx-2025)
+3004.388.11 (26-Dec-2025)
   - NOTE: AiCloud has been removed from Asuswrt-Merlin due
           to its poor security track record.  This also includes
           cloud syncing features such as Asuswebstorage or
@@ -2394,6 +2394,7 @@ Asuswrt-Merlin GNUton's builds Changelog
               match with Asus' own supported list)
    - REMOVED: "Custom" OpenVPN authentication mode (which probably
               nobody used or even understood).
+
 
 
 
