@@ -1,4 +1,4 @@
-﻿@font-face{
+@font-face{
 	font-family: Roboto;
     src: url(../fonts/Roboto-Regular.woff) format("woff"),
          url(../fonts/Roboto-Regular.ttf) format("opentype");
@@ -108,16 +108,16 @@ body{
 	transition: all 0.5s ease-in-out;
 }
 .core-color-0{
-	background: linear-gradient(to right, #0bc8ff 0%, #0039ff 100%);
+	background-color:#FF9000;
 }
 .core-color-1{
-	background: linear-gradient(to right, #0bc8ff 0%, #0039ff 100%);
+	background-color:#33CFCF;
 }
 .core-color-2{
-	background: linear-gradient(to right, #0bc8ff 0%, #0039ff 100%);
+	background-color:#FFCC00;
 }
 .core-color-3{
-	background: linear-gradient(to right, #0bc8ff 0%, #0039ff 100%);
+	background-color:#FF44FF;
 }
 .ram-color{
 	background: linear-gradient(to right, #0bc8ff 0%, #0039ff 100%);
@@ -136,8 +136,17 @@ body{
 .svg-block{
 	background-color:#000000;
 }
-.core-fill-color-0, .core-fill-color-1, .core-fill-color-2, .core-fill-color-3{
-	stroke:#0bc8ff;
+.core-fill-color-0{
+	stroke:#FF9000;
+}
+.core-fill-color-1{
+	stroke:#33CFCF;
+}
+.core-fill-color-2{
+	stroke:#FFCC00;;
+}
+.core-fill-color-3{
+	stroke:#FF44FF;
 }
 /* RAM */
 .ram-fill-color{
@@ -146,7 +155,20 @@ body{
 .ram-text-width{
 	width: 90px;
 }
-
+/* Traffic */
+.tx-color{
+	background: linear-gradient(to right, #0bc8ff 0%, #0039ff 100%);
+}
+.rx-color{
+	background: linear-gradient(to right, #0bc8ff 0%, #0039ff 100%);
+}
+.bar-text-net {
+	font-size:12px;
+}
+.bar-text-percent-net{
+	font-size:12px;
+	width:90px;
+}
 /* Ports */
 .table-header{
 	background-color:rgb(33,33,33);
