@@ -417,7 +417,7 @@ body{
 	behavior: url(/PIE.htc);
 	border-radius: 10px 10px 10px 10px;
 	border: 0px;
-	/*margin-top:200px;*/
+	margin-top:200px !important;
 	width:500px;
 	font-size:20px;
 	color:#FFFFFF;
