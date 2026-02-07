@@ -1,6 +1,10 @@
 Asuswrt-Merlin GNUton's builds Changelog
 ========================
 
+3004.388.11_1 (07-FEB-2026)
+  - FIXED: Re-enabled CAKE QoS on TUF-AX3000_V2
+
+
 3004.388.11 (26-Dec-2025)
   - NOTE: AiCloud has been removed from Asuswrt-Merlin due
           to its poor security track record.  This also includes
@@ -2394,6 +2398,7 @@ Asuswrt-Merlin GNUton's builds Changelog
               match with Asus' own supported list)
    - REMOVED: "Custom" OpenVPN authentication mode (which probably
               nobody used or even understood).
+
 
 
 
