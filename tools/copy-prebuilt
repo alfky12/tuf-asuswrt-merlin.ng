@@ -182,7 +182,7 @@ then
 #	rsync -a --del release/src-rt-5.04behnd.4916/bootloaders/obj/ $REPO/release/src-rt-5.04behnd.4916/bootloaders/obj.$BUILD_NAME_LC
 	cp release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/net/*.o $REPO/release/src-rt-5.04behnd.4916/bootloaders/obj.$BUILD_NAME_LC/net/
 	cp release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/phy/dt_parsing.o $REPO/release/src-rt-5.04behnd.4916/bootloaders/obj.$BUILD_NAME_LC/drivers/net/bcmbca/phy/
-	cp release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/bcmbca_xrdp_eth.o $REPO/release/src-rt-5.04behnd.4916/bootloaders/obj.$BUILD_NAME_LC/drivers/net/bcmbca/
+	cp release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/bcmbca_sysport_v2.o $REPO/release/src-rt-5.04behnd.4916/bootloaders/obj.$BUILD_NAME_LC/drivers/net/bcmbca/
 	cp release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/common/autoboot.o $REPO/release/src-rt-5.04behnd.4916/bootloaders/obj.$BUILD_NAME_LC/common/
 	cp release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/board/broadcom/bcmbca/*.o $REPO/release/src-rt-5.04behnd.4916/bootloaders/obj.$BUILD_NAME_LC/board/broadcom/bcmbca/
 
@@ -221,6 +221,28 @@ then
 
 #	release/src-rt-5.04behnd.4916/bcmdrivers/broadcom/net/gdx/impl1/prebuilt/gdx_hw.o
 
+	else	# These don't exist in bcm676x
+		cp release/src-rt-5.04behnd.4916/bcmdrivers/broadcom/char/pktrunner/impl2/pktrunner.o $REPO/release/src-rt-5.04behnd.4916/router-sysdep.$BUILD_NAME_LC/hnd_extra/prebuilt/
+		cp release/src-rt-5.04behnd.4916/bootloaders/u-boot-2019.07/drivers/net/bcmbca/bcmbca_xrdp_eth.o $REPO/release/src-rt-5.04behnd.4916/bootloaders/obj.$BUILD_NAME_LC/drivers/net/bcmbca/
+	fi
+
+# RDP model-specifics for BCM6813
+	if [ -f "release/src-rt-5.04behnd.4916/rdp/projects/BCM6813/target/rdpa/rdpa.o" ]
+	then
+		cp release/src-rt-5.04behnd.4916/rdp/drivers/bdmf/bdmf.o $REPO/release/src-rt-5.04behnd.4916/router-sysdep.$BUILD_NAME_LC/hnd_extra/prebuilt/
+		cp release/src-rt-5.04behnd.4916/rdp/projects/BCM6813/target/rdpa/rdpa.o $REPO/release/src-rt-5.04behnd.4916/router-sysdep.$BUILD_NAME_LC/hnd_extra/prebuilt/
+		cp release/src-rt-5.04behnd.4916/rdp/projects/BCM6813/target/rdpa_gpl/rdpa_gpl.o $REPO/release/src-rt-5.04behnd.4916/router-sysdep.$BUILD_NAME_LC/hnd_extra/prebuilt/
+		cp release/src-rt-5.04behnd.4916/rdp/projects/BCM6813/target/rdpa_user/rdpa_usr.o $REPO/release/src-rt-5.04behnd.4916/router-sysdep.$BUILD_NAME_LC/hnd_extra/prebuilt/
+	fi
+
+	if [ "$BUILD_NAME" == "GT-BE19000AI" ]
+	then
+		cp release/src/router/ark/prebuild/* $REPO/release/src/router/ark/prebuild/$BUILD_NAME/
+		cp release/src-rt-5.04behnd.4916/bcmdrivers/broadcom/net/wl/impl103/main/components/apps/afcd/prebuilt/* $REPO/release/src-rt-5.04behnd.4916/bcmdrivers/broadcom/net/wl/impl103/main/components/apps/afcd/prebuilt/$BUILD_NAME/
+		cp -a release/src-rt-5.04behnd.4916/bcmdrivers/broadcom/net/wl/impl103/main/components/apps/locpold/prebuilt/* $REPO/release/src-rt-5.04behnd.4916/bcmdrivers/broadcom/net/wl/impl103/main/components/apps/locpold/prebuilt/$BUILD_NAME/
+	fi
+
+	aarch64-buildroot-linux-gnu-strip --strip-debug $REPO/release/src-rt-5.04behnd.4916/router-sysdep.$BUILD_NAME_LC/hnd_extra/prebuilt/*.o
 else
 	echo "Unrecognized BUILD_NAME!"
 	exit
