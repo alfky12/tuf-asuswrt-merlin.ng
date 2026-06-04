@@ -6897,6 +6897,9 @@ strongswan/Makefile: strongswan/configure
 	--enable-acert --enable-agent \
 	--enable-md4 \
 	--enable-eap-identity --enable-eap-md5 --enable-eap-mschapv2 --enable-eap-tls --enable-eap-peap \
+	--enable-stroke \
+	--enable-aes --enable-des --enable-fips-prf --enable-gcm \
+	--enable-curve25519 --enable-hmac --enable-md5 --enable-sha1 --enable-sha2 \
 	--enable-cmd --enable-libipsec \
 	--enable-shared --disable-static \
 	--with-ipsecdir=/usr/lib/ipsec \
@@ -7747,10 +7750,21 @@ wget/Makefile: wget/Makefile.in
 		LDFLAGS="$(EXTRALDFLAGS) -Wl,--gc-sections -L$(STAGEDIR)/usr/lib -pthread"
 
 wget: openssl zlib wget/Makefile
+ifeq ($(AUTOMAKE_117),yes)
 	$(MAKE) -C $@ $(PARALLEL_BUILD)
+else
+	$(MAKE) -C $@ $(PARALLEL_BUILD) ACLOCAL=true \
+          AUTOMAKE=true \
+          AUTOCONF=true \
+          AUTOHEADER=true
+endif
 
 wget-clean:
+ifeq ($(AUTOMAKE_117),yes)
 	[ ! -f wget/Makefile ] || $(MAKE) -C wget distclean
+else
+	[ ! -f wget/Makefile ] || $(MAKE) -C wget clean
+endif
 	@rm -f wget/Makefile
 
 wget-install:

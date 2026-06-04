@@ -471,7 +471,7 @@ struct interface_name {
 };
 
 union bigname {
-  char name[MAXDNAME];
+  char name[(MAXDNAME * 2) + 1];
   union bigname *next; /* freelist */
 };
 
