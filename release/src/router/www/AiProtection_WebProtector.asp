@@ -89,7 +89,7 @@ function pullLANIPList(obj){
 	var element = document.getElementById('ClientList_Block_PC');
 	var isMenuopen = element.offsetWidth > 0 || element.offsetHeight > 0;
 	if(isMenuopen == 0){
-		obj.src = "/images/arrow-top.gif"
+		obj.src = "/images/unfold_less.svg"
 		element.style.display = 'block';
 		document.form.PC_devicename.focus();
 	}
@@ -98,7 +98,7 @@ function pullLANIPList(obj){
 }
 
 function hideClients_Block(){
-	document.getElementById("pull_arrow").src = "/images/arrow-down.gif";
+	document.getElementById("pull_arrow").src = "/images/unfold_more.svg";
 	document.getElementById('ClientList_Block_PC').style.display='none';
 }
 
@@ -352,7 +352,7 @@ function genMain_table(){
 	code += '</td>';
 	code += '<td style="border-bottom:2px solid #000;">';
 	code += '<input type="text" maxlength="17" style="margin-left:10px;float:left;width:255px;" class="input_20_table" name="PC_devicename" onkeypress="return validator.isHWAddr(this,event)" onclick="hideClients_Block();" placeholder="ex: <% nvram_get("lan_hwaddr"); %>" autocorrect="off" autocapitalize="off">';
-	code += '<img id="pull_arrow" height="14px;" src="/images/arrow-down.gif" onclick="pullLANIPList(this);" title="<#select_client#>">';
+	code += '<img id="pull_arrow" height="14px;" src="/images/unfold_more.svg" onclick="pullLANIPList(this);" title="<#select_client#>">';
 	code += '<div id="ClientList_Block_PC" class="clientlist_dropdown" style="margin-top:25px;margin-left:10px;"></div>';
 	code += '</td>';
 	code += '<td style="border-bottom:2px solid #000;text-align:left;">';

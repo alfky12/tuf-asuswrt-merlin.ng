@@ -1330,17 +1330,16 @@ function fixed_change_wan_type(wan_type){
 		else{
 			document.form.wan_ppp_echo.value = default_ppp_echo;
 		}		
+		ppp_echo_control();
 	}else if(wan_type == "pptp" || wan_type == "l2tp"){
 		if(wan_type == original_wan_type){
 			document.form.wan_ppp_echo.value = original_ppp_echo;
 		}
 		else{
 			document.form.wan_ppp_echo.value = default_ppp_echo;
-			
 		}
+		ppp_echo_control();
 	}
-	ppp_echo_control();
-
 }
 
 function change_wan_dhcp_enable(flag){
@@ -1779,7 +1778,7 @@ function create_DNSlist_view(){
 	document.getElementById("dns_list_Block").onclick = function() {show_DNSList_view_block();}
 
 	var DNSListTableIndex=[array_Ab, array_Fm, array_FD, array_Sf, array_Pr];
-	var DNSListTableCategory=["<#IPConnection_x_DNS_List_adB#>", "<#IPConnection_x_DNS_List_Family#>", "<#IPConnection_x_DNS_List_Fast#>", "Safe", "<#IPConnection_x_DNS_List_Priv-resp#>"];
+	var DNSListTableCategory=["<#IPConnection_x_DNS_List_adB#>", "<#IPConnection_x_DNS_List_Family#>", "<#IPConnection_x_DNS_List_Fast#>", "<#IPConnection_x_DNS_List_Safe#>", "<#IPConnection_x_DNS_List_Priv-resp#>"];
 
 	var code="";
 
@@ -2012,7 +2011,7 @@ function Update_DNS_status(){
 	$("#DNS_status").empty();
 
 	if(document.form.wan_dnsenable_x.value == 1){
-		DSN_status_info="<b>Default status :</b> <#IPConnection_x_DNSServer_auto#>";
+		DSN_status_info=`<b>Default status :</b> <#IPConnection_x_DNSServer_auto#>`;
 	}
 	else{
 		DNS_list_index=DNSList_match(document.form.wan_dns1_x.value, document.form.wan_dns2_x.value);
@@ -2711,7 +2710,7 @@ function showInfo(){
 					</td>
 				</tr>
 				<tr style="display:none">
-					<th><a class="hintstyle" href="javascript:void(0);" onClick="openHint(7,6);"><#WANPPPAuthText#></a></th>
+					<th><a class="hintstyle" href="javascript:void(0);" onClick="openHint(7,29);"><#WANPPPAuthText#></a></th>
 					<td align="left">
 						<select class="input_option" name="wan_pppoe_auth">
 						<option value="" <% nvram_match("wan_pppoe_auth", "", "selected"); %>><#Auto#></option>

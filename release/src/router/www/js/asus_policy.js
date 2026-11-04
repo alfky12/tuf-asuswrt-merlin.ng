@@ -79,7 +79,9 @@ const ASUS_POLICY = {
                         </ol>
                         <div class="policy_end"><#ASUS_PP_End#></div>
                     </div>
-                </div>`,
+                </div>
+                <div class="policy_show"></div>
+`,
         },
         EULA: {
             Title: `<#ASUS_EULA_Title#>`,
@@ -218,7 +220,9 @@ const ASUS_POLICY = {
                             </li>
                         </ol>
                     </div>
-                </div>`,
+                </div>
+                <div class="policy_show"></div>
+            `,
         },
         TM: {
             Title: `<#lyra_TrendMicro_agreement#>`,
@@ -757,6 +761,21 @@ class PolicyScrollDiv {
             shadowRoot.querySelector('.policy-scroll-div').innerHTML = ASUS_POLICY.Content[policy].HTML;
         }
 
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    scrollCallBack({target: shadowRoot.querySelector('.policy-scroll-div')});
+                }
+            });
+        }, {threshold: 0.1});
+
+        const targetElement = shadowRoot.querySelector('.policy-scroll-div .policy_show')
+        observer.observe(targetElement);
+
+        window.addEventListener('resize', () => {
+            scrollCallBack({target: shadowRoot.querySelector('.policy-scroll-div')});
+        });
+
         this.element = div;
     }
 
@@ -955,8 +974,8 @@ class PolicyModalComponent {
         let theme = 'RT';
         if (isSupport("rog")) {
             return "ROG";
-        } else if (isSupport("tuf")) {
-            return "TUF";
+        // } else if (isSupport("tuf")) {
+        //     return "TUF";
         } else if (isSupport("BUSINESS")) {
             return "";
         } else {
@@ -2250,8 +2269,8 @@ class QisPolicyPageComponent {
         let theme = 'RT';
         if (isSupport("rog")) {
             return "ROG";
-        } else if (isSupport("tuf")) {
-            return "TUF";
+        // } else if (isSupport("tuf")) {
+        //     return "TUF";
         } else if (isSupport("BUSINESS")) {
             return "";
         } else {

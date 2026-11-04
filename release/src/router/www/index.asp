@@ -1088,7 +1088,7 @@ function check_status(_device){
 	document.getElementById('iconUSBdisk_'+diskOrder).style.backgroundPosition = '1px -4px';
 	document.getElementById('iconUSBdisk_'+diskOrder).style.backgroundSize = "100%";
 
-	document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundImage = "url(/images/New_ui/white_04.gif)"; //have to change the file location address
+	document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundImage = "";
 	document.getElementById('ring_USBdisk_'+diskOrder).style.display = "";
 
 	if(!diskUtility_support)
@@ -2762,7 +2762,7 @@ function copyDdnsName(e) {
 						<script>
 							(function(){
 								setTimeout(function(){
-									document.getElementById("statusframe").src = "/device-map/router_status.asp";
+									$('#statusframe').attr('src', '/device-map/router_status.asp').show();
 									const get_header_info = httpApi.hookGet("get_header_info");
 									const domain = `${get_header_info.protocol}://${get_header_info.host}`;
 									const domain_w_port = `${get_header_info.protocol}://${get_header_info.host}:${get_header_info.port}`;

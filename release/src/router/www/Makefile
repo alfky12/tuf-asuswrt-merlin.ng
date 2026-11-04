@@ -1028,6 +1028,4 @@ update:
 	rm -rf $(INSTALLDIR)/www/tmhist.js
 	rm -rf $(INSTALLDIR)/www/tmmenu.css
 	rm -rf $(INSTALLDIR)/www/tmmenu.js
-	rm -rf $(INSTALLDIR)/www/sysdep/FUNCTION/TUF_UI/tmcal.js
-	rm -rf $(INSTALLDIR)/www/sysdep/FUNCTION/TUF_UI/tmmenu.css
 # End legacy files

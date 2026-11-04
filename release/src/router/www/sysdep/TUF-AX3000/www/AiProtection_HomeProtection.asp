@@ -1,1 +1,1 @@
-../../FUNCTION/ROG_UI/AiProtection_HomeProtection.asp
+../../../AiProtection_HomeProtection.asp

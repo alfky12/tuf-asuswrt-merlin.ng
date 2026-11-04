@@ -264,7 +264,7 @@ function setClientIP(_macaddr){
 }
 
 function hideClients_Block(){
-	document.getElementById("pull_arrow").src = "/images/arrow-down.gif";
+	document.getElementById("pull_arrow").src = "/images/unfold_more.svg";
 	document.getElementById('ClientList_Block_PC').style.display='none';
 }
 
@@ -272,7 +272,7 @@ function pullLANIPList(obj){
 	var element = document.getElementById('ClientList_Block_PC');
 	var isMenuopen = element.offsetWidth > 0 || element.offsetHeight > 0;
 	if(isMenuopen == 0){		
-		obj.src = "/images/arrow-top.gif"
+		obj.src = "/images/unfold_less.svg"
 		element.style.display = 'block';		
 		document.form.wollist_macAddr.focus();		
 	}
@@ -362,7 +362,7 @@ function applyRule(){
 																					  		
 				            			<td width="80%">
 											<input type="text" class="input_20_table" maxlength="17" name="wollist_macAddr" onClick="hideClients_Block();" autocorrect="off" autocapitalize="off" style="margin-left:-12px;width:255px;" onKeyPress="return validator.isHWAddr(this,event)" placeholder="ex: <% nvram_get("lan_hwaddr"); %>">
-											<img id="pull_arrow" height="14px;" src="/images/arrow-down.gif" style="position:absolute;*margin-left:-3px;*margin-top:1px;" onclick="pullLANIPList(this);" title="<#select_device_name#>">
+											<img id="pull_arrow" height="14px;" src="/images/unfold_more.svg" style="position:absolute;*margin-left:-3px;*margin-top:1px;" onclick="pullLANIPList(this);" title="<#select_device_name#>">
 											<div id="ClientList_Block_PC" class="clientlist_dropdown"></div>	
 				            			</td>
 				            			<td width="20%">

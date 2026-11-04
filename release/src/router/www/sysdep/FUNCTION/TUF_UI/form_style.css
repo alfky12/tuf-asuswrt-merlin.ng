@@ -167,8 +167,7 @@
 	text-align:center;
 }
 .FormTable_table td{
-	/* background-color:transparent; */
-	background-color: rgb(66, 66, 66);
+	background-color:transparent;
 	text-align:center;
 	/*border: 1px solid #222;*/
 	border-collapse: collapse;
@@ -680,14 +679,14 @@ form{
 }
 
 .list_table{
-	border: 0px solid rgb(76,76,76);
+	border: 1px solid rgb(76,76,76);
 	border-collapse: collapse;
 	background-color:rgb(55,55,55);
 	text-align:center;
 	font-size:12px;
 }
 .list_table td{
-	/* border-bottom: 1px solid #FFF; */
+	border-bottom: 1px solid #FFF;
 	border-collapse: collapse;
 	height:25px;
 }
@@ -859,8 +858,8 @@ form{
 /* CSS Document */
 @font-face{
 	font-family: Xolonium;
-    src: url(/fonts/xolonium.regular.woff) format("woff"),
-    	 url(/fonts/xolonium.regular.otf) format("opentype");
+    	src: url(/fonts/xolonium.regular.woff) format("woff"),
+             url(/fonts/xolonium.regular.otf) format("opentype");
 }
 body{
 	color:#FFFFFF;
@@ -1202,14 +1201,6 @@ padding-top:1px;
 	background-repeat:no-repeat;
 	background-position:2px -48px;
 	height:29px;
-	width:30px;
-	cursor: pointer;
-}
-.wifihwswstatuspartial{
-	background-image:url(images/wifi_hw_sw.png);
-	background-repeat:no-repeat;
-	background-position: 2px -73px;
-	height: 29px;
 	width:30px;
 	cursor: pointer;
 }
@@ -2034,14 +2025,14 @@ padding-top:1px;
 
 .content_bg{
 	/* background: rgba(17, 17, 17, .5); */
-	background: rgba(34, 34, 34, .5);
+	background: rgba(45, 45, 45, .5);
 }
 .divide_line{
 	border: 1px solid #FFF;
 }
 [bgcolor="#4D595D"]{
 	/* background: rgba(17, 17, 17, .5); */
-	background: rgba(34, 34, 34, .5);
+	background: rgba(45, 45, 45, .5);
 }
 .block_bg{
 	background: transparent;
@@ -2054,7 +2045,7 @@ padding-top:1px;
 }
 .control_bg{
 	/* background: rgba(17, 17, 17, .5); */
-	background: rgba(34, 34, 34, .5);
+	background: rgba(45, 45, 45, .5);
 }
 .tab_font_color{
 	color: #FFF;
@@ -2064,7 +2055,7 @@ padding-top:1px;
 }
 .analysis_bg, .web_frame{
 	/* background: rgba(17, 17, 17, .5); */
-	background: rgba(34, 34, 34, .95);
+	background: rgba(45, 45, 45, .95);
 	border: 1px solid #92650F;
 }
 .tm_title_bg{
@@ -2127,10 +2118,10 @@ padding-top:1px;
 	background: #354248;
 }
 .quotabar{
-	background: #0bc8ff;
-	background: -webkit-linear-gradient(to right, #0bc8ff 0%, #0039ff 100%);
-	background: -o-linear-gradient(to right, #0bc8ff 0%, #0039ff 100%);
-	background: linear-gradient(to right, #0bc8ff 0%, #0039ff 100%);
+	background: #8DB6D8;
+	background: -webkit-linear-gradient(#8DB6D8 0%, #7FACD3 49%, #6C9AC7 50%, #6998C5 51%, #6998C5 100%);
+	background: -o-linear-gradient(#8DB6D8 0%, #7FACD3 49%, #6C9AC7 50%, #6998C5 51%, #6998C5 100%);
+	background: linear-gradient(#8DB6D8 0%, #7FACD3 49%, #6C9AC7 50%, #6998C5 51%, #6998C5 100%);
 }
 .splitLine{
 	background: #CEC1C7;

@@ -34,7 +34,7 @@ body{
 .logo-container{
 	display: flex;
 	align-items: center;
-	margin-left: 135px;
+	margin-left: 150px;
 }
 .logo-container-odm{
 	display: flex;
@@ -267,7 +267,7 @@ body{
 	padding: 10px 0 0 0; 
 }
 .login-btn-bg, .login-btn-bg-odm{
-	/*width: 93%;*/
+	width: 95%;
 	background-size: 100%;
 }
 .login-btn-bg{
@@ -431,7 +431,6 @@ var remaining_time_show;
 var countdownid, rtime_obj;
 var redirect_page = login_info.page;
 var cloud_file = '<% get_parameter("file"); %>';
-if ('<% nvram_get("http_dut_redir"); %>' == '1') {
 var isRouterMode = ('<% nvram_get("sw_mode"); %>' == '1') ? true : false;
 
 var header_info = [<% get_header_info(); %>][0];
@@ -445,7 +444,6 @@ var chdom = function(){window.location.href=domainNameUrl};
 		}, 1);
 	}
 })();
-}
 
 <% login_state_hook(); %>
 

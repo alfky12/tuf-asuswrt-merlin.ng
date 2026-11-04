@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -51,6 +51,11 @@ if (isSupport("UI4")){
 	var tableLabelColor = "#006CE1";
 	var tableValueColor = "#1C1C1E";
 } else {
+	if (rog_support) {
+		var chartBackgroundColor = "rgba(17, 17, 17)";
+	} else {
+		var chartBackgroundColor = "#2f3e44";
+	}
 	var labelsColor = "#CCC";
 	var gridColor = "#282828";
 	var ticksColor = "#CCC";
@@ -58,7 +63,6 @@ if (isSupport("UI4")){
 	var rxBackgroundColor = "rgba(76, 143, 192, 0.3)";
 	var txBorderColor = "rgba(76, 192, 143, 1)";
 	var txBackgroundColor = "rgba(76, 192, 143, 0.3)";
-	var chartBackgroundColor = "rgba(0, 0, 0, 0)";
 	var tableLabelColor = "#FFCC00";
 	var tableValueColor = "white";
 }

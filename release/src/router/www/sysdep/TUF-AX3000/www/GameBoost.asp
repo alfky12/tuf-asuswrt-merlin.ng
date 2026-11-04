@@ -33,13 +33,12 @@ body{
 }
 
 .GB_background{
-	/* background: url('images/New_ui/mainimage_img_Game.jpg');
+	background: url('images/New_ui/mainimage_img_Game.jpg');
 	background-repeat: no-repeat
 	margin-top: -15px;
 	border-radius: 3px;
-	background-size: cover; */
-	background: rgba(34, 34, 34, .5);
-	height: 1229px !important;
+	background-size: cover;
+	height: auto;
 }
 
 .GB_background_rt{
@@ -163,7 +162,7 @@ body{
 	position: absolute;
 	width: 700px;
 	height: 600px;
-	background-color: #222222;
+	background-color: #444f53;
 	z-index: 199;
 	padding: 12px 18px;
 	overflow-y: auto;
@@ -293,7 +292,7 @@ function setClientIP(macaddr){
 }
 
 function hideClients_Block(){
-	document.getElementById("pull_arrow").src = "/images/arrow-down.gif";
+	document.getElementById("pull_arrow").src = "/images/unfold_more.svg";
 	document.getElementById('ClientList_Block_PC').style.display='none';
 }
 
@@ -302,7 +301,7 @@ function pullLANIPList(obj){
 	var isMenuopen = element.offsetWidth > 0 || element.offsetHeight > 0;
 
 	if(isMenuopen == 0){		
-		obj.src = "/images/arrow-top.gif"
+		obj.src = "/images/unfold_less.svg"
 		element.style.display = 'block';		
 		document.getElementById('client').focus();		
 	}
@@ -330,7 +329,7 @@ function genGameList(){
                 <div style="display: flex; justify-content: center">
                     <div class="clientlist_dropdown_main">
                         <input type="text" class="input_20_table" maxlength="17" id="client" onKeyPress="return validator.isHWAddr(this,event)" onClick="hideClients_Block();" autocorrect="off" autocapitalize="off" placeholder="ex: ${nvram_get_param.lan_hwaddr}">
-                        <img id="pull_arrow" height="14px;" src="/images/arrow-down.gif" style="position:absolute;*margin-left:-3px;*margin-top:1px;" onclick="pullLANIPList(this);" title="<#select_MAC#>">
+                        <img id="pull_arrow" height="14px;" src="/images/unfold_more.svg" style="position:absolute;*margin-left:-3px;*margin-top:1px;" onclick="pullLANIPList(this);" title="<#select_MAC#>">
                         <div id="ClientList_Block_PC" class="clientlist_dropdown" style="margin-left:138px;"></div>
                     </div>
                 </div>
@@ -718,7 +717,7 @@ function enableGearUp(){
 <div>
 	<table class="content" align="center" cellspacing="0" style="margin:auto;">
 		<tr>
-			<td width="14">&nbsp;</td>
+			<td width="15">&nbsp;</td>
 			<!--=====Beginning of Main Menu=====-->
 			<td valign="top" width="202">
 				<div id="mainMenu"></div>
@@ -732,8 +731,8 @@ function enableGearUp(){
 					<table style="padding-left:10px;">
 						<tr>
 							<td class="formfonttitle">
-								<div style="width:730px;padding-top:10px;">
-									<table width="730px">
+								<div style="width:743px;padding-top:10px;">
+									<table width="743px">
 										<tr>
 											<td align="left">
 

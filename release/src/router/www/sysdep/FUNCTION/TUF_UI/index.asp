@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html xmlns:v>
 <head>
@@ -462,7 +462,7 @@ function initial(){
 			else
 				document.getElementById('rssi_div').style.display = "";
 			
-			document.getElementById('wlc_band_status').innerHTML = wl_nband_title[wlc_band];
+			document.getElementById('wlc_band_status').innerHTML = wl_nband_title[wlc_band]; 	
 		}
 		document.getElementById('NM_connect_title').innerHTML = "<#parent_AP_status#> :";
 	}
@@ -807,8 +807,8 @@ function showDiskInfo(device){
 		percentbar = simpleNum2((device.totalSize - device.totalUsed)/device.totalSize*100);
 		percentbar = Math.round(100 - percentbar);
 
-		dec_html_code += '<div id="diskquota" align="left" style="margin-top:5px;margin-bottom:10px;border-radius:4px">\n';
-		dec_html_code += '<div class="quotabar" style="width:'+ percentbar +'%;height:13px;border-radius:4px"></div>';
+		dec_html_code += '<div id="diskquota" align="left" style="margin-top:5px;margin-bottom:10px;">\n';
+		dec_html_code += '<div class="quotabar" style="width:'+ percentbar +'%;height:13px;"></div>';
 		dec_html_code += '</div>\n';
 	}
 	else{
@@ -990,7 +990,7 @@ function clickEvent(obj){
 
 	if(lastClicked){
 		if(lastClicked.id.indexOf("USBdisk") > 0)
-			lastClicked.style.backgroundPosition = '0 5px';
+			lastClicked.style.backgroundPosition = '0 0';
 		else if(lastClicked.id.indexOf("iconRouter") >= 0){
 			lastClicked.style.backgroundPosition = '35% -3%';
 		}
@@ -1098,7 +1098,7 @@ function check_status(_device){
 		document.getElementById('iconUSBdisk_'+diskOrder).style.backgroundImage = "url(/images/New_ui/networkmap/M2.png)";
 	else 
 		document.getElementById('iconUSBdisk_'+diskOrder).style.backgroundImage = "url(/images/New_ui/networkmap/USB_2.png)";
-	document.getElementById('iconUSBdisk_'+diskOrder).style.backgroundPosition = '0 5px';
+	document.getElementById('iconUSBdisk_'+diskOrder).style.backgroundPosition = '0 0';
 	document.getElementById('iconUSBdisk_'+diskOrder).style.backgroundSize = "100%";
 
 	if(!rog_support)
@@ -2602,7 +2602,7 @@ function copyDdnsName(e) {
 		<div id="NM_shift" style="margin-top:-140px;"></div>
 		<div id="NM_table" class="NM_table" >
 		<div id="NM_table_div" style="background-color:rgba(0,0,0,.5);height:805px;">
-			<div style="width:51%;float:left;background:url('images/New_ui/networkmap/networkmap_bg.png') no-repeat /*rgba(0,0,0,.5)*/;background-position-x: 4px; height:805px;">
+			<div style="width:51%;float:left;background:url('images/New_ui/networkmap/networkmap_bg.png') no-repeat rgba(0,0,0,.5);background-position-x: 4px; height:805px;">
 			<table id="_NM_table" border="0" cellpadding="0" cellspacing="0" style="opacity:.95;margin-left:-30px;" >
 				<tr>
 					<td width="40px" rowspan="11" valign="center"></td>

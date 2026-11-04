@@ -1,7 +1,7 @@
 ﻿@font-face{
 	font-family: Xolonium;
-    src: url(/fonts/xolonium.regular.woff) format("woff"),
-		 url(/fonts/xolonium.regular.otf) format("opentype");
+    	src: url(/fonts/xolonium.regular.woff) format("woff"),
+             url(/fonts/xolonium.regular.otf) format("opentype");
 }
 #welcomeTitle{
 	font-family: Xolonium;
@@ -19,7 +19,7 @@
 	line-height: 50px;
 }
 .desktop_applyBtn, .desktop_abortBtn{
-	line-height: 50px;
+	line-height: 66px;
 	font-size: 2em;
 }
 .mobile_applyBtn, .mobile_abortBtn{
