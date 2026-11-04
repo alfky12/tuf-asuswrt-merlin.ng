@@ -40,10 +40,54 @@ body{
 }
 
 .banner1{
-	width:1064px;
+	/* Lebar banner disamakan dengan isi (998px) supaya pemusatan banner
+	   dan isi tidak pernah berpisah saat lebar layar menyusut; flex
+	   menggantikan margin piksel tetap/negatif di dalam banner.
+	   Lebar TETAP 998px, bukan 100%: isi halaman juga tetap 998px, jadi
+	   keduanya meluap secara simetris di layar sempit dan tepinya tidak
+	   pernah berpisah; banner yang menyusut justru menimbulkan geser baru. */
+	width:998px;
 	height:70px;
 	background:url(images/New_ui/title_bg.png) 0 0 no-repeat;
+	background-size:100% 100%;
 	margin:0px auto 30px auto;
+	display:flex;
+	align-items:center;
+	box-sizing:border-box;
+}
+.banner1 .navigation{
+	/* Menang atas .navigation di form_style.css (yang position:absolute
+	   margin-left:820px) supaya tombol bahasa ikut flex, bukan menempel
+	   pada posisi absolut. Selektor ini lebih spesifik, jadi menang
+	   walau form_style.css dimuat sesudahnya. */
+	position:static;
+	/* Margin kanan 25px: tepi kanan tombol bahasa 973px dari kiri banner,
+	   praktis sejajar dengan tepi kanan ikon statusBar (977px).
+	   Margin 45px membuat ruang nama model terlalu sempit sehingga
+	   nama model tertutup tombol Logout, jadi tidak dipakai. */
+	margin:0 25px 0 0;
+	width:auto;
+	flex:0 0 auto;
+	/* Turunkan 13px: pusat tombol bahasa dari 35px ke 48px, segaris
+	   dengan pusat logo TUF, sama seperti Merlin/model/Logout. Hanya
+	   tampilan yang turun, susunan kotak tidak berubah. */
+	transform:translateY(13px);
+}
+.banner1 .navigation li dt{
+	/* Samakan tinggi tombol bahasa dengan tombol Logout (34px) DAN
+	   tengahkan teksnya benar-benar (bukan padding atas 8px yang
+	   membuat teks tampak di tengah-atas): */
+	box-sizing:border-box;
+	padding:0;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+@media (max-width: 800px){
+	.modelName_top{ font-size:20px; }
+}
+@media (max-width: 560px){
+	.modelName_top{ font-size:16px; }
 }	
 #banner3{
 	width:983px;
@@ -617,15 +661,19 @@ width:122px;
 }
 
 .modelName_top{
-	text-align: left;
+	/* Nama model di tengah oleh flex (wrapper-nya flex:1), bukan
+	   ditarik margin negatif -210px. */
+	text-align: center;
 	font-size: 28px;
-	float:left;
-	margin: 5px 0 0 -210px;
+	float:none;
+	margin: 0;
 	text-shadow: 3px 2px #000;
 	font-weight: bold;
 	font-family: Xolonium;
-    word-break: break-all;
-    width: 420px;
+    word-break: normal;
+    width: auto;
+	display:block;
+	white-space:nowrap;
 }
 .cloud_main_radius{
 	-webkit-border-radius: 10px;
