@@ -43,6 +43,11 @@ on:
 
 permissions:
   contents: write
+  # Push cabang penuh membawa file workflow dari basis beta1
+  # (.github/workflows/merge-upstream-388.13-2.yml), dan GitHub menolak
+  # token Actions membuat/mengubah file workflow tanpa izin ini
+  # (run #2 gagal di push terakhir karena itu).
+  workflows: write
 
 jobs:
   port-webui-to-full-beta1:
