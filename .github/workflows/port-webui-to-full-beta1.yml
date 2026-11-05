@@ -4,13 +4,14 @@ name: Port webui TUF ke basis beta1 penuh (cherry-pick)
 # Workflow ini HANYA membuat cabang baru yang penuh, BUKAN build firmware,
 # dan TIDAK mengubah cabang webui saja maupun cabang utama.
 # Dijalankan MANUAL lewat tombol Run workflow di tab Actions, setelah
-# cabang webui TUF-3004.388.13_beta1 sudah di-push ke repo ini.
+# cabang webui TUF-3004.388.13_beta1-webui sudah di-push ke repo ini.
 # Alasan tidak auto-run saat push: push cabang webui tidak boleh langsung
 # memicu pembuatan cabang penuh tanpa perintah Alf.
 #
 # Kenapa cherry-pick, bukan git merge biasa:
 # Cabang webui saja berakar di alpha1, sedangkan basis penuh berakar di
-# beta1. Git merge biasa akan mencari merge-base lama dan menimbulkan
+# beta1. Cabang penuh inilah yang nantinya bernama TUF-3004.388.13_beta1,
+# sedangkan cabang webui saja bernama TUF-3004.388.13_beta1-webui. Git merge biasa akan mencari merge-base lama dan menimbulkan
 # banyak konflik, seperti pelajaran merge upstream 31 Okt 2026.
 # Cherry-pick satu per satu hanya memindahkan ubahan webui yang sudah
 # dibuat di atas file beta1, sehingga seharusnya bersih.
@@ -28,7 +29,7 @@ on:
       target_branch:
         description: "Nama cabang baru yang penuh (jangan pakai nama cabang webui saja)"
         required: true
-        default: "TUF-3004.388.13_beta1-full"
+        default: "TUF-3004.388.13_beta1"
 
 permissions:
   contents: write
@@ -71,7 +72,7 @@ jobs:
           git checkout -b "$TARGET" main/tuf-ax3000-388
 
           # Cabang webui saja, sumber commit porting.
-          git fetch origin TUF-3004.388.13_beta1
+          git fetch origin TUF-3004.388.13_beta1-webui
 
           # Urutan dari lama ke baru, hanya commit porting yang berlaku.
           for sha in 9bb599eb4 bc09fae62 c4990ed62 dee4eb926 da078fcf9 f8d9dbaeb f9c57640e 2a46242a9 1be1d4e63; do
@@ -91,8 +92,8 @@ jobs:
           # Bukti sebelum push.
           # 1. File www hasil porting harus sama persis dengan cabang webui saja.
           echo "Cek www sama dengan cabang webui saja (harus kosong):"
-          git diff origin/TUF-3004.388.13_beta1 -- release/src/router/www/ | head -50
-          test -z "$(git diff origin/TUF-3004.388.13_beta1 -- release/src/router/www/)" || {
+          git diff origin/TUF-3004.388.13_beta1-webui -- release/src/router/www/ | head -50
+          test -z "$(git diff origin/TUF-3004.388.13_beta1-webui -- release/src/router/www/)" || {
             echo "BERHENTI: www cabang penuh berbeda dengan cabang webui saja."
             exit 1
           }
