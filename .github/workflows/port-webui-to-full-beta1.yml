@@ -1,10 +1,12 @@
 name: Port webui TUF ke basis beta1 penuh (cherry-pick)
 
-# DRAF, belum di-push, belum pernah dijalankan.
 # Workflow ini HANYA membuat cabang baru yang penuh, BUKAN build firmware,
 # dan TIDAK mengubah cabang webui saja maupun cabang utama.
 # Dijalankan MANUAL lewat tombol Run workflow di tab Actions, setelah
 # cabang webui TUF-3004.388.13_beta1-webui sudah di-push ke repo ini.
+# File ini HARUS ada di cabang default (main) supaya muncul di tab Actions;
+# GitHub hanya menampilkan workflow yang ada di cabang default.
+# Cabang webui TUF-3004.388.13_beta1-webui sudah di-push (08a97e24d).
 # Alasan tidak auto-run saat push: push cabang webui tidak boleh langsung
 # memicu pembuatan cabang penuh tanpa perintah Alf.
 #
