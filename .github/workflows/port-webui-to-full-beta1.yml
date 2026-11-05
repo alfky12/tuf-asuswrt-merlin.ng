@@ -1,0 +1,121 @@
+name: Port webui TUF ke basis beta1 penuh (cherry-pick)
+
+# Workflow ini HANYA membuat cabang baru yang penuh, BUKAN build firmware,
+# dan TIDAK mengubah cabang webui saja maupun cabang utama.
+# Dijalankan MANUAL lewat tombol Run workflow di tab Actions, setelah
+# cabang webui TUF-3004.388.13_beta1-webui sudah di-push ke repo ini.
+# File ini HARUS ada di cabang default (main) supaya muncul di tab Actions;
+# GitHub hanya menampilkan workflow yang ada di cabang default.
+# Cabang webui TUF-3004.388.13_beta1-webui sudah di-push (08a97e24d).
+# Alasan tidak auto-run saat push: push cabang webui tidak boleh langsung
+# memicu pembuatan cabang penuh tanpa perintah Alf.
+#
+# Kenapa cherry-pick, bukan git merge biasa:
+# Cabang webui saja berakar di alpha1, sedangkan basis penuh berakar di
+# beta1. Cabang penuh inilah yang nantinya bernama TUF-3004.388.13_beta1,
+# sedangkan cabang webui saja bernama TUF-3004.388.13_beta1-webui. Git merge biasa akan mencari merge-base lama dan menimbulkan
+# banyak konflik, seperti pelajaran merge upstream 31 Okt 2026.
+# Cherry-pick satu per satu hanya memindahkan ubahan webui yang sudah
+# dibuat di atas file beta1, sehingga seharusnya bersih.
+#
+# Yang TIDAK di-pick, dengan sengaja:
+#  - ea80a20e4 sync www ke beta1 (basis baru sudah beta1, www-nya sama)
+#  - 796700a6a ikon Sysinfo toolsys.png (salah, sudah diganti sprite emas)
+#  - 5579db765 logo login flex (sudah dibatalkan, diganti margin 110px)
+# Kalau ada konflik di luar dugaan, workflow BERHENTI tanpa push,
+# supaya Alf yang menyelesaikan, bukan mesin yang menebak.
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: "Nama cabang baru yang penuh (jangan pakai nama cabang webui saja)"
+        required: true
+        default: "TUF-3004.388.13_beta1"
+
+permissions:
+  contents: write
+
+jobs:
+  port-webui-to-full-beta1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: Checkout repo tinkering
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Port webui ke basis beta1 penuh
+        run: |
+          set -u
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          TARGET="${{ inputs.target_branch }}"
+
+          # Jangan menimpa cabang yang sudah ada.
+          if git ls-remote --heads origin "$TARGET" | grep -q .; then
+            echo "BERHENTI: cabang $TARGET sudah ada di origin, tidak ditimpa."
+            exit 1
+          fi
+
+          # Basis penuh yang asli: repo utama Alf, cabang tuf-ax3000-388.
+          git remote add main https://github.com/alfky12/asuswrt-merlin.ng.git
+          # Fetch PENUH, seperti workflow merge upstream: fetch hemat
+          # pernah gagal saat cherry-pick meminta blob dadakan.
+          git fetch main tuf-ax3000-388
+          BASE_HEAD="772fd1f8fbbeee349378decb5ac137a87d865348"
+          test "$(git rev-parse main/tuf-ax3000-388)" = "$BASE_HEAD" || {
+            echo "BERHENTI: head main/tuf-ax3000-388 bukan beta1 yang sudah diverifikasi ($BASE_HEAD)."
+            echo "Periksa dulu sebelum lanjut, jangan pakai basis lain diam-diam."
+            exit 1
+          }
+          git checkout -b "$TARGET" main/tuf-ax3000-388
+
+          # Cabang webui saja, sumber commit porting.
+          git fetch origin TUF-3004.388.13_beta1-webui
+
+          # Urutan dari lama ke baru, hanya commit porting yang berlaku.
+          for sha in 9bb599eb4 bc09fae62 c4990ed62 dee4eb926 da078fcf9 f8d9dbaeb f9c57640e 2a46242a9 1be1d4e63; do
+            echo "PICK $sha $(git log -1 --format=%s "$sha")"
+            if git cherry-pick "$sha" < /dev/null > /tmp/cherry-pick.log 2>&1; then
+              continue
+            fi
+            echo "PICK GAGAL $sha, log:"
+            cat /tmp/cherry-pick.log
+            echo "File konflik:"
+            git ls-files -u
+            echo "BERHENTI tanpa push, supaya konflik diselesaikan manual."
+            git cherry-pick --abort || true
+            exit 1
+          done
+
+          # Bukti sebelum push.
+          # 1. File www hasil porting harus sama persis dengan cabang webui saja.
+          echo "Cek www sama dengan cabang webui saja (harus kosong):"
+          git diff origin/TUF-3004.388.13_beta1-webui -- release/src/router/www/ | head -50
+          test -z "$(git diff origin/TUF-3004.388.13_beta1-webui -- release/src/router/www/)" || {
+            echo "BERHENTI: www cabang penuh berbeda dengan cabang webui saja."
+            exit 1
+          }
+          # 2. Nomor versi tetap beta1, bukan alpha1.
+          grep -E '^(SERIALNO|EXTENDNO)=' release/src-rt/version.conf
+          grep -q '^EXTENDNO=beta1_GPL_25575$' release/src-rt/version.conf || {
+            echo "BERHENTI: EXTENDNO bukan beta1_GPL_25575."
+            exit 1
+          }
+          # 3. Di luar www, tidak ada perubahan dibanding basis beta1.
+          #    Porting webui memang hanya menyentuh www.
+          echo "File di luar www yang berubah dibanding basis (harus kosong):"
+          git diff --name-only main/tuf-ax3000-388 HEAD | grep -v '^release/src/router/www/' || true
+          test -z "$(git diff --name-only main/tuf-ax3000-388 HEAD | grep -v '^release/src/router/www/')" || {
+            echo "BERHENTI: ada perubahan di luar www, periksa dulu."
+            exit 1
+          }
+          # 4. Target build TUF tetap 3, seperti cek workflow merge upstream.
+          echo "OPENSSL35 untuk TUF: $(grep -c 'export TUF-.*OPENSSL35=y' release/src-rt/target.mak) (harus 3)"
+          test "$(grep -c 'export TUF-.*OPENSSL35=y' release/src-rt/target.mak)" = "3"
+
+          git push origin "HEAD:$TARGET"
+          echo "Cabang penuh $TARGET sudah di-push. Build tetap perintah terpisah."
