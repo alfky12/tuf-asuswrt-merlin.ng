@@ -65,6 +65,13 @@ body{
 }
 .logo-rog{
 	background:url('./images/New_ui/TUF-logo.png') no-repeat;
+	/* Geser gambar logo 10px ke kanan di dalam kotaknya (290px):
+	   nama model tidak ikut bergerak, margin logo-container
+	   tetap 110px, jadi tepi kanan nama model tetap sejajar
+	   dengan kolom isian login. Sisi kanan gambar masih aman:
+	   gambar terlihat sampai 249px, +10px = 259px, masih di
+	   dalam kotak 290px, tidak terpotong. */
+	background-position: 10px 0;
 }
 .logo-odm{
 	background:url('./images/New_ui/COD_logo.png') no-repeat;
@@ -253,6 +260,8 @@ body{
 }
 .logo-rog{
 	margin: 0 auto;
+	/* Mobile tetap seperti semula (tanpa geseran 10px desktop). */
+	background-position: 0 0;
 }
 .logo-odm{
 	display:none;
