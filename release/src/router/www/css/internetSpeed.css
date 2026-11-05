@@ -1830,10 +1830,10 @@ body{
 }
 .input_option{
        height:25px;
-       background-color:#576D73;
+       background-color:#2d2d31;
        border-top-width:1px;
        border-bottom-width:1px;
-       border-color:#888;
+       /*border-color:#888;*/
        color:#FFFFFF;
        font-family: Lucida Console;
        font-size:13px;
