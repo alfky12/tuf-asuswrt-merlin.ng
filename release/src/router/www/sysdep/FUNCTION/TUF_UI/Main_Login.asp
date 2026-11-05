@@ -34,7 +34,12 @@ body{
 .logo-container{
 	display: flex;
 	align-items: center;
-	margin-left: 135px;
+	/* Pusatkan logo + nama model dengan flex, bukan margin kiri
+	   tetap: margin 135px hanya pas untuk satu lebar nama model
+	   saja, sedangkan flex selalu menengahkan blok logo+model
+	   di dalam kolom login (887px), apa pun lebar nama modelnya. */
+	justify-content: center;
+	margin-left: 0;
 }
 .logo-container-odm{
 	display: flex;
