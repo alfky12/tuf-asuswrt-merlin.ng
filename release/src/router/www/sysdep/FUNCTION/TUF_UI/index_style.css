@@ -1037,6 +1037,16 @@ width:122px;
 	background-position: -0px -144px;
 }
 
+.menu_Sysinfo{
+	/* Diadaptasi dari index_style.css utama beta1 (bukan salinan lama
+	   tinkering): menu Sysinfo di beta1 memakai toolsys.png, bukan
+	   icon_menues.png -144px yang di beta1 sudah dipakai Network Tool.
+	   Tanpa blok ini, menu Sysinfo di build TUF tidak punya ikon,
+	   karena index_style.css utama ditimpa TUF_UI saat build TUF. */
+	background: url(images/New_ui/toolsys.png);
+	background-position: 0px 0px;
+}
+
 .menu_Dashboard{
 	background-image: url(images/New_ui/icon_Gamecenter.png);
 	background-position: -0px 0px;
