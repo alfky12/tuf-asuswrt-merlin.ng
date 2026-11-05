@@ -34,7 +34,7 @@ body{
 .logo-container{
 	display: flex;
 	align-items: center;
-	margin-left: 150px;
+	margin-left: 135px;
 }
 .logo-container-odm{
 	display: flex;
