@@ -43,11 +43,13 @@ on:
 
 permissions:
   contents: write
-  # Push cabang penuh membawa file workflow dari basis beta1
-  # (.github/workflows/merge-upstream-388.13-2.yml), dan GitHub menolak
-  # token Actions membuat/mengubah file workflow tanpa izin ini
-  # (run #2 gagal di push terakhir karena itu).
-  workflows: write
+  # CATATAN: token Actions TIDAK BOLEH membuat/mengubah file workflow,
+  # dan izin 'workflows: write' TIDAK dikenal di file workflow
+  # (GitHub menolak file ini kalau baris itu ditulis — terbukti di
+  # run #3/#4, 5 Nov 2026). Karena itu workflow ini MENGHAPUS
+  # .github/workflows dari cabang penuh sebelum push (lihat langkah 5
+  # di bawah); file workflow untuk build ditambahkan lagi sesudah
+  # cabang terbentuk, lewat jalur lain.
 
 jobs:
   port-webui-to-full-beta1:
@@ -131,6 +133,15 @@ jobs:
           # 4. Target build TUF tetap 3, seperti cek workflow merge upstream.
           echo "OPENSSL35 untuk TUF: $(grep -c 'export TUF-.*OPENSSL35=y' release/src-rt/target.mak) (harus 3)"
           test "$(grep -c 'export TUF-.*OPENSSL35=y' release/src-rt/target.mak)" = "3"
+
+          # 5. Hapus file workflow dari cabang penuh sebelum push.
+          #    Token Actions tidak boleh membuat/mengubah file workflow,
+          #    jadi cabang penuh dibuat TANPA .github/workflows.
+          #    File workflow untuk build (Building images) ditambahkan
+          #    lagi sesudah cabang terbentuk, lewat jalur lain.
+          echo "Hapus .github/workflows dari cabang penuh sebelum push:"
+          git rm -r -q .github/workflows
+          git commit -qm "ci: hapus file workflow dari cabang penuh (token Actions tidak boleh push file workflow)"
 
           git push origin "HEAD:$TARGET"
           echo "Cabang penuh $TARGET sudah di-push. Build tetap perintah terpisah."
