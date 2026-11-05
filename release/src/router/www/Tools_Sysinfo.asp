@@ -135,7 +135,7 @@ if (isSupport("UI4")) {
         if (rog_support) {
                 canvasColor = "rgba(17, 17, 17)";
         } else {
-                canvasColor = "#2f3e44";
+                canvasColor = "rgba(0, 0, 0, 0)";
         }
 }
 

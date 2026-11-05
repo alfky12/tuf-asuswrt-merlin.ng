@@ -108,7 +108,7 @@ if (isSupport("UI4")){
 	if (rog_support) {
 		var chartBackgroundColor = "rgba(17, 17, 17)";
 	} else {
-		var chartBackgroundColor = "#2f3e44";
+		var chartBackgroundColor = "rgba(0, 0, 0, 0)";
 	}
 	var labelsColor = "#CCC";
 	var gridColor = "#282828";
