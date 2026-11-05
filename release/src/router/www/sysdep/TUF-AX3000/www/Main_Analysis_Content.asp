@@ -12,8 +12,8 @@
 <link rel="stylesheet" type="text/css" href="form_style.css">
 <style>
 #ClientList_Block_PC{
-	border:1px outset #999;
-	background-color:#576D73;
+	border:1px outset #92650F;
+	background-color:#3E2902;
 	position:absolute;
 	*margin-top:26px;	
 	margin-left:2px;
@@ -27,7 +27,6 @@
 	display:none;
 }
 #ClientList_Block_PC div{
-	background-color:#576D73;
 	height:auto;
 	*height:20px;
 	line-height:20px;
