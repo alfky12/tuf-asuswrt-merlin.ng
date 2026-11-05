@@ -6,7 +6,7 @@ name: Port webui TUF ke basis beta1 penuh (cherry-pick)
 # cabang webui TUF-3004.388.13_beta1-webui sudah di-push ke repo ini.
 # File ini HARUS ada di cabang default (main) supaya muncul di tab Actions;
 # GitHub hanya menampilkan workflow yang ada di cabang default.
-# Cabang webui TUF-3004.388.13_beta1-webui sudah di-push (08a97e24d).
+# Cabang webui TUF-3004.388.13_beta1-webui sudah di-push.
 # Alasan tidak auto-run saat push: push cabang webui tidak boleh langsung
 # memicu pembuatan cabang penuh tanpa perintah Alf.
 #
@@ -20,8 +20,16 @@ name: Port webui TUF ke basis beta1 penuh (cherry-pick)
 #
 # Yang TIDAK di-pick, dengan sengaja:
 #  - ea80a20e4 sync www ke beta1 (basis baru sudah beta1, www-nya sama)
-#  - 796700a6a ikon Sysinfo toolsys.png (salah, sudah diganti sprite emas)
-#  - 5579db765 logo login flex (sudah dibatalkan, diganti margin 110px)
+# Dua commit perantara HARUS ikut di-pick, walau isinya sudah dibatalkan
+# oleh commit sesudahnya, karena commit perbaikan di atasnya butuh
+# keadaan file dari commit perantara itu:
+#  - 796700a6a ikon Sysinfo toolsys.png (salah) -> bc09fae62 memperbaikinya
+#    menjadi sprite emas; melewati 796700a6a membuat bc09fae62 konflik
+#    (terbukti di run #1, 5 Nov 2026 21:00 WIT).
+#  - 5579db765 logo login flex (sudah dibatalkan) -> dee4eb926 membatalkannya
+#    menjadi margin 110px; melewati 5579db765 membuat dee4eb926 konflik.
+# Hasil akhir tetap sama persis dengan cabang webui saja, karena pasangan
+# perantara+perbaikan itu saling meniadakan, kecuali hasil perbaikannya.
 # Kalau ada konflik di luar dugaan, workflow BERHENTI tanpa push,
 # supaya Alf yang menyelesaikan, bukan mesin yang menebak.
 
@@ -77,7 +85,9 @@ jobs:
           git fetch origin TUF-3004.388.13_beta1-webui
 
           # Urutan dari lama ke baru, hanya commit porting yang berlaku.
-          for sha in 9bb599eb4 bc09fae62 c4990ed62 dee4eb926 da078fcf9 f8d9dbaeb f9c57640e 2a46242a9 1be1d4e63; do
+          # Termasuk dua commit perantara (796700a6a, 5579db765) supaya
+          # commit perbaikan di atasnya bisa diterapkan bersih.
+          for sha in 9bb599eb4 796700a6a bc09fae62 c4990ed62 5579db765 dee4eb926 da078fcf9 f8d9dbaeb f9c57640e 2a46242a9 1be1d4e63; do
             echo "PICK $sha $(git log -1 --format=%s "$sha")"
             if git cherry-pick "$sha" < /dev/null > /tmp/cherry-pick.log 2>&1; then
               continue
