@@ -65,9 +65,10 @@ body{
 	   praktis sejajar dengan tepi kanan ikon statusBar (977px).
 	   Margin 45px membuat ruang nama model terlalu sempit sehingga
 	   nama model tertutup tombol Logout, jadi tidak dipakai. */
-	margin:0 25px 0 0;
+	margin:18px 25px 0 0;
 	width:auto;
 	flex:0 0 auto;
+	align-self:flex-start;
 	/* Turunkan 13px: pusat tombol bahasa dari 35px ke 48px, segaris
 	   dengan pusat logo TUF, sama seperti Merlin/model/Logout. Hanya
 	   tampilan yang turun, susunan kotak tidak berubah. */
