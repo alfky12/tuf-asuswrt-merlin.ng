@@ -34,14 +34,16 @@ body{
 .logo-container{
 	display: flex;
 	align-items: center;
-	/* Margin 110px = (887 - 667) / 2: kolom login 887px, blok
+	/* Margin 130px atas perintah Alf 8 Nov 2026 (diuji lewat inspect
+	   element di PC: terasa lebih di tengah). Sebelumnya 110px =
+	   (887 - 667) / 2: kolom login 887px, blok
 	   logo 290px + jarak 25px + nama model ~352px = 667px,
 	   jadi blok logo tepat di tengah kolom login dan sejajar
 	   dengan form di bawahnya. Flex centering DICOBA lalu
 	   DIBATALKAN: wadah .main-field-padding ternyata lebih
 	   lebar dari kolom login (~970px vs 887px), jadi flex
 	   malah menggeser logo ~18px ke kanan dibanding margin. */
-	margin-left: 110px;
+	margin-left: 130px;
 }
 .logo-container-odm{
 	display: flex;
