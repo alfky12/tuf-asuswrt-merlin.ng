@@ -680,7 +680,7 @@ form{
 }
 
 .list_table{
-	border: 1px solid rgb(76,76,76);
+	border: 0px solid rgb(76,76,76);
 	border-collapse: collapse;
 	background-color:rgb(55,55,55);
 	text-align:center;
