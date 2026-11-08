@@ -1637,7 +1637,7 @@ function showMenuTree(menuList, menuExclude){
 			if("Advanced_WAN_Content.asp" === curMenuWAN.tab[y].url){
 				clickedItem_menuWAN = z;
 			}
-                        if("Advanced_OpenVPNClient_Content.asp" === curMenuWAN.tab[y].url){
+                        if("Advanced_VPNClient_Content.asp" === curMenuWAN.tab[y].url){
                                 clickedItem_tabVPNC = y;
                         }
 		}
