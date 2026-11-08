@@ -94,7 +94,7 @@ jobs:
           # Urutan dari lama ke baru, hanya commit porting yang berlaku.
           # Termasuk dua commit perantara (796700a6a, 5579db765) supaya
           # commit perbaikan di atasnya bisa diterapkan bersih.
-          for sha in 9bb599eb4 796700a6a bc09fae62 c4990ed62 5579db765 dee4eb926 da078fcf9 f8d9dbaeb f9c57640e 2a46242a9 1be1d4e63; do
+          for sha in 9bb599eb4 796700a6a bc09fae62 c4990ed62 5579db765 dee4eb926 da078fcf9 f8d9dbaeb f9c57640e 2a46242a9 1be1d4e63 265ff6f48 7819867ed 24b42dce1 e0a5544d8 d40ae3b56 1293379cf 52d6d483a c119da3d5 9c5f15ea2 465aa3569 24c557ef6 00ddb6e90 845ff7a5b 9afbc22a3 f1b08a7ee 0fdf25ec6 72a97dca6 1eaea4162 1ade2dc5a bd8bcad4a 14f9c0252 fdaec24f2 1fda4efee 4dbc903cb e3a675e49 fb26fe08b 2d6abbb18 804e25b36 8d7e71bbd 2611ddf98 16006bfbb 564a13833 1f21377bb 07f58f2a6 f13a0e9ff; do
             echo "PICK $sha $(git log -1 --format=%s "$sha")"
             if git cherry-pick "$sha" < /dev/null > /tmp/cherry-pick.log 2>&1; then
               continue
