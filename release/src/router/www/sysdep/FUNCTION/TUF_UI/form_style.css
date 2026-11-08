@@ -2034,14 +2034,14 @@ padding-top:1px;
 
 .content_bg{
 	/* background: rgba(17, 17, 17, .5); */
-	background: rgba(45, 45, 45, .5);
+	background: rgba(34, 34, 34, .5);
 }
 .divide_line{
 	border: 1px solid #FFF;
 }
 [bgcolor="#4D595D"]{
 	/* background: rgba(17, 17, 17, .5); */
-	background: rgba(45, 45, 45, .5);
+	background: rgba(34, 34, 34, .5);
 }
 .block_bg{
 	background: transparent;
@@ -2054,7 +2054,7 @@ padding-top:1px;
 }
 .control_bg{
 	/* background: rgba(17, 17, 17, .5); */
-	background: rgba(45, 45, 45, .5);
+	background: rgba(34, 34, 34, .5);
 }
 .tab_font_color{
 	color: #FFF;
