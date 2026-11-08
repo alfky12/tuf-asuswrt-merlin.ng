@@ -1,3 +1,9 @@
+3004.388.13-0_GPL_25575
+  - Upstream code to RMerl 3004.388 head d1a59dcffb (3004.388.13 final)
+  - Synced with upstream 3004.388 final: 1 commit picked, 2 skipped (1 Updated changelog, 1 Bumped revision to final, karena versi/changelog diedit manual)
+  - GPL and binary blobs kept at 388_25575 (no GPL/blob commit in the 94195d9b32..d1a59dcffb range)
+  - Timezones: added Vancouver (PST7) and Edmonton (MST6), backport from GPL 40585
+
 3004.388.13-beta1_GPL_25575
   - Upstream code to RMerl 3004.388 head 94195d9b32 (3004.388.13 beta1)
   - Synced with upstream 3004.388 beta1: 10 commits picked, 2 skipped (1 Updated changelog, 1 Bumped revision to beta1, karena versi/changelog diedit manual)
