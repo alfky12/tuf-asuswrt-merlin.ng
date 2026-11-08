@@ -180,7 +180,7 @@ body{
 /*for Firefox*/
 @-moz-document url-prefix(){
 	.menu, .m0_r, .menu_clicked{
-		border: 1px solid #000;
+		border: none;
 	}
 	
 	.m_qis_r{
