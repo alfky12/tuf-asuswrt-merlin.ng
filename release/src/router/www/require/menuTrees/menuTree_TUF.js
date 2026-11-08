@@ -156,6 +156,7 @@ define(function(){
 					{url: "mediaserver.asp", tabName: "<#UPnPMediaServer#>"},
 					{url: "Advanced_AiDisk_samba.asp", tabName: "<#menu5_4_1#>".concat(WebDav_support?" / <#Cloud_Disk#>":"")},
 					{url: "Advanced_AiDisk_ftp.asp", tabName: "<#menu5_4_2#>"},
+					{url: "Advanced_AiDisk_NFS.asp", tabName: "NFS Exports"},
 					{url: "PrinterServer.asp", tabName: "__INHERIT__"},
 					{url: "Advanced_Modem_Content.asp", tabName: "__INHERIT__"},
 					{url: "Advanced_TimeMachine.asp", tabName: "__INHERIT__"},
@@ -338,6 +339,10 @@ define(function(){
 		exclude: {
 			menus: function(){
 				var retArray = [];
+
+				if(!nfsd_support){
+					retArray.push("Advanced_AiDisk_NFS.asp");
+				}
 
 				if(!dnsfilter_support){
 					retArray.push("DNSDirector.asp");
