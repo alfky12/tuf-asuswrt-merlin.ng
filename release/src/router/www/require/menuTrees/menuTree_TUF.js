@@ -263,8 +263,13 @@ define(function(){
 				menuName: "VPN",
 				index: "menu_VPN", 
 				tab: [
+					{url: "Advanced_VPNStatus.asp", tabName: "VPN Status"},
+					{url: "Advanced_VPNDirector.asp", tabName: "VPN Director"},
 					{url: "Advanced_VPNServer_Content.asp", tabName: "<#BOP_isp_heart_item#>"},
+					{url: "Advanced_VPN_OpenVPN.asp", tabName: "__INHERIT__"},
 					{url: "Advanced_VPNClient_Content.asp", tabName: (vpn_fusion_support) ? "<#VPN_Fusion#>" : "<#vpnc_title#>"},
+					{url: "Advanced_OpenVPNClient_Content.asp", tabName: "__INHERIT__"},
+					{url: "Advanced_WireguardClient_Content.asp", tabName: "__INHERIT__"},
 					{url: "Advanced_TOR_Content.asp", tabName: "TOR"},
 					{url: "Advanced_Instant_Guard.asp", tabName: "<#Instant_Guard_title#>"},
 					{url: "NULL", tabName: "__INHERIT__"}
@@ -515,6 +520,12 @@ define(function(){
 
 				if(!vpnc_support){
 					retArray.push("Advanced_VPNClient_Content.asp");
+				}
+
+				if(!openvpnd_support){
+					retArray.push("Advanced_VPN_OpenVPN.asp");
+					retArray.push("Advanced_OpenVPNClient_Content.asp");
+					retArray.push("Advanced_VPNDirector.asp");
 				}
 
 				if(!isSupport("Instant_Guard"))
