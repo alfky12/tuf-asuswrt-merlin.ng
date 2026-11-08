@@ -342,7 +342,7 @@ function pullLANIPList(obj){
 									</div>
 
 									<div style="margin-top:8px" id="logArea">
-										<textarea cols="63" rows="27" wrap="off" readonly="readonly" id="textarea" style="width:99%;font-family:Courier New, Courier, mono; font-size:11px;background:#475A5F;color:#FFFFFF;">
+										<textarea cols="63" rows="27" wrap="off" readonly="readonly" id="textarea" class="textarea_ssh_table" style="width:99%;font-family:Courier New, Courier, mono; font-size:11px;">
 											<% nvram_dump("syscmd.log","syscmd.sh"); %>
 										</textarea>
 									</div>
