@@ -53,7 +53,7 @@ body{
 	background-color: #D0982C;
 }
 .unit-block{
-	background-color: rgb(25, 25, 25);
+	background-color: rgba(25, 25, 25, .5);
 	padding: 8px 12px;
 	margin-bottom: 4px;
 }	
