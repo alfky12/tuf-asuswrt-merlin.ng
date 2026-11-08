@@ -1101,8 +1101,6 @@ function check_status(_device){
 	document.getElementById('iconUSBdisk_'+diskOrder).style.backgroundPosition = '0 5px';
 	document.getElementById('iconUSBdisk_'+diskOrder).style.backgroundSize = "100%";
 
-	if(!rog_support)
-		document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundImage = "url(/images/New_ui/networkmap/white_04.gif)";
 	
 	document.getElementById('ring_USBdisk_'+diskOrder).style.display = "";
 
