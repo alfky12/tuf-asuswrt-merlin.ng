@@ -40,12 +40,6 @@ body{
 }
 
 .banner1{
-	/* Lebar banner disamakan dengan isi (998px) supaya pemusatan banner
-	   dan isi tidak pernah berpisah saat lebar layar menyusut; flex
-	   menggantikan margin piksel tetap/negatif di dalam banner.
-	   Lebar TETAP 998px, bukan 100%: isi halaman juga tetap 998px, jadi
-	   keduanya meluap secara simetris di layar sempit dan tepinya tidak
-	   pernah berpisah; banner yang menyusut justru menimbulkan geser baru. */
 	width:998px;
 	height:70px;
 	background:url(images/New_ui/title_bg.png) 0 0 no-repeat;
@@ -56,28 +50,14 @@ body{
 	box-sizing:border-box;
 }
 .banner1 .navigation{
-	/* Menang atas .navigation di form_style.css (yang position:absolute
-	   margin-left:820px) supaya tombol bahasa ikut flex, bukan menempel
-	   pada posisi absolut. Selektor ini lebih spesifik, jadi menang
-	   walau form_style.css dimuat sesudahnya. */
 	position:static;
-	/* Margin kanan 25px: tepi kanan tombol bahasa 973px dari kiri banner,
-	   praktis sejajar dengan tepi kanan ikon statusBar (977px).
-	   Margin 45px membuat ruang nama model terlalu sempit sehingga
-	   nama model tertutup tombol Logout, jadi tidak dipakai. */
 	margin:18px 25px 0 0;
 	width:auto;
 	flex:0 0 auto;
 	align-self:flex-start;
-	/* Turunkan 13px: pusat tombol bahasa dari 35px ke 48px, segaris
-	   dengan pusat logo TUF, sama seperti Merlin/model/Logout. Hanya
-	   tampilan yang turun, susunan kotak tidak berubah. */
 	transform:translateY(13px);
 }
 .banner1 .navigation li dt{
-	/* Samakan tinggi tombol bahasa dengan tombol Logout (34px) DAN
-	   tengahkan teksnya benar-benar (bukan padding atas 8px yang
-	   membuat teks tampak di tengah-atas): */
 	box-sizing:border-box;
 	padding:0;
 	display:flex;
