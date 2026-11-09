@@ -52,6 +52,7 @@ body{
 .banner1 .navigation{
 	position:static;
 	margin:18px 25px 0 0;
+	padding:0;
 	width:auto;
 	flex:0 0 auto;
 	align-self:flex-start;
