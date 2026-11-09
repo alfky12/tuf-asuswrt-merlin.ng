@@ -61,8 +61,7 @@ var assassinMode_enable = (function(){
 	return false;
 })();
 $(document).ready(function(){
-	const get_header_info = httpApi.hookGet("get_header_info");
-	window.parent.postMessage('router.asp', `${get_header_info.protocol}://${get_header_info.host}:${get_header_info.port}`);
+	window.parent.postMessage('router.asp', window.location.protocol.replace(':','') + '://' + window.location.hostname + (window.location.port ? ':' + window.location.port : ''));
 	if(system.INTELplatform || system.modelName == 'RT-AC87U'){
 		checkWLReady();
 	}
