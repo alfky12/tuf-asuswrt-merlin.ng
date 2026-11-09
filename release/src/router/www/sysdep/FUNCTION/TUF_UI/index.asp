@@ -1102,6 +1102,7 @@ function check_status(_device){
 	document.getElementById('iconUSBdisk_'+diskOrder).style.backgroundSize = "100%";
 
 	
+	document.getElementById('ring_USBdisk_'+diskOrder).style.backgroundImage = "none";
 	document.getElementById('ring_USBdisk_'+diskOrder).style.display = "";
 
 	if(!diskUtility_support)
