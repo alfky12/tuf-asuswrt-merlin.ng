@@ -1,0 +1,120 @@
+name: Port 4 perbaikan webui baru ke cabang penuh
+
+# Workflow ini HANYA menambah 4 commit perbaikan webui terbaru ke cabang
+# penuh TUF-3004.388.13 yang SUDAH ADA, BUKAN membuat cabang baru dan
+# BUKAN build firmware. Dijalankan MANUAL lewat tombol Run workflow di
+# tab Actions, setelah cabang webui TUF-3004.388.13-webui sudah di-push.
+# File ini HARUS ada di cabang default (main) supaya muncul di tab Actions.
+#
+# 4 commit yang di-port (urutan lama ke baru, semua sudah di-push ke
+# cabang webui TUF-3004.388.13-webui):
+#  - 2c44f6cea9 webui: router.asp postMessage pakai window.location
+#  - 6feaf02c77 webui: default tab System Status jadi Status
+#  - cfd573795b webui: cincin USB backgroundImage none
+#  - 1b208413f0 webui: jarak logout-bahasa padding navigation 0
+#
+# Kenapa workflow baru, bukan pakai port-webui-to-full-final.yml:
+# Workflow lama itu membuat cabang penuh BARU dari basis final dan
+# MENOLAK kalau cabang target sudah ada. Cabang penuh TUF-3004.388.13
+# sudah ada (head 01b94d5288) dan sudah dipakai build 388.13 final,
+# jadi workflow ini menambah commit di ATAS head itu (fast-forward),
+# bukan membuat ulang.
+#
+# Yang TIDAK dilakukan workflow ini:
+#  - Tidak menghapus .github/workflows (cabang penuh butuh
+#    github-actions.yml untuk build; workflow ini tidak menyentuh
+#    file workflow sama sekali, jadi push-nya diizinkan token Actions).
+#  - Tidak mengubah cabang webui saja maupun cabang utama.
+# Kalau ada konflik, workflow BERHENTI tanpa push, supaya Alf yang
+# menyelesaikan, bukan mesin yang menebak.
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: "Cabang penuh yang sudah ada (jangan pakai nama cabang webui saja)"
+        required: true
+        default: "TUF-3004.388.13"
+
+permissions:
+  contents: write
+
+jobs:
+  port-webui-updates-to-full:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: Checkout repo tinkering
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Port 4 perbaikan webui ke cabang penuh
+        run: |
+          set -u
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          TARGET="${{ inputs.target_branch }}"
+
+          # Cabang target harus sudah ada; workflow ini menambah, bukan membuat baru.
+          if ! git ls-remote --heads origin "$TARGET" | grep -q .; then
+            echo "BERHENTI: cabang $TARGET belum ada di origin."
+            exit 1
+          fi
+
+          # Head cabang penuh yang diharapkan (hasil build 388.13 final).
+          EXPECTED_HEAD="01b94d52886f410c335225f7cd6e4df8f2bd2673"
+          git fetch origin "$TARGET"
+          test "$(git rev-parse "origin/$TARGET")" = "$EXPECTED_HEAD" || {
+            echo "BERHENTI: head $TARGET bukan $EXPECTED_HEAD yang sudah diverifikasi."
+            echo "Periksa dulu sebelum lanjut, jangan port di atas head lain diam-diam."
+            exit 1
+          }
+          git checkout -b "$TARGET" "origin/$TARGET"
+
+          # Cabang webui saja, sumber commit porting.
+          git fetch origin TUF-3004.388.13-webui
+
+          # Urutan dari lama ke baru, hanya 4 commit perbaikan terbaru.
+          for sha in 2c44f6cea9 6feaf02c77 cfd573795b 1b208413f0; do
+            echo "PICK $sha $(git log -1 --format=%s "$sha")"
+            if git cherry-pick "$sha" < /dev/null > /tmp/cherry-pick.log 2>&1; then
+              continue
+            fi
+            echo "PICK GAGAL $sha, log:"
+            cat /tmp/cherry-pick.log
+            echo "File konflik:"
+            git ls-files -u
+            echo "BERHENTI tanpa push, supaya konflik diselesaikan manual."
+            git cherry-pick --abort || true
+            exit 1
+          done
+
+          # Bukti sebelum push.
+          # 1. File www hasil porting harus sama persis dengan cabang webui saja.
+          echo "Cek www sama dengan cabang webui saja (harus kosong):"
+          git diff origin/TUF-3004.388.13-webui -- release/src/router/www/ | head -50
+          test -z "$(git diff origin/TUF-3004.388.13-webui -- release/src/router/www/)" || {
+            echo "BERHENTI: www cabang penuh berbeda dengan cabang webui saja."
+            exit 1
+          }
+          # 2. Nomor versi tetap final (0), bukan beta1.
+          grep -E '^(SERIALNO|EXTENDNO)=' release/src-rt/version.conf
+          grep -q '^EXTENDNO=0_GPL_25575$' release/src-rt/version.conf || {
+            echo "BERHENTI: EXTENDNO bukan 0_GPL_25575."
+            exit 1
+          }
+          # 3. Hanya 4 commit baru di atas head lama, dan semuanya hanya menyentuh www.
+          echo "File yang berubah di 4 commit baru (harus semua di bawah www/):"
+          git diff --name-only "$EXPECTED_HEAD" HEAD | head -20
+          test -z "$(git diff --name-only "$EXPECTED_HEAD" HEAD | grep -v '^release/src/router/www/')" || {
+            echo "BERHENTI: ada perubahan di luar www, periksa dulu."
+            exit 1
+          }
+          # 4. Target build TUF tetap 3.
+          echo "OPENSSL35 untuk TUF: $(grep -c 'export TUF-.*OPENSSL35=y' release/src-rt/target.mak) (harus 3)"
+          test "$(grep -c 'export TUF-.*OPENSSL35=y' release/src-rt/target.mak)" = "3"
+
+          git push origin "HEAD:$TARGET"
+          echo "Cabang penuh $TARGET sudah di-push (4 perbaikan baru). Build tetap perintah terpisah."
