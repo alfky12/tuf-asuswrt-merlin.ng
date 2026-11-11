@@ -17,7 +17,7 @@ function Check_Https_Redirect_Status(){
 
 	const isTargetRegionSku = (function(){
 		const ttc = '<% nvram_get("territory_code"); %>' || '';
-		const targetRegions = ['SG', 'AA', 'EU'];
+		const targetRegions = ['SG', 'EU'];
 		return targetRegions.some(region => ttc.startsWith(region));
 	})();
 
