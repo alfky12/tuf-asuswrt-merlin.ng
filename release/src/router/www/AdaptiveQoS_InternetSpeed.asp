@@ -22,8 +22,19 @@ $(document).ready(function(){
 });
 
 function load_page(){
-	document.getElementById("internetSpeed_iframe").style.height = document.getElementById("FormTitle").style.height;
-	document.getElementById("internetSpeed_iframe").src = "internet_speed.html";
+	var iframe = document.getElementById("internetSpeed_iframe");
+	function resize(){
+		try{
+			var doc = iframe.contentWindow.document;
+			var h = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
+			if(h > 150) iframe.style.height = h + "px";
+		}catch(e){}
+	}
+	iframe.onload = function(){
+		resize();
+		setTimeout(resize, 1500);
+	};
+	iframe.src = "internet_speed.html";
 }
 
 function initial(){
