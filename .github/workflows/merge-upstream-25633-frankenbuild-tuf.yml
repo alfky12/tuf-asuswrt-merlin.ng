@@ -84,7 +84,7 @@ jobs:
           TARGET=67b5bd4a9b1e1ee89e8a3f0859dbef3f23420822
 
           # Daftar commit upstream, dengan pengecualian eksplisit:
-          # 1 commit GPL 25633 (sudah masuk sebagai 33d96cf1d2) dan
+          # 1 commit GPL 25633 (sudah masuk sebagai 5be0383464) dan
           # 6 commit blob 25633 untuk model lain (bukan TUF-AX3000).
           git rev-list --reverse "$MERGE_BASE..$TARGET" | grep -v -E '^(d2044444a5d37b18430fe53a89f41c872b27d0df|b4b9611efda6547652c77ccf18ca8851adbe606b|96ddbbf09770531b0246bf83e11fd6d7bdd43a20|e673a26324bd6fd4295dc9ad1ab63e4e27d854cd|843307dbb6798a5cc012dcc06e07fbf3ebc7cb5e|00122ac4ae1813e1d4428b38548aac377930fe7f|675fded3e85eb2dc8a78f3a6a663ecc54f3eb98e)$' > /tmp/cherry-list.txt
           echo "Commit yang akan di-pick: $(wc -l < /tmp/cherry-list.txt) (harus 171)"
@@ -185,7 +185,7 @@ jobs:
           # Bukti cepat sebelum push.
           echo "Commit stack terakhir (wsdd2) ada? $(git log --grep='wsdd2: apply security patches from main branch' -1 --format=%H)"
           echo "Cloudflare di services.c: $(grep -c -i cloudflare release/src/router/rc/services.c) (harus 2)"
-          echo "Commit baru di atas GPL: $(git rev-list --count 33d96cf1d2..HEAD)"
+          echo "Commit baru di atas GPL: $(git rev-list --count 5be0383464..HEAD)"
           test -n "$(git log --grep='wsdd2: apply security patches from main branch' -1 --format=%H)"
           test "$(grep -c -i cloudflare release/src/router/rc/services.c)" = "2"
 
