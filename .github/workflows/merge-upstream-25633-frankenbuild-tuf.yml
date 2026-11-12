@@ -1,0 +1,192 @@
+name: Merge upstream Merlin 388.13 + GPL 25633 (Frankenbuild TUF)
+
+# Workflow ini HANYA menyalin kode (merge), BUKAN build firmware,
+# dan HANYA mengubah branch TUF-3004.388.13-25633-test.
+# Ia jalan otomatis saat file workflow ini pertama kali masuk ke branch
+# tersebut, atau manual lewat tombol Run workflow di tab Actions.
+# Push hasil merge tidak memicu workflow ini lagi, karena push tersebut
+# tidak mengubah file workflow ini (trigger paths di bawah).
+#
+# FRANKENBUILD: branch percobaan yang menggabungkan source GPL 388_25633
+# (sudah masuk sebagai commit 5be0383464 "Merge with GPL 388_25633",
+# hasil cherry-pick d2044444a5, dengan 1 konflik init.c yang diputuskan
+# Alf 12 Nov 2026: pertahankan keduanya) dengan binary blob yang
+# tetap 25575. Workflow ini menumpuk ulang stack kode RMerl 3004.388
+# di atas GPL itu.
+# Cabang ini dibuat dari titik awal lama 8af85751 (Merge tag 3004.388.11),
+# BUKAN dari cabang penuh TUF-3004.388.13, supaya perbaikan UI TUF tidak
+# tertimpa commit GPL. UI TUF di-port sesudah stack ini selesai.
+#
+# Daftar pick dibuat otomatis dengan rev-list, mengikuti workflow
+# 388.12_2 yang sudah terbukti (102 commit, 25 Okt 2026):
+#   RMerl tag 3004.388.11 (28022138) .. HEAD 67b5bd4a9 (11 Nov 2026),
+#   dikecualikan 7 commit: 1 sinkronisasi GPL 25633 (sudah masuk) dan
+#   6 salinan binary blob 25633 untuk model lain (bukan TUF-AX3000).
+#   Total yang dicoba: 171 commit (143 kode + 28 changelog/bump/dok).
+#   Changelog/bump versi dilewati otomatis oleh loop (continue gagal
+#   lalu skip), karena versi dan changelog diedit manual di akhir.
+#
+# BEDA dengan workflow 388.12_2 (yang mengecualikan 9 commit):
+#   - 2c5b37545 "rc: add hostname to hosts file" DIMASUKKAN (Alf setuju,
+#     12 Nov 2026; 1 baris di rc/services.c, port bersih).
+#   - 6d2c7ad4f "webui: fix JS error on DDNS page" DIMASUKKAN. Dulu
+#     tidak berlaku karena repo Alf (25575) tidak punya bug itu; di
+#     branch ini kode GPL 25633 SUDAH ada, jadi bug-nya ada dan
+#     perbaikannya berlaku.
+#   - 67b5bd4a9 "wsdd2: apply security patches" DIMASUKKAN (Alf setuju,
+#     12 Nov 2026; satu-satunya gap keamanan).
+#
+# Workflow ini TIDAK mengubah versi dan TIDAK menyentuh Changelog.
+# Bump versi (EXTENDNO=0_FrankenBuild-25633) dan patch JS redirect
+# HTTPS dikerjakan manual sesudah stack selesai, sebagai commit
+# terpisah, lalu di-push lagi.
+on:
+  push:
+    branches: [TUF-3004.388.13-25633-test]
+    paths: [.github/workflows/merge-upstream-25633-frankenbuild.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  merge-upstream:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: Checkout branch target
+        uses: actions/checkout@v4
+        with:
+          ref: TUF-3004.388.13-25633-test
+          fetch-depth: 0
+
+      - name: Cherry-pick stack RMerl di atas GPL 25633
+        run: |
+          set -u
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Kalau commit stack terakhir (wsdd2) sudah ada, stack sudah
+          # diterapkan, jangan diulang (hindari duplikat).
+          if git log --grep="wsdd2: apply security patches from main branch" -1 --format=%H | grep -q .; then
+            echo "Stack sudah diterapkan, berhenti."
+            exit 0
+          fi
+
+          git remote add rmerl https://github.com/RMerl/asuswrt-merlin.ng.git
+          # Fetch PENUH tanpa filter dan tanpa batas kedalaman.
+          # Alasan: fetch hemat (blob:none/shallow) pernah gagal di run lama
+          # saat cherry-pick meminta blob dadakan dari promisor remote.
+          git fetch rmerl 3004.388
+          git fetch rmerl tag 3004.388.11
+
+          MERGE_BASE=280221387bccd9c8d1f54401eb33868c0f68fb65
+          TARGET=67b5bd4a9b1e1ee89e8a3f0859dbef3f23420822
+
+          # Daftar commit upstream, dengan pengecualian eksplisit:
+          # 1 commit GPL 25633 (sudah masuk sebagai 33d96cf1d2) dan
+          # 6 commit blob 25633 untuk model lain (bukan TUF-AX3000).
+          git rev-list --reverse "$MERGE_BASE..$TARGET" | grep -v -E '^(d2044444a5d37b18430fe53a89f41c872b27d0df|b4b9611efda6547652c77ccf18ca8851adbe606b|96ddbbf09770531b0246bf83e11fd6d7bdd43a20|e673a26324bd6fd4295dc9ad1ab63e4e27d854cd|843307dbb6798a5cc012dcc06e07fbf3ebc7cb5e|00122ac4ae1813e1d4428b38548aac377930fe7f|675fded3e85eb2dc8a78f3a6a663ecc54f3eb98e)$' > /tmp/cherry-list.txt
+          echo "Commit yang akan di-pick: $(wc -l < /tmp/cherry-list.txt) (harus 171)"
+
+          # Baca daftar commit lewat fd 3, supaya perintah git di dalam
+          # loop tidak ikut menghabiskan daftar tersebut dari stdin.
+          exec 3< /tmp/cherry-list.txt
+          while IFS= read -r sha <&3; do
+            echo "PICK $sha $(git log -1 --format=%s "$sha")"
+            if git cherry-pick "$sha" < /dev/null > /tmp/cherry-pick-initial.log 2>&1; then
+              continue
+            fi
+            echo "PICK GAGAL $sha, log awal cherry-pick:"
+            cat /tmp/cherry-pick-initial.log
+            echo "CHERRY_PICK_HEAD ada? $(test -f .git/CHERRY_PICK_HEAD && echo YA || echo TIDAK)"
+            echo "File konflik (ls-files -u):"
+            git ls-files -u
+            echo "Baris status unmerged (AA/UU/DU/UD/AU/UA/DD):"
+            git status --porcelain | grep -E '^(AA|UU|DU|UD|AU|UA|DD)' || echo "(tidak ada baris unmerged di status)"
+            # Kalau tidak ada cherry-pick yang berjalan, ini BUKAN konflik
+            # isi file, melainkan kegagalan lain (misal blob gagal diunduh
+            # atau alasan git lainnya). Jangan coba continue/skip, karena
+            # itu hanya menutupi alasan aslinya dengan pesan
+            # "no cherry-pick in progress". Berhenti di sini dengan
+            # log awal di atas, branch belum di-push.
+            if [ ! -f .git/CHERRY_PICK_HEAD ]; then
+              echo "BERHENTI: pick gagal tanpa cherry-pick yang berjalan, lihat log awal di atas."
+              exit 1
+            fi
+            conflicts=$(git ls-files -u | awk '{print $4}' | sort -u)
+            echo "CONFLICT pada $sha:"
+            echo "$conflicts"
+            bad=0
+            for f in $conflicts; do
+              case "$f" in
+                release/src-rt/version.conf|Changelog-NG.txt)
+                  git checkout --ours "$f"; git add "$f" ;;
+                release/src/router/curl/*)
+                  git checkout --theirs "$f"; git add "$f" ;;
+                *)
+                  echo "Konflik di luar daftar yang diizinkan: $f"
+                  bad=1 ;;
+              esac
+            done
+            if [ "$bad" -ne 0 ]; then
+              echo "BERHENTI: konflik tidak dikenal, branch belum di-push."
+              git cherry-pick --abort || true
+              exit 1
+            fi
+            remaining=$(git ls-files -u | wc -l)
+            echo "File konflik tersisa setelah resolve: $remaining"
+            if [ "$remaining" -ne 0 ]; then
+              echo "Masih ada file konflik, berhenti sebelum continue:"
+              git ls-files -u
+              git cherry-pick --abort || true
+              exit 1
+            fi
+            if [ ! -f .git/CHERRY_PICK_HEAD ]; then
+              echo "BERHENTI: cherry-pick hilang setelah resolve, tidak bisa continue."
+              exit 1
+            fi
+            # Commit dokumentasi/bump versi bisa jadi kosong setelah
+            # version.conf/Changelog dipertahankan; lewati saja, karena
+            # versi dan changelog diedit manual di akhir. Jangan coba
+            # skip secara membabi buta bila continue gagal karena alasan
+            # lain: tampilkan log continue-nya dulu.
+            if ! GIT_EDITOR=true EDITOR=true git cherry-pick --continue < /dev/null > /tmp/cherry-continue.log 2>&1; then
+              echo "Continue gagal, log continue:"
+              cat /tmp/cherry-continue.log
+              echo "Status unmerged saat continue gagal:"
+              git status --porcelain | grep -E '^(AA|UU|DU|UD|AU|UA|DD)' || echo "(tidak ada)"
+              # Hanya skip bila commit menjadi kosong (kasus dokumentasi/
+              # bump versi), bukan bila ada konflik tersisa.
+              if [ "$(git ls-files -u | wc -l)" -eq 0 ] && [ ! -f .git/CHERRY_PICK_HEAD ]; then
+                echo "Continue gagal tapi tidak ada konflik dan tidak ada cherry-pick berjalan; lanjut ke commit berikutnya."
+                continue
+              fi
+              if git ls-files -u | grep -q .; then
+                echo "Masih ada konflik, berhenti."
+                git cherry-pick --abort || true
+                exit 1
+              fi
+              # Coba skip hanya bila ini commit dokumentasi/bump versi
+              # yang kosong setelah resolve (pesan commit mengandung
+              # 'Updated documentation' atau 'Bumped revision').
+              msg=$(git log -1 --format=%s "$sha")
+              case "$msg" in
+                "Updated documentation"|"Updated changelog"|"Bumped revision"*)
+                  git cherry-pick --skip < /dev/null || { echo "Skip juga gagal"; exit 1; } ;;
+                *)
+                  echo "Continue gagal untuk commit bukan dokumentasi/bump versi, berhenti."
+                  exit 1 ;;
+              esac
+            fi
+          done
+          exec 3<&-
+
+          # Bukti cepat sebelum push.
+          echo "Commit stack terakhir (wsdd2) ada? $(git log --grep='wsdd2: apply security patches from main branch' -1 --format=%H)"
+          echo "Cloudflare di services.c: $(grep -c -i cloudflare release/src/router/rc/services.c) (harus 2)"
+          echo "Commit baru di atas GPL: $(git rev-list --count 33d96cf1d2..HEAD)"
+          test -n "$(git log --grep='wsdd2: apply security patches from main branch' -1 --format=%H)"
+          test "$(grep -c -i cloudflare release/src/router/rc/services.c)" = "2"
+
+          git push origin HEAD:TUF-3004.388.13-25633-test
