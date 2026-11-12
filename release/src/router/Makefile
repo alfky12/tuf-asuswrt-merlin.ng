@@ -3198,7 +3198,7 @@ openssl-1.1/Makefile:
 	$(if $(filter y,$(RTCONFIG_SFP) $(RTCONFIG_4M_SFP) $(RTCONFIG_8M_SFP)),-Os,-O2) \
 	$(if $(RTCONFIG_DEBUG),-g) \
 	-ffunction-sections -fdata-sections -Wl,--gc-sections \
-	shared $(OPENSSL_CIPHERS) no-err no-async --api=1.0.0 \
+	shared $(OPENSSL_CIPHERS) no-err no-async no-tests --api=1.0.0 \
 	    no-aria no-sm2 no-sm3 no-sm4 \
 	    --with-rand-seed=devrandom \
 	    $(if $(filter y,$(RTCONFIG_WTFAST)),-DRTCONFIG_WTFAST,) \
