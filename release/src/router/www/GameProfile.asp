@@ -84,8 +84,10 @@ var gameList = new Object;
 })();
 
 
-function initial(){
+document.addEventListener("DOMContentLoaded", function(){
 	show_menu();
+});
+function initial(){
 	if((wan_proto == "v6plus" || wan_proto == "ocnvc" || wan_proto == "v6opt") && s46_ports_check_flag && array_ipv6_s46_ports.length > 1){
 
 		$("#v6plus_port_range_note").show();
