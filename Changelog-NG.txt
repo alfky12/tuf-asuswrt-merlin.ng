@@ -1,6 +1,15 @@
 Asuswrt-Merlin GNUton's builds Changelog
 ========================
 
+3004.388.13-FrankenBuild-25633 (12-Nov-2026)
+  - NOTE: Test build combining GPL 388_25633 source code with
+          GPL 388_25575 prebuilt binaries.  The TUF-AX3000 has
+          no GPL 25633 release, so this is not an official
+          combination.
+  - NEW: Cloudflare DDNS support (from GPL 388_25633).
+  - UPDATED: Upstream code to 3004.388.13.
+  - UPDATED: wsdd2 security patches from main branch.
+
 3004.388.11_1-gnuton1 (XX-XXX-2025)
   - UPDATED: Upstream code to 3004.388.11
   - UPDATED: Merged GPL 388_25575
