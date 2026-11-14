@@ -807,8 +807,10 @@ function showDiskInfo(device){
 		percentbar = simpleNum2((device.totalSize - device.totalUsed)/device.totalSize*100);
 		percentbar = Math.round(100 - percentbar);
 
-		dec_html_code += '<div id="diskquota" align="left" style="margin-top:5px;margin-bottom:10px;border-radius:4px">\n';
-		dec_html_code += '<div class="quotabar" style="width:'+ percentbar +'%;height:13px;border-radius:4px"></div>';
+		dec_html_code += '<div style=\"display:flex;align-items:center;justify-content:center;margin-top:5px;margin-bottom:10px\">\n';
+		dec_html_code += '<div class=\"bar-container\">\n';
+		dec_html_code += '<div class=\"core-color-container ram-color\" style=\"width:'+ percentbar +'%\"></div>\n';
+		dec_html_code += '</div>\n';
 		dec_html_code += '</div>\n';
 	}
 	else{

@@ -1180,3 +1180,30 @@ width:122px;
 .radio_hint{
     background-color: #FA9100;
 }
+
+.bar-container{
+	background-color:#262626;
+	width: 130px;
+	height: 8px;
+	border-radius: 6px;
+	padding: 2px 1px;
+	flex-shrink: 0;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.core-color-container{
+	width: 35%;
+	height: 8px;
+	border-radius: 4px;
+	flex-shrink: 0;
+	margin-left: 0;
+	margin-right: auto;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+.ram-color{
+	background: linear-gradient(to right, #0bc8ff 0%, #0039ff 100%);
+}
