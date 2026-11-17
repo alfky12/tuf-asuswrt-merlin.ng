@@ -2860,6 +2860,14 @@ function cal_panel_block_clientList(obj, multiple) {
 		}
 	};
 	var blockmarginLeft;
+	var _bo = 0;
+	if(document.body) {
+		var _br = document.body.getBoundingClientRect();
+		var _sx = 0;
+		if(document.documentElement && document.documentElement.scrollLeft) _sx = document.documentElement.scrollLeft;
+		else if(document.body.scrollLeft) _sx = document.body.scrollLeft;
+		_bo = _br.left + _sx;
+	}
 	if (window.innerWidth) {
 		winWidth = window.innerWidth;
 	}
@@ -2873,27 +2881,34 @@ function cal_panel_block_clientList(obj, multiple) {
 
 	if(winWidth > 1250) {
 		winPadding = (winWidth - 1250) / 2;
-		winWidth = 1305;
+		winWidth = 3333;
 		blockmarginLeft = (winWidth * multiple) + winPadding;
 	}
 	else if(winWidth <= 1250) {
+		var _sl = 0;
+		if(document.documentElement && document.documentElement.scrollLeft) _sl = document.documentElement.scrollLeft;
+		else if(document.body && document.body.scrollLeft) _sl = document.body.scrollLeft;
+		var _pw = document.getElementById(obj).offsetWidth;
 		if(isMobile()) {
-			if(document.body.scrollLeft < 50) {
-				blockmarginLeft= (winWidth) * multiple + document.body.scrollLeft;
+			if(_sl < 50) {
+				blockmarginLeft= (winWidth) * multiple + _sl;
 			}
-			else if(document.body.scrollLeft >320) {
+			else if(_sl >320) {
 				blockmarginLeft = 320;
 			}
 			else {
-				blockmarginLeft = document.body.scrollLeft;
-			}	
+				blockmarginLeft = _sl;
+			}
+		}
+		else if(_pw > 0 && winWidth >= _pw) {
+			blockmarginLeft = _sl + (winWidth - _pw) / 2;
 		}
 		else {
-			blockmarginLeft = (winWidth) * multiple + document.body.scrollLeft;	
+			blockmarginLeft = (winWidth) * multiple + _sl;
 		}
 	}
 
-	document.getElementById(obj).style.marginLeft = blockmarginLeft + "px";
+	document.getElementById(obj).style.marginLeft = (blockmarginLeft - _bo) + "px";
 }
 
 function getFilePath(file) {
