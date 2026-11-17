@@ -43,6 +43,9 @@
 	padding-left: 10px;
 	cursor: pointer;
 }
+.FormTable_table td span.csv_action{
+	color:#FFFFFF;
+}
 </style>
 <script>
 $(function () {
