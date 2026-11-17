@@ -554,7 +554,7 @@ static int _get_ipv6_addr(const char *ifname, char *ipv6addr, const size_t len)
 			continue;
 	       }
 
-		if(scope == IPV6_ADDR_GLOBAL)
+		if(scope == IPV6_ADDR_GLOBAL && (ipv6[0] & 0xe0) == 0x20)
 		{
 			strlcpy(ipv6addr, address, len);
 			ret =0;
@@ -597,7 +597,7 @@ static int get_address(ddns_t *ctx)
 			}
 #if defined(USE_IPV6) && defined(ASUSWRT)
 			memset(ip6_addr, 0, sizeof(ip6_addr));
-			if(nvram_get_int("ddns_ipv6_update") && !_get_ipv6_addr(iface, ip6_addr, sizeof(ip6_addr))) {
+			if(nvram_get_int("ddns_ipv6_update") && (!_get_ipv6_addr(iface, ip6_addr, sizeof(ip6_addr)) || !_get_ipv6_addr("br0", ip6_addr, sizeof(ip6_addr)))) {
 				alias->ipv6_has_changed = strncmp(alias->ipv6_address, ip6_addr, sizeof(alias->ipv6_address)) != 0;
 				/* allow_ipv6 cannot for NO-IP and ASUS.COM */
 				if(alias->ipv6_has_changed && !allow_ipv6) {

@@ -4475,7 +4475,7 @@ static int _get_ipv6_addr(const char *ifname, char *ipv6addr, const size_t len)
 			continue;
 		}
 
-		if(scope == IPV6_ADDR_GLOBAL)
+		if(scope == IPV6_ADDR_GLOBAL && (ipv6[0] & 0xe0) == 0x20)
 		{
 			strlcpy(ipv6addr, address, len);
 			ret =0;
@@ -4645,7 +4645,8 @@ start_ddns(char *caller, int isAidisk)
 	wan_ifname = get_wan_ifname(unit);
 #if defined(RTCONFIG_IPV6) && defined(RTCONFIG_INADYN)
 	if (nvram_get_int("ddns_ipv6_update")
-		&& ipv6_enabled() && (_get_ipv6_addr(wan_ifname, ip6_addr, sizeof(ip6_addr)) != 0))
+		&& ipv6_enabled() && (_get_ipv6_addr(wan_ifname, ip6_addr, sizeof(ip6_addr)) != 0)
+		&& (_get_ipv6_addr("br0", ip6_addr, sizeof(ip6_addr)) != 0))
 	{
 		logmessage(log_title, "%s has not yet obtained an WAN IPv6 address.(%d)", wan_ifname, ddns_check_retry);
 		if (!isAidisk)
