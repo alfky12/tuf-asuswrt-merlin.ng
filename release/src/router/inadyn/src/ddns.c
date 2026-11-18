@@ -660,7 +660,11 @@ static int check_alias_update_table(ddns_t *ctx)
  *     standard update interval!
  */
 			override = time_to_check(ctx, alias);
-			if (!alias->ip_has_changed && !override) {
+			if (!alias->ip_has_changed
+#if defined(USE_IPV6) && defined(ASUSWRT)
+			    && !alias->ipv6_has_changed
+#endif
+			    && !override) {
 				alias->update_required = 0;
 				continue;
 			}
@@ -814,11 +818,28 @@ static int update_alias_table(ddns_t *ctx)
 					break;
 				event = "error";
 			} else {
-				/* Only reset if send_update() succeeds. */
-				alias->update_required = 0;
-				alias->last_update = time(NULL);
-				/* Update cache file for this entry */
-				write_cache_file(alias);
+#if defined(USE_IPV6) && defined(ASUSWRT)
+				if (!strcmp(info->system->name, "default@cloudflare.com") &&
+				    alias->ipv6_address[0] != '\0') {
+					char saved_address[MAX_ADDRESS_LEN];
+
+					strlcpy(saved_address, alias->address, sizeof(saved_address));
+					strlcpy(alias->address, alias->ipv6_address, sizeof(alias->address));
+					rc = send_update(ctx, info, alias, &anychange);
+					strlcpy(alias->address, saved_address, sizeof(alias->address));
+				}
+#endif
+				if (rc) {
+					if (exec_mode == EXEC_MODE_COMPAT)
+						break;
+					event = "error";
+				} else {
+					/* Only reset if send_update() succeeds. */
+					alias->update_required = 0;
+					alias->last_update = time(NULL);
+					/* Update cache file for this entry */
+					write_cache_file(alias);
+				}
 			}
 
 			/* Run command or script on successful update. */
